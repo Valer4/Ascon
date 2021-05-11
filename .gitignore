@@ -50,8 +50,6 @@ Thumbs.db
 
 /BusinessLogicLayer/bin/Debug/BusinessLogicLayer.dll
 /BusinessLogicLayer/bin/Debug/BusinessLogicLayer.pdb
-/BusinessLogicLayer/bin/Debug/DomainLayer.dll
-/BusinessLogicLayer/bin/Debug/DomainLayer.pdb
 /BusinessLogicLayer/obj/Debug/BusinessLogicLayer.csproj.CopyComplete
 /BusinessLogicLayer/obj/Debug/.NETFramework,Version=v4.6.1.AssemblyAttributes.cs
 /BusinessLogicLayer/obj/Debug/BusinessLogicLayer.csproj.CoreCompileInputs.cache
@@ -60,12 +58,6 @@ Thumbs.db
 /BusinessLogicLayer/obj/Debug/BusinessLogicLayer.dll
 /BusinessLogicLayer/obj/Debug/BusinessLogicLayer.pdb
 /BusinessLogicLayer/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-/BusinessLogicLayer/obj/Debug/DomainLayer.csproj.CopyComplete
-/BusinessLogicLayer/obj/Debug/DomainLayer.csproj.CoreCompileInputs.cache
-/BusinessLogicLayer/obj/Debug/DomainLayer.csproj.FileListAbsolute.txt
-/BusinessLogicLayer/obj/Debug/DomainLayer.csprojAssemblyReference.cache
-/BusinessLogicLayer/obj/Debug/DomainLayer.dll
-/BusinessLogicLayer/obj/Debug/DomainLayer.pdb
 /BusinessLogicLayer/BusinessLogicLayer.csproj.user
 /DataAccessLayer/bin/Debug/BusinessLogicLayer.dll
 /DataAccessLayer/bin/Debug/BusinessLogicLayer.pdb
@@ -104,8 +96,6 @@ Thumbs.db
 /UserInterfaceLayer/.vs/UserInterfaceLayer/v16/.suo
 /UserInterfaceLayer/bin/Debug/BusinessLogicLayer.dll
 /UserInterfaceLayer/bin/Debug/BusinessLogicLayer.pdb
-/UserInterfaceLayer/bin/Debug/DomainLayer.dll
-/UserInterfaceLayer/bin/Debug/DomainLayer.pdb
 /UserInterfaceLayer/bin/Debug/Microsoft.Practices.Unity.dll
 /UserInterfaceLayer/bin/Debug/UserInterfaceLayer.exe.config
 /UserInterfaceLayer/bin/Debug/UserInterfaceLayer.pdb
