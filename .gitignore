@@ -206,11 +206,4 @@ Thumbs.db
 /UserInterfaceLayer/packages/EntityFramework.ru.6.2.0/lib/net45/ru/EntityFramework.xml
 /UserInterfaceLayer/packages/EntityFramework.ru.6.2.0/.signature.p7s
 /UserInterfaceLayer/packages/EntityFramework.ru.6.2.0/EntityFramework.ru.6.2.0.nupkg
-/UserInterfaceLayer/Properties/Resources.resx
-/UserInterfaceLayer/Properties/Settings.settings
 /UserInterfaceLayer/UserInterfaceLayer.csproj.user
-/BusinessLogicLayer/Properties/AssemblyInfo.cs
-/DataAccessLayer/Properties/AssemblyInfo.cs
-/UserInterfaceLayer/Properties/AssemblyInfo.cs
-/UserInterfaceLayer/Properties/Resources.Designer.cs
-/UserInterfaceLayer/Properties/Settings.Designer.cs
