@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1649BD72-EF8A-46B8-8B53-F9EA8040E2D1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>UserInterfaceLayer</RootNamespace>
+    <AssemblyName>UserInterfaceLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="ChannelsManager.cs" />
+    <Compile Include="Clients\Print\IPrintClient.cs" />
+    <Compile Include="Clients\Print\PrintClient.cs" />
+    <Compile Include="Clients\Repositories\Classes\AbstractRepositoryClient.cs" />
+    <Compile Include="Clients\Repositories\Classes\ConcreteDefinitions\DetailRelationRepositoryClient.cs" />
+    <Compile Include="Clients\Repositories\Interfaces\IAbstractRepositoryClient.cs" />
+    <Compile Include="Clients\Repositories\Interfaces\ConcreteDefinitions\IDetailRelationRepositoryClient.cs" />
+    <Compile Include="Clients\UnitsOfWork\Classes\AbstractUnitOfWorkClient.cs" />
+    <Compile Include="Clients\UnitsOfWork\Interfaces\IAbstractUnitOfWorkClient.cs" />
+    <Compile Include="Configurator.cs" />
+    <Compile Include="Delegates.cs" />
+    <Compile Include="Forms\IViews\IPrintView.cs" />
+    <Compile Include="Forms\Presenters\PrintPresenter.cs" />
+    <Compile Include="Forms\TreeViewHelper\TreeViewNodeState.cs" />
+    <Compile Include="Forms\TreeViewHelper\TreeViewState.cs" />
+    <Compile Include="Forms\Views\DetailEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Views\DetailEditor.Designer.cs">
+      <DependentUpon>DetailEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Presenters\DetailRelationRepositoryPresenter.cs" />
+    <Compile Include="Forms\IViews\IDetailRelationRepositoryView.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserInfo.cs" />
+    <EmbeddedResource Include="Forms\Views\DetailEditor.resx">
+      <DependentUpon>DetailEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj">
+      <Project>{fc4bdf75-52a4-4e6c-abfb-b34947795dc9}</Project>
+      <Name>BusinessLogicLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

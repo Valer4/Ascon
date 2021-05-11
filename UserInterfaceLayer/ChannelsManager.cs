@@ -1,0 +1,31 @@
+﻿using System;
+using System.ServiceModel;
+using System.ServiceModel.Security;
+
+namespace UserInterfaceLayer
+{
+    public class ChannelsManager
+    {
+        public T GetChannel<T>()
+        {
+            if( ! Configurator._HostNames.TryGetValue(typeof(T), out string hostName))
+                throw new ArgumentException("Имя хоста не найдено.");
+
+            NetTcpBinding binding = new NetTcpBinding(SecurityMode.Message);
+            binding.Security.Message.ClientCredentialType = MessageCredentialType.UserName;
+
+            string hostAddress = Configurator._ConnectInfo.HostAddress;
+            string uriString = $"net.tcp://{hostAddress}/{hostName}";
+            Uri uri = new Uri(uriString);
+
+            EndpointAddress address = new EndpointAddress(uri);
+
+            ChannelFactory<T> channel = new ChannelFactory<T>(binding, address);
+            channel.Credentials.ServiceCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.None;
+            channel.Credentials.UserName.UserName = Configurator._UserInfo._Login;
+            channel.Credentials.UserName.Password = Configurator._UserInfo._Password;
+
+            return channel.CreateChannel();
+        }
+    }
+}
