@@ -52,7 +52,6 @@ Thumbs.db
 /BusinessLogicLayer/bin/Debug/BusinessLogicLayer.pdb
 /BusinessLogicLayer/bin/Debug/DomainLayer.dll
 /BusinessLogicLayer/bin/Debug/DomainLayer.pdb
-/BusinessLogicLayer/bin/Debug/Microsoft.Practices.Unity.dll
 /BusinessLogicLayer/bin/Debug/WCF.dll
 /BusinessLogicLayer/bin/Debug/WCF.pdb
 /BusinessLogicLayer/obj/Debug/BusinessLogicLayer.csproj.CopyComplete
@@ -84,7 +83,6 @@ Thumbs.db
 /DataAccessLayer/bin/Debug/Entities.dll
 /DataAccessLayer/bin/Debug/Entities.dll.config
 /DataAccessLayer/bin/Debug/Entities.pdb
-/DataAccessLayer/bin/Debug/EntityFramework.dll
 /DataAccessLayer/bin/Debug/EntityFramework.SqlServer.dll
 /DataAccessLayer/bin/Debug/Microsoft.Practices.Unity.dll
 /DataAccessLayer/bin/Debug/WCF.dll
