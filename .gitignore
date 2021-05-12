@@ -48,12 +48,15 @@ Thumbs.db
 *.mov
 *.wmv
 
+/.vs/slnx.sqlite
+/UserInterfaceLayer/.vs/UserInterfaceLayer/v16/.suo
 /BusinessLogicLayer/bin/Debug/BusinessLogicLayer.dll
 /BusinessLogicLayer/bin/Debug/BusinessLogicLayer.pdb
 /BusinessLogicLayer/obj/Debug/.NETFramework,Version=v4.6.1.AssemblyAttributes.cs
 /BusinessLogicLayer/obj/Debug/BusinessLogicLayer.csproj.CopyComplete
 /BusinessLogicLayer/obj/Debug/BusinessLogicLayer.csproj.CoreCompileInputs.cache
 /BusinessLogicLayer/obj/Debug/BusinessLogicLayer.csproj.FileListAbsolute.txt
+/BusinessLogicLayer/obj/Debug/BusinessLogicLayer.csprojAssemblyReference.cache
 /BusinessLogicLayer/obj/Debug/BusinessLogicLayer.dll
 /BusinessLogicLayer/obj/Debug/BusinessLogicLayer.pdb
 /BusinessLogicLayer/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
@@ -92,7 +95,6 @@ Thumbs.db
 /Server/obj/Debug/Server.csproj.FileListAbsolute.txt
 /Server/obj/Debug/Server.csprojAssemblyReference.cache
 /Server/obj/Debug/Server.pdb
-/UserInterfaceLayer/.vs/UserInterfaceLayer/v16/.suo
 /UserInterfaceLayer/bin/Debug/BusinessLogicLayer.dll
 /UserInterfaceLayer/bin/Debug/BusinessLogicLayer.pdb
 /UserInterfaceLayer/bin/Debug/Microsoft.Practices.Unity.dll
@@ -111,3 +113,10 @@ Thumbs.db
 /UserInterfaceLayer/obj/Debug/UserInterfaceLayer.pdb
 /UserInterfaceLayer/obj/Debug/UserInterfaceLayer.Properties.Resources.resources
 /UserInterfaceLayer/UserInterfaceLayer.csproj.user
+/BusinessLogicLayer/obj/Release/.NETFramework,Version=v4.6.1.AssemblyAttributes.cs
+/BusinessLogicLayer/obj/Release/BusinessLogicLayer.csprojAssemblyReference.cache
+/DataAccessLayer/obj/Release/.NETFramework,Version=v4.6.1.AssemblyAttributes.cs
+/DataAccessLayer/obj/Release/DataAccessLayer.csprojAssemblyReference.cache
+/Server/obj/Release/.NETFramework,Version=v4.6.1.AssemblyAttributes.cs
+/UserInterfaceLayer/obj/Release/.NETFramework,Version=v4.6.1.AssemblyAttributes.cs
+/UserInterfaceLayer/obj/Release/UserInterfaceLayer.csprojAssemblyReference.cache
