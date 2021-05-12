@@ -24,6 +24,12 @@ namespace BusinessLogicLayer
 
         private void RegisterTypes()
         {
+            _Container.RegisterType<IDetailRelationRepositoryService, DetailRelationRepositoryService>(
+                constructorParams: new DetailRelationRepositoryManager());
+
+            _Container.RegisterType<IPrintService, PrintService>(
+                constructorParams: new PrintManager());
+
             _Container.RegisterType<IDetailRelationRepositoryManager, DetailRelationRepositoryManager>();
             _Container.RegisterType<IPrintManager, PrintManager>();
         }

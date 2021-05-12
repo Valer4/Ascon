@@ -21,7 +21,7 @@ namespace BusinessLogicLayer
             string uriString = $"net.tcp://{hostAddress}/{hostName}";
             Uri uri = new Uri(uriString);
 
-            ServiceHost host = new ServiceHost(contractClass, uri);
+            ServiceHost host = new UnityServiceHost(Configurator._Container._main, contractClass);
 
             host.Credentials.ServiceCertificate.SetCertificate
                 (StoreLocation.LocalMachine, StoreName.My, X509FindType.FindBySerialNumber, "01");
@@ -34,7 +34,7 @@ namespace BusinessLogicLayer
 
             host.Description.Behaviors.Find<ServiceDebugBehavior>().IncludeExceptionDetailInFaults = true;
 
-            host.AddServiceEndpoint(contractInterface, binding, "");
+            host.AddServiceEndpoint(contractInterface, binding, uri);
             host.Open();
         }
     }

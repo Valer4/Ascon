@@ -49,6 +49,7 @@ Thumbs.db
 *.wmv
 
 /.vs/slnx.sqlite
+/.vs/VSWorkspaceState.json
 /UserInterfaceLayer/.vs/UserInterfaceLayer/v16/.suo
 /BusinessLogicLayer/bin/Debug/BusinessLogicLayer.dll
 /BusinessLogicLayer/bin/Debug/BusinessLogicLayer.pdb
@@ -95,6 +96,7 @@ Thumbs.db
 /Server/obj/Debug/Server.csproj.FileListAbsolute.txt
 /Server/obj/Debug/Server.csprojAssemblyReference.cache
 /Server/obj/Debug/Server.pdb
+/Server/Server.csproj.user
 /UserInterfaceLayer/bin/Debug/BusinessLogicLayer.dll
 /UserInterfaceLayer/bin/Debug/BusinessLogicLayer.pdb
 /UserInterfaceLayer/bin/Debug/Microsoft.Practices.Unity.dll
