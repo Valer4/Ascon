@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer;
+using BusinessLogicLayer.DataAccessInterfaces.Repositories.ConcreteDefinitions;
 using BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions;
 using BusinessLogicLayer.Managers.Print;
 using BusinessLogicLayer.Services.Print;
@@ -15,14 +16,17 @@ namespace Server
         {
             new Configurator(new ConnectInfoClientService("localhost", 10000));
 
+            Configurator._Container.RegisterType<IDetailRelationRepository, DetailRelationRepository>(
+                constructorParams: new ConnectInfoDataAccess("localhost", "Kuznetsov", "msroot", "msroot", 1433).
+                    ConnectionString);
+
             Configurator._Container.RegisterType<IDetailRelationRepositoryService, DetailRelationRepositoryService>(
                 constructorParams: new DetailRelationRepositoryManager(
-                    new DetailRelationRepository(
-                        new ConnectInfoDataAccess("localhost", "Kuznetsov", "msroot", "msroot", 1433).ConnectionString)));
+                    Configurator._Container.Resolve<IDetailRelationRepository>()));
 
             Configurator._Container.RegisterType<IPrintService, PrintService>(
-                constructorParams: new PrintManager());
-            Configurator._Container.RegisterType<IPrintManager, PrintManager>();
+                constructorParams: new PrintManager(
+                    Configurator._Container.Resolve<IDetailRelationRepository>()));
 
             Console.ReadKey();
         }

@@ -12,11 +12,15 @@ namespace BusinessLogicLayer.Managers.Print
 {
     public class PrintManager : IPrintManager
     {
+        public IDetailRelationRepository _repository;
+
+        public PrintManager(IDetailRelationRepository repository) =>
+            _repository = repository;
+
         public byte[] GetMSWord(long id)
         {
             DetailRelationRepositoryHelper helper = new DetailRelationRepositoryHelper();
-            IQueryable<DetailRelationEntity> allDetailRelations =
-                Configurator._Container.Resolve<IDetailRelationRepository>().GetAll();
+            IQueryable<DetailRelationEntity> allDetailRelations = _repository.GetAll();
 
             DetailRelationEntity selectedDetailRelation = helper.Find(id, allDetailRelations);
 
