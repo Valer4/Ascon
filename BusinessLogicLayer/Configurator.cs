@@ -18,20 +18,7 @@ namespace BusinessLogicLayer
             _Container = new Container();
             _ConnectInfo = connectInfo;
 
-            RegisterTypes();
             CreateHosts(GetRelatedTypes());
-        }
-
-        private void RegisterTypes()
-        {
-            _Container.RegisterType<IDetailRelationRepositoryService, DetailRelationRepositoryService>(
-                constructorParams: new DetailRelationRepositoryManager());
-
-            _Container.RegisterType<IPrintService, PrintService>(
-                constructorParams: new PrintManager());
-
-            _Container.RegisterType<IDetailRelationRepositoryManager, DetailRelationRepositoryManager>();
-            _Container.RegisterType<IPrintManager, PrintManager>();
         }
 
         private IEnumerable<RelatedTypes> GetRelatedTypes()

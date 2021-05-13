@@ -4,6 +4,8 @@ namespace BusinessLogicLayer.Managers.Repositories.Interfaces
 {
     public interface IAbstractRepositoryManager<TEntity, TId>
     {
+        void Save(string message = null);
+
         #region Entity.
         TEntity Get(TId id);
         void Add(TEntity entity);

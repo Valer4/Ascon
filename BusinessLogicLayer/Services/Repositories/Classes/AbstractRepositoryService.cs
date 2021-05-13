@@ -10,37 +10,37 @@ namespace BusinessLogicLayer.Services.Repositories.Classes
         IAbstractRepositoryService<TEntity, TId>
             where TInterfaceRepositoryManager : IAbstractRepositoryManager<TEntity, TId>
     {
-        TInterfaceRepositoryManager _interfaceRepositoryManager;
+        TInterfaceRepositoryManager _repositoryManager;
 
-        public AbstractRepositoryService(TInterfaceRepositoryManager interfaceRepositoryManager) =>
-            _interfaceRepositoryManager = interfaceRepositoryManager;
+        public AbstractRepositoryService(TInterfaceRepositoryManager repositoryManager) =>
+            _repositoryManager = repositoryManager;
 
         #region Entity.
         [PrincipalPermission(SecurityAction.Demand, Role = AppRoles.Admin)]
-        public TEntity Get(TId id) => _interfaceRepositoryManager.Get(id);
+        public TEntity Get(TId id) => _repositoryManager.Get(id);
 
         [PrincipalPermission(SecurityAction.Demand, Role = AppRoles.Admin)]
-        public void Add(TEntity entity) => _interfaceRepositoryManager.Add(entity);
+        public void Add(TEntity entity) => _repositoryManager.Add(entity);
 
         [PrincipalPermission(SecurityAction.Demand, Role = AppRoles.Admin)]
-        public void Edit(TEntity entity) => _interfaceRepositoryManager.Edit(entity);
+        public void Edit(TEntity entity) => _repositoryManager.Edit(entity);
 
         [PrincipalPermission(SecurityAction.Demand, Role = AppRoles.Admin)]
-        public void Delete(TEntity entity) => _interfaceRepositoryManager.Delete(entity);
+        public void Delete(TEntity entity) => _repositoryManager.Delete(entity);
         #endregion
 
         #region Collection.
         [PrincipalPermission(SecurityAction.Demand, Role = AppRoles.Admin)]
-        public IQueryable<TEntity> GetAll() => _interfaceRepositoryManager.GetAll();
+        public IQueryable<TEntity> GetAll() => _repositoryManager.GetAll();
 
         [PrincipalPermission(SecurityAction.Demand, Role = AppRoles.Admin)]
-        public void AddCollection(IQueryable<TEntity> collection) => _interfaceRepositoryManager.AddCollection(collection);
+        public void AddCollection(IQueryable<TEntity> collection) => _repositoryManager.AddCollection(collection);
 
         [PrincipalPermission(SecurityAction.Demand, Role = AppRoles.Admin)]
-        public void EditCollection(IQueryable<TEntity> collection) => _interfaceRepositoryManager.EditCollection(collection);
+        public void EditCollection(IQueryable<TEntity> collection) => _repositoryManager.EditCollection(collection);
 
         [PrincipalPermission(SecurityAction.Demand, Role = AppRoles.Admin)]
-        public void DeleteCollection(IQueryable<TEntity> collection) => _interfaceRepositoryManager.DeleteCollection(collection);
+        public void DeleteCollection(IQueryable<TEntity> collection) => _repositoryManager.DeleteCollection(collection);
         #endregion
     }
 }

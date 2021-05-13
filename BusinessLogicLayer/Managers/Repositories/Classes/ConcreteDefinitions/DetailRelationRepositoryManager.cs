@@ -8,9 +8,12 @@ using System.Linq;
 
 namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
 {
-    public partial class DetailRelationRepositoryManager : AbstractRepositoryManager<DetailRelationEntity, long>,
+    public partial class DetailRelationRepositoryManager : AbstractRepositoryManager<DetailRelationEntity, long, IDetailRelationRepository>,
         IDetailRelationRepositoryManager
     {
+        public DetailRelationRepositoryManager(IDetailRelationRepository detailRelationRepository) :
+            base(detailRelationRepository) {}
+
         private DetailRelationRepositoryHelper _helper;
         private DetailRelationRepositoryHelper _Helper
         {
@@ -19,17 +22,6 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
                 if (_helper == null)
                     _helper = new DetailRelationRepositoryHelper();
                 return _helper;
-            }
-        }
-
-        private IDetailRelationRepository _detailRelationRepository;
-        private IDetailRelationRepository _DetailRelationRepository
-        {
-            get
-            {
-                if (_detailRelationRepository == null)
-                    _detailRelationRepository = Configurator._Container.Resolve<IDetailRelationRepository>();
-                return _detailRelationRepository;
             }
         }
 
@@ -81,22 +73,6 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
             DeleteDetailRelation(entity);
             Save("Произошла ошибка при обращении к базе данных.");
         }
-
-        public void Save(string message)
-        {
-            try
-            {
-                _DetailRelationRepository.Save();
-            }
-            catch(Exception ex)
-            {
-                throw new Exception(message, ex);
-            }
-        }
-        #endregion
-
-        #region Collection.
-        public override IQueryable<DetailRelationEntity> GetAll() => _DetailRelationRepository.GetAll();
         #endregion
     }
 }
