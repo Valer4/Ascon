@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DataAccessLayer
+namespace BusinessLogicLayer
 {
     public class JoinedEnumerable<T> : IEnumerable<T>
     {

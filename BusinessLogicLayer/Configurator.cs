@@ -1,7 +1,4 @@
-﻿using BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions;
-using BusinessLogicLayer.Managers.Print;
-using BusinessLogicLayer.Managers.Repositories.Interfaces.ConcreteDefinitions;
-using BusinessLogicLayer.Services.Print;
+﻿using BusinessLogicLayer.Services.Print;
 using BusinessLogicLayer.Services.Repositories.Classes.ConcreteDefinitions;
 using BusinessLogicLayer.Services.Repositories.Interfaces.ConcreteDefinitions;
 using System.Collections.Generic;

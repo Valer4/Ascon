@@ -42,7 +42,6 @@
     <Compile Include="DataAccessClasses\Repositories\ConcreteDefinitions\ChildDetailRelationRepository.cs" />
     <Compile Include="DataAccessClasses\Repositories\ConcreteDefinitions\DetailTypeRepository.cs" />
     <Compile Include="DataAccessClasses\Repositories\ConcreteDefinitions\DetailRelationRepository.cs" />
-    <Compile Include="LINQExtensions.cs" />
     <Compile Include="MainContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

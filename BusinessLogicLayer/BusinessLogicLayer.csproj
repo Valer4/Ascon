@@ -50,6 +50,7 @@
     <Compile Include="InversionOfControlWithWCFAndUnity\UnityInstanceProvider.cs" />
     <Compile Include="InversionOfControlWithWCFAndUnity\UnityServiceBehavior.cs" />
     <Compile Include="InversionOfControlWithWCFAndUnity\UnityServiceHost.cs" />
+    <Compile Include="LINQExtensions.cs" />
     <Compile Include="Managers\Common\DetailRelationRepositoryHelper.cs" />
     <Compile Include="Managers\Print\IPrintManager.cs" />
     <Compile Include="Managers\Print\PrintManager.cs" />
