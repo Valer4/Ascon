@@ -25,14 +25,7 @@ namespace UserInterfaceLayer.Forms.IViews
             {
                 _allDetails = value.OrderBy(x => x.Name);
 
-                TreeViewState treeState = new TreeViewState();
-                treeState.SaveState(treeViewDetails);
-
-                treeViewDetails.Nodes.Clear();
-
-                (new TreeViewBuilder()).BuildTreeView<DetailRelationEntity, long, long?, long>(treeViewDetails, _allDetails);
-
-                treeState.RestoreState(treeViewDetails);
+                BuildTreeView(treeViewDetails, _allDetails);
             }
         }
         public event SimpleEventHandler GetAllDetails;
@@ -44,6 +37,19 @@ namespace UserInterfaceLayer.Forms.IViews
         #region Implementation of IPrintView
         public event ParamReturnDelegate<byte[], long> GetMSWord;
         #endregion
+
+        private void BuildTreeView<T>(TreeView treeView, IQueryable<T> collection)
+            where T : DetailRelationEntity
+        {
+            TreeViewState treeState = new TreeViewState();
+            treeState.SaveState(treeView);
+
+            treeView.Nodes.Clear();
+
+            (new TreeViewBuilder()).BuildTreeView<T, long, long?, long>(treeView, collection);
+
+            treeState.RestoreState(treeView);
+        }
 
         private void buttonAddRoot_Click(object sender, EventArgs e) => OperationExecute(AddDetail, (CreateAddingDetail(isRoot: true)));
         private void buttonAddChild_Click(object sender, EventArgs e)
