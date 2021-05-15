@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using UserInterfaceLayer.Forms.HelpersToControls;
 using Word = Microsoft.Office.Interop.Word;
 
 namespace UserInterfaceLayer.Forms.IViews
@@ -234,17 +235,7 @@ namespace UserInterfaceLayer.Forms.IViews
             return AllDetails.Where(x => selectedNodeId.Equals(x.Id)).Single();
         }
 
-        private void maskedTextBoxNumber_MouseClick(object sender, MouseEventArgs e) => MoveCaretBeforeSpaces();
-        private void MoveCaretBeforeSpaces() => maskedTextBoxNumber.Select(GetPositionOfFirstSpace(), 0);
-        private int GetPositionOfFirstSpace()
-        {
-            string text = maskedTextBoxNumber.Text;
-            int i = 0,
-                len = text.Length;
-            for(; i < len; ++ i)
-                if(text[i] ==  ' ')
-                    return i;
-            return i;
-        }
+        private void maskedTextBoxNumber_MouseClick(object sender, MouseEventArgs e) =>
+            (new MaskedTextBoxHelper()).MoveCaretBeforeSpaces(maskedTextBoxNumber);
     }
 }

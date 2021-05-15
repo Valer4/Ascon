@@ -47,6 +47,7 @@
     <Compile Include="Clients\UnitsOfWork\Interfaces\IAbstractUnitOfWorkClient.cs" />
     <Compile Include="Configurator.cs" />
     <Compile Include="Delegates.cs" />
+    <Compile Include="Forms\HelpersToControls\MaskedTextBoxHelper.cs" />
     <Compile Include="Forms\IViews\IPrintView.cs" />
     <Compile Include="Forms\Presenters\PrintPresenter.cs" />
     <Compile Include="Forms\TreeViewHelper\TreeViewNodeState.cs" />
