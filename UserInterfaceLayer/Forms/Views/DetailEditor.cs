@@ -45,14 +45,14 @@ namespace UserInterfaceLayer.Forms.IViews
         public event ParamReturnDelegate<byte[], long> GetMSWord;
         #endregion
 
-        private void buttonAddRoot_Click(object sender, EventArgs e) => OperationExecute(AddDetail, (CreateAddingDetail(root: true)));
+        private void buttonAddRoot_Click(object sender, EventArgs e) => OperationExecute(AddDetail, (CreateAddingDetail(isRoot: true)));
         private void buttonAddChild_Click(object sender, EventArgs e)
         {
             DetailRelationEntity сreatedDetail = CreateAddingDetail();
             if(null != сreatedDetail)
                 OperationExecute(AddDetail, сreatedDetail);
         }
-        private DetailRelationEntity CreateAddingDetail(bool root = false)
+        private DetailRelationEntity CreateAddingDetail(bool isRoot = false)
         {
             DetailRelationEntity detail = new DetailRelationEntity();
 
@@ -60,11 +60,11 @@ namespace UserInterfaceLayer.Forms.IViews
             {
                 detail.Name = textBoxName.Text;
 
-                if(root)
-                    detail.Root = true;
+                if(isRoot)
+                    detail.IsRoot = true;
                 else
                 {
-                    if( ! DetailSelected())
+                    if( ! IsDetailSelected())
                         return null;
 
                     if( ! SetAmount(detail, "Количество не указано."))
@@ -84,7 +84,7 @@ namespace UserInterfaceLayer.Forms.IViews
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            if( ! DetailSelected())
+            if( ! IsDetailSelected())
                 return;
 
             DetailRelationEntity EditableDetail = new DetailRelationEntity();
@@ -97,7 +97,7 @@ namespace UserInterfaceLayer.Forms.IViews
             if( ! string.IsNullOrWhiteSpace(textBoxName.Text))
                 EditableDetail.Name = textBoxName.Text;
 
-            if( ! EditableDetail.Root)
+            if( ! EditableDetail.IsRoot)
                 if( ! SetAmount(EditableDetail, "Количество не указано."))
                     return;
 
@@ -106,7 +106,7 @@ namespace UserInterfaceLayer.Forms.IViews
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            if( ! DetailSelected())
+            if( ! IsDetailSelected())
                 return;
 
             OperationExecute(DeleteDetail, GetSelectedDetail());
@@ -114,7 +114,7 @@ namespace UserInterfaceLayer.Forms.IViews
 
         private void buttonCreateReport_Click(object sender, EventArgs e)
         {
-            if( ! DetailSelected())
+            if( ! IsDetailSelected())
                 return;
 
             if(null != GetMSWord)
@@ -167,7 +167,7 @@ namespace UserInterfaceLayer.Forms.IViews
 
         private void ShowErrorMessage(string message) =>
             MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        private bool DetailSelected()
+        private bool IsDetailSelected()
         {
             if(null == treeViewDetails.SelectedNode)
             {

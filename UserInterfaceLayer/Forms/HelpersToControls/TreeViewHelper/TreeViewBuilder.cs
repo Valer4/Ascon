@@ -20,7 +20,7 @@ namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper
             where TItem : ITreeLogicalNode<TId, TParentId, TTypeId>
         {
             foreach(TItem detail in collection)
-                if(detail.Root)
+                if(detail.IsRoot)
                     AddNode<TItem, TId, TParentId, TTypeId>(treeView.Nodes, detail);
         }
 

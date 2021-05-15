@@ -46,8 +46,8 @@ namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
 			            on itemA.Id equals itemB.TypeId
 		                    select new DetailRelationEntity()
                             {
-                                Id = itemA.Root ? itemA.Id * -1 - 1 : itemB.Id,
-                                Root = itemA.Root,
+                                Id = itemA.IsRoot ? itemA.Id * -1 - 1 : itemB.Id,
+                                IsRoot = itemA.IsRoot,
                                 RelationId = itemB?.Id,
                                 ParentId = itemB?.ParentId,
                                 TypeId = itemA.Id,

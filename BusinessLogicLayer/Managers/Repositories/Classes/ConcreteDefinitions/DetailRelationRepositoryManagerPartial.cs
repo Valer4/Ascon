@@ -27,12 +27,12 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
                     throw new Exception("Произошла ошибка при обращении к базе данных.", ex);
                 }
 
-                if( ! detailRelation.Root)
+                if( ! detailRelation.IsRoot)
                     AddChildDetailRelation(detailType.Id, detailRelation);
             }
             else
             {
-                if(detailRelation.Root)
+                if(detailRelation.IsRoot)
                     throw new Exception("Узел с таким названием уже существует.");
 
                 long typeId = sameName.TypeId;
@@ -57,7 +57,7 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
         private DetailTypeEntity AddDetailType(DetailRelationEntity detailRelation)
         {
             DetailTypeEntity detailType = new DetailTypeEntity();
-            detailType.Root = detailRelation.Root;
+            detailType.IsRoot = detailRelation.IsRoot;
             detailType.Name = detailRelation.Name;
             _repository._DetailTypeRepository.Add(detailType);
             return detailType;
@@ -89,7 +89,7 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
 
             detailType.Name = detailRelation.Name;
 
-            if( ! detailRelation.Root)
+            if( ! detailRelation.IsRoot)
             {
                 long relationId = (long)detailRelation.RelationId;
                 ChildDetailRelationEntity childDetailRelation =
@@ -114,7 +114,7 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
         }
         public void DeleteRecursive(DetailRelationEntity detailRelation, IQueryable<DetailRelationEntity> allDetailRelations)
         {
-            if( ! detailRelation.Root)
+            if( ! detailRelation.IsRoot)
                 _repository._ChildDetailRelationRepository.Delete((long)detailRelation.RelationId);
 
             long typeId = detailRelation.TypeId;

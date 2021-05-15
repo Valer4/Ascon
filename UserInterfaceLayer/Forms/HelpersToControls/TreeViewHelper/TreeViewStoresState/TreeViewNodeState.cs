@@ -3,14 +3,14 @@
     public class TreeViewNodeState
     {
         public string FullPath;
-        public bool Expanded,
-                    Selected;
+        public bool IsExpanded,
+                    IsSelected;
 
-        public TreeViewNodeState(string fullPath, bool expanded, bool selected)
+        public TreeViewNodeState(string fullPath, bool isExpanded, bool isSelected)
         {
             FullPath = fullPath;
-            Expanded = expanded;
-            Selected = selected;
+            IsExpanded = isExpanded;
+            IsSelected = isSelected;
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class DetailRelationEntity : TreeLogicalNode<long, long?, long>
     {
-        public override string Text => Root ? Name : $"{Name} ({Amount})";
+        public override string Text => IsRoot ? Name : $"{Name} ({Amount})";
 
         public long? RelationId { get; set; }
         public string Name { get; set; }

@@ -32,6 +32,7 @@ namespace BusinessLogicLayer
             host.Authorization.ExternalAuthorizationPolicies =
                 new ReadOnlyCollection<IAuthorizationPolicy>(new IAuthorizationPolicy[] { new AuthorizationPolicy() });
 
+            // Исключения для клиента.
             host.Description.Behaviors.Find<ServiceDebugBehavior>().IncludeExceptionDetailInFaults = true;
 
             host.AddServiceEndpoint(contractInterface, binding, uri);

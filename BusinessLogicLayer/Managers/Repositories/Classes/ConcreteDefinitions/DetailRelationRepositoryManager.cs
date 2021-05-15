@@ -26,12 +26,12 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
         }
 
         #region Entity.
-        private void CheckData(DetailRelationEntity entity, bool add = false)
+        private void CheckData(DetailRelationEntity entity, bool isAdd = false)
         {
             if(string.IsNullOrWhiteSpace(entity.Name))
                 throw new Exception("Несоответствие данных.");
 
-            if(entity.Root)
+            if(entity.IsRoot)
             {
                 if(entity.RelationId != null) throw new Exception("Несоответствие данных.");
                 if(entity.ParentId != null) throw new Exception("Несоответствие данных.");
@@ -39,7 +39,7 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
             }
             else
             {
-                if(add)
+                if(isAdd)
                 {
                     if(entity.RelationId != null) throw new Exception("Несоответствие данных.");
                 }
@@ -56,7 +56,7 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
 
         public override void Add(DetailRelationEntity entity)
         {
-            CheckData(entity, add: true);
+            CheckData(entity, isAdd: true);
             AddDetailRelation(entity);
             Save("Произошла ошибка при обращении к базе данных.");
         }

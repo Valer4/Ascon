@@ -2,7 +2,7 @@
 {
     public interface ITreeLogicalNode<TId, TParentId, TTypeId> : IAbstractEntity<TId>
     {
-        bool Root { get; set; }
+        bool IsRoot { get; set; }
         TParentId ParentId { get; set; }
         TTypeId TypeId { get; set; }
 

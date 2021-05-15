@@ -67,10 +67,10 @@ namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper.TreeViewStor
 
                 if(null != nodeState)
                 {
-                    if(nodeState.Expanded)
+                    if(nodeState.IsExpanded)
                         node.Expand();
 
-                    if(nodeState.Selected)
+                    if(nodeState.IsSelected)
                         node.TreeView.SelectedNode = node;
                 }
 
