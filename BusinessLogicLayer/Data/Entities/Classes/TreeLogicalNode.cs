@@ -1,7 +1,7 @@
-﻿using BusinessLogicLayer.Entities.Interfaces;
+﻿using BusinessLogicLayer.Data.Entities.Interfaces;
 using System;
 
-namespace BusinessLogicLayer.Entities.Classes
+namespace BusinessLogicLayer.Data.Entities.Classes
 {
     public class TreeLogicalNode<TId, TParentId, TTypeId> : AbstractEntity<TId>, ITreeLogicalNode<TId, TParentId, TTypeId>
     {

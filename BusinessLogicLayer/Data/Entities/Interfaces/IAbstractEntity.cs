@@ -1,4 +1,4 @@
-﻿namespace BusinessLogicLayer.Entities.Interfaces
+﻿namespace BusinessLogicLayer.Data.Entities.Interfaces
 {
     public interface IAbstractEntity<TId>
     {

@@ -1,4 +1,4 @@
-﻿using BusinessLogicLayer.Entities.Interfaces;
+﻿using BusinessLogicLayer.Data.Entities.Interfaces;
 using System.Linq;
 using System.Windows.Forms;
 

@@ -1,4 +1,4 @@
-﻿using BusinessLogicLayer.Entities.Classes.ConcreteDefinitions;
+﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
 using Client.Forms.TreeViewHelper;
 using Microsoft.Office.Interop.Word;
 using System;

@@ -1,6 +1,6 @@
-﻿using BusinessLogicLayer.Entities.Interfaces;
+﻿using BusinessLogicLayer.Data.Entities.Interfaces;
 
-namespace BusinessLogicLayer.Entities.Classes
+namespace BusinessLogicLayer.Data.Entities.Classes
 {
     public abstract class AbstractEntity<TId> : IAbstractEntity<TId>
     {

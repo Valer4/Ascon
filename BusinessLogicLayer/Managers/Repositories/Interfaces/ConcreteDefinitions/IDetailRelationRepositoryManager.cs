@@ -1,4 +1,4 @@
-﻿using BusinessLogicLayer.Entities.Classes.ConcreteDefinitions;
+﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
 
 namespace BusinessLogicLayer.Managers.Repositories.Interfaces.ConcreteDefinitions
 {

@@ -1,4 +1,4 @@
-﻿using BusinessLogicLayer.Entities.Classes.ConcreteDefinitions;
+﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

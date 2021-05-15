@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BusinessLogicLayer.Entities.Classes.ConcreteDefinitions
+namespace BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions
 {
     public class UserEntity : AbstractEntity<long>
     {

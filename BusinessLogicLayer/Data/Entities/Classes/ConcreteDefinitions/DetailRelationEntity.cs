@@ -1,4 +1,4 @@
-﻿namespace BusinessLogicLayer.Entities.Classes.ConcreteDefinitions
+﻿namespace BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions
 {
     public class DetailRelationEntity : TreeLogicalNode<long, long?, long>
     {

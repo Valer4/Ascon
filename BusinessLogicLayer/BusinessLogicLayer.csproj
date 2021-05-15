@@ -39,13 +39,13 @@
     <Compile Include="DataAccessInterfaces\Repositories\IAbstractRepository.cs" />
     <Compile Include="DataAccessInterfaces\Repositories\ConcreteDefinitions\IDetailRelationRepository.cs" />
     <Compile Include="DataAccessInterfaces\UnitsOfWork\IAbstractUnitOfWork.cs" />
-    <Compile Include="Entities\Classes\ConcreteDefinitions\RoleEntity.cs" />
-    <Compile Include="Entities\Classes\ConcreteDefinitions\UserEntity.cs" />
-    <Compile Include="Entities\Classes\ConcreteDefinitions\ChildDetailRelationEntity.cs" />
-    <Compile Include="Entities\Classes\ConcreteDefinitions\DetailTypeEntity.cs" />
-    <Compile Include="Entities\Classes\TreeLogicalNode.cs" />
-    <Compile Include="Entities\Interfaces\IAbstractEntity.cs" />
-    <Compile Include="Entities\Interfaces\ITreeLogicalNode.cs" />
+    <Compile Include="Data\Entities\Classes\ConcreteDefinitions\RoleEntity.cs" />
+    <Compile Include="Data\Entities\Classes\ConcreteDefinitions\UserEntity.cs" />
+    <Compile Include="Data\Entities\Classes\ConcreteDefinitions\ChildDetailRelationEntity.cs" />
+    <Compile Include="Data\Entities\Classes\ConcreteDefinitions\DetailTypeEntity.cs" />
+    <Compile Include="Data\Entities\Classes\TreeLogicalNode.cs" />
+    <Compile Include="Data\Entities\Interfaces\IAbstractEntity.cs" />
+    <Compile Include="Data\Entities\Interfaces\ITreeLogicalNode.cs" />
     <Compile Include="HostsManager.cs" />
     <Compile Include="InversionOfControlWithWCFAndUnity\UnityInstanceProvider.cs" />
     <Compile Include="InversionOfControlWithWCFAndUnity\UnityServiceBehavior.cs" />
@@ -75,8 +75,8 @@
     <Compile Include="Services\Repositories\Interfaces\ConcreteDefinitions\IDetailRelationRepositoryService.cs" />
     <Compile Include="Services\UnitsOfWork\Classes\AbstractUnitOfWorkService.cs" />
     <Compile Include="Services\UnitsOfWork\Interfaces\IAbstractUnitOfWorkService.cs" />
-    <Compile Include="Entities\Classes\AbstractEntity.cs" />
-    <Compile Include="Entities\Classes\ConcreteDefinitions\DetailRelationEntity.cs" />
+    <Compile Include="Data\Entities\Classes\AbstractEntity.cs" />
+    <Compile Include="Data\Entities\Classes\ConcreteDefinitions\DetailRelationEntity.cs" />
     <Compile Include="ConnectInfoClientService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,11 +95,11 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Data\Models\" />
     <Folder Include="Managers\Print\DataFromStorage\" />
     <Folder Include="Managers\Print\DataFromViews\" />
     <Folder Include="Managers\UnitsOfWork\Classes\ConcreteDefinitions\" />
     <Folder Include="Managers\UnitsOfWork\Interfaces\ConcreteDefinitions\" />
-    <Folder Include="Models\" />
     <Folder Include="Services\UnitsOfWork\Classes\ConcreteDefinitions\" />
     <Folder Include="Services\UnitsOfWork\Interfaces\ConcreteDefinitions\" />
   </ItemGroup>

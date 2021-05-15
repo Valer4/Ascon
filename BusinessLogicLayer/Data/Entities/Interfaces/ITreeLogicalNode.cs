@@ -1,4 +1,4 @@
-﻿namespace BusinessLogicLayer.Entities.Interfaces
+﻿namespace BusinessLogicLayer.Data.Entities.Interfaces
 {
     public interface ITreeLogicalNode<TId, TParentId, TTypeId> : IAbstractEntity<TId>
     {
