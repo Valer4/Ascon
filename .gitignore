@@ -50,7 +50,7 @@ Thumbs.db
 
 /.vs/slnx.sqlite
 /.vs/VSWorkspaceState.json
-/UserInterfaceLayer/.vs/UserInterfaceLayer/v16/.suo
+/UserInterfaceLayer/.vs/Ascon/v16/.suo
 /BusinessLogicLayer/bin/Debug/BusinessLogicLayer.dll
 /BusinessLogicLayer/bin/Debug/BusinessLogicLayer.pdb
 /BusinessLogicLayer/obj/Debug/.NETFramework,Version=v4.6.1.AssemblyAttributes.cs
