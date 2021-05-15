@@ -10,5 +10,7 @@ namespace BusinessLogicLayer.Entities.ConcreteDefinitions
         public long TypeId { get; set; }
         public string Name { get; set; }
         public short? Amount { get; set; }
+
+        public string Text => Root ? Name : $"{Name} ({Amount})";
     }
 }

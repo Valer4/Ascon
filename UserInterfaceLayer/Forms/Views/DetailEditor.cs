@@ -78,9 +78,7 @@ namespace UserInterfaceLayer.Forms.IViews
         private TreeNode AddNode(TreeNodeCollection nodes, DetailRelationEntity detail, bool root = false)
         {
             TreeNode addedNode;
-            string text = detail.Name;
-            if( ! root)
-                text += $" ({detail.Amount})";
+            string text = detail.Text;
             addedNode = nodes.Add(text);
             addedNode.Tag = detail.Id;
             return addedNode;
