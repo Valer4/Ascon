@@ -48,11 +48,11 @@
     <Compile Include="Configurator.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="Forms\HelpersToControls\MaskedTextBoxHelper.cs" />
-    <Compile Include="Forms\HelpersToControls\TreeViewHelper.cs" />
+    <Compile Include="Forms\HelpersToControls\TreeViewHelper\TreeViewBuilder.cs" />
     <Compile Include="Forms\IViews\IPrintView.cs" />
     <Compile Include="Forms\Presenters\PrintPresenter.cs" />
-    <Compile Include="Forms\TreeViewHelper\TreeViewNodeState.cs" />
-    <Compile Include="Forms\TreeViewHelper\TreeViewState.cs" />
+    <Compile Include="Forms\HelpersToControls\TreeViewHelper\TreeViewStoresState\TreeViewNodeState.cs" />
+    <Compile Include="Forms\HelpersToControls\TreeViewHelper\TreeViewStoresState\TreeViewState.cs" />
     <Compile Include="Forms\Views\DetailEditor.cs">
       <SubType>Form</SubType>
     </Compile>

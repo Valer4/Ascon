@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Client.Forms.TreeViewHelper
+namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper.TreeViewStoresState
 {
     public class TreeViewState
     {

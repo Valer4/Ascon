@@ -1,4 +1,4 @@
-﻿namespace Client.Forms.TreeViewHelper
+﻿namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper.TreeViewStoresState
 {
     public class TreeViewNodeState
     {

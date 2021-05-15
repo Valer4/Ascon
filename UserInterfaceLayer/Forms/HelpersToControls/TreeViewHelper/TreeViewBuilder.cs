@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Windows.Forms;
 
-namespace UserInterfaceLayer.Forms.HelpersToControls
+namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper
 {
-    public class TreeViewHelper
+    public class TreeViewBuilder
     {
         #region Построение TreeView.
         public void BuildTreeView<TItem, TId, TParentId, TTypeId>(TreeView treeView, IQueryable<TItem> collection)

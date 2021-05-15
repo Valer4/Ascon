@@ -1,5 +1,4 @@
 ﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
-using Client.Forms.TreeViewHelper;
 using Microsoft.Office.Interop.Word;
 using System;
 using System.IO;
@@ -7,6 +6,8 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using UserInterfaceLayer.Forms.HelpersToControls;
+using UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper;
+using UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper.TreeViewStoresState;
 using Word = Microsoft.Office.Interop.Word;
 
 namespace UserInterfaceLayer.Forms.IViews
@@ -29,7 +30,7 @@ namespace UserInterfaceLayer.Forms.IViews
 
                 treeViewDetails.Nodes.Clear();
 
-                (new TreeViewHelper()).BuildTreeView<DetailRelationEntity, long, long?, long>(treeViewDetails, _allDetails);
+                (new TreeViewBuilder()).BuildTreeView<DetailRelationEntity, long, long?, long>(treeViewDetails, _allDetails);
 
                 treeState.RestoreState(treeViewDetails);
             }
