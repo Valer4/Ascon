@@ -1,6 +1,4 @@
-﻿using BusinessLogicLayer.Entities;
-
-namespace BusinessLogicLayer.Entities.ConcreteDefinitions
+﻿namespace BusinessLogicLayer.Entities.Classes.ConcreteDefinitions
 {
     public class DetailTypeEntity : AbstractEntity<long>
     {

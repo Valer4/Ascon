@@ -1,5 +1,5 @@
 ﻿using BusinessLogicLayer.Entities;
-using BusinessLogicLayer.Entities.ConcreteDefinitions;
+using BusinessLogicLayer.Entities.Classes.ConcreteDefinitions;
 using DataAccessLayer.Configurations;
 using System;
 using System.Data.Entity;

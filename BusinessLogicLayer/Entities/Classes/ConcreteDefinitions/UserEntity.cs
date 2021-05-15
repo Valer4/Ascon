@@ -1,7 +1,6 @@
-﻿using BusinessLogicLayer.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace BusinessLogicLayer.Entities.ConcreteDefinitions
+namespace BusinessLogicLayer.Entities.Classes.ConcreteDefinitions
 {
     public class UserEntity : AbstractEntity<long>
     {

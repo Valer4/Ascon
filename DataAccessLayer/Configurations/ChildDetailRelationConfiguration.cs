@@ -1,4 +1,4 @@
-﻿using BusinessLogicLayer.Entities.ConcreteDefinitions;
+﻿using BusinessLogicLayer.Entities.Classes.ConcreteDefinitions;
 using System.Data.Entity.ModelConfiguration;
 
 namespace DataAccessLayer.Configurations

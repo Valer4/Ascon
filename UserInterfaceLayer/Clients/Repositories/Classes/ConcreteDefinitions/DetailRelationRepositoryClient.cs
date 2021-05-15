@@ -1,4 +1,4 @@
-﻿using BusinessLogicLayer.Entities.ConcreteDefinitions;
+﻿using BusinessLogicLayer.Entities.Classes.ConcreteDefinitions;
 using BusinessLogicLayer.Services.Repositories.Interfaces.ConcreteDefinitions;
 using UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions;
 

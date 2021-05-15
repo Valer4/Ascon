@@ -1,6 +1,6 @@
 ﻿using UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions;
 using UserInterfaceLayer.Forms.IViews;
-using BusinessLogicLayer.Entities.ConcreteDefinitions;
+using BusinessLogicLayer.Entities.Classes.ConcreteDefinitions;
 
 namespace UserInterfaceLayer.Forms.Presenters
 {

@@ -1,4 +1,4 @@
-﻿using BusinessLogicLayer.Entities.ConcreteDefinitions;
+﻿using BusinessLogicLayer.Entities.Classes.ConcreteDefinitions;
 using Client.Forms.TreeViewHelper;
 using Microsoft.Office.Interop.Word;
 using System;
@@ -29,7 +29,7 @@ namespace UserInterfaceLayer.Forms.IViews
 
                 treeViewDetails.Nodes.Clear();
 
-                BuildTreeView(_allDetails);
+                (new TreeViewHelper()).BuildTreeView<DetailRelationEntity, long, long?, long>(treeViewDetails, _allDetails);
 
                 treeState.RestoreState(treeViewDetails);
             }
@@ -42,47 +42,6 @@ namespace UserInterfaceLayer.Forms.IViews
 
         #region Implementation of IPrintView
         public event ParamReturnDelegate<byte[], long> GetMSWord;
-        #endregion
-
-        #region Построение TreeView.
-        private void BuildTreeView(IQueryable<DetailRelationEntity> allDetails)
-        {
-            BuildRootNodesTreeView(allDetails);
-
-            foreach(TreeNode node in treeViewDetails.Nodes)
-                BuildChildNodesTreeViewRecursive(node, allDetails);
-        }
-
-        private void BuildRootNodesTreeView(IQueryable<DetailRelationEntity> allDetails)
-        {
-            foreach(DetailRelationEntity detail in allDetails)
-                if(detail.Root)
-                    AddNode(treeViewDetails.Nodes, detail, root: true);
-        }
-
-        private void BuildChildNodesTreeViewRecursive(TreeNode treeNode, IQueryable<DetailRelationEntity> allDetails)
-        {
-            long treeNodeId = Convert.ToInt64(treeNode.Tag),
-                 typeId = allDetails.Where(x => treeNodeId == x.Id).Single().TypeId;
-            IQueryable<DetailRelationEntity> childsOfDetail = allDetails.Where(x => typeId == x.ParentId);
-
-            TreeNode addedNode;
-            foreach(DetailRelationEntity childOfDetail in childsOfDetail)
-            {
-                addedNode = AddNode(treeNode.Nodes, childOfDetail);
-
-                BuildChildNodesTreeViewRecursive(addedNode, allDetails);
-            }
-        }
-
-        private TreeNode AddNode(TreeNodeCollection nodes, DetailRelationEntity detail, bool root = false)
-        {
-            TreeNode addedNode;
-            string text = detail.Text;
-            addedNode = nodes.Add(text);
-            addedNode.Tag = detail.Id;
-            return addedNode;
-        }
         #endregion
 
         private void buttonAddRoot_Click(object sender, EventArgs e) => OperationExecute(AddDetail, (CreateAddingDetail(root: true)));
