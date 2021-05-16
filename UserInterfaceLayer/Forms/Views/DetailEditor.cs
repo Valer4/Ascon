@@ -38,6 +38,20 @@ namespace UserInterfaceLayer.Forms.IViews
         public event ParamReturnDelegate<byte[], long> GetMSWord;
         #endregion
 
+        private void DetailEditor_Load(object sender, EventArgs e) => UpdateTree();
+        private void UpdateTree()
+        {
+            if(null != GetAllDetails)
+                try
+                {
+                    GetAllDetails();
+                }
+                catch(Exception ex)
+                {
+                    ShowErrorMessage(ex.Message);
+                }
+        }
+
         private void BuildTreeView<T>(TreeView treeView, IQueryable<T> collection)
             where T : DetailRelationEntity
         {
@@ -51,76 +65,95 @@ namespace UserInterfaceLayer.Forms.IViews
             treeState.RestoreState(treeView);
         }
 
-        private void buttonAddRoot_Click(object sender, EventArgs e) => OperationExecute(AddDetail, (CreateAddingDetail(isRoot: true)));
-        private void buttonAddChild_Click(object sender, EventArgs e)
+        private void buttonAddRoot_Click(object sender, EventArgs e) => CreateAndAddDetail(isRoot: true);
+        private void buttonAddChild_Click(object sender, EventArgs e) => CreateAndAddDetail();
+        private void CreateAndAddDetail(bool isRoot = false)
         {
-            DetailRelationEntity сreatedDetail = CreateAddingDetail();
-            if(null != сreatedDetail)
-                OperationExecute(AddDetail, сreatedDetail);
-        }
-        private DetailRelationEntity CreateAddingDetail(bool isRoot = false)
-        {
-            DetailRelationEntity detail = new DetailRelationEntity();
-
             try
             {
+                DetailRelationEntity detail = new DetailRelationEntity();
+
                 detail.Name = textBoxName.Text;
 
                 if(isRoot)
                     detail.IsRoot = true;
                 else
                 {
-                    if( ! IsDetailSelected())
-                        return null;
+                    if( ! ThereIsSelectedNode())
+                        return;
 
-                    if( ! SetAmount(detail, "Количество не указано."))
-                        return null;
+                    if( ! SetAmount(detail))
+                        return;
 
                     detail.ParentId = GetSelectedDetail().TypeId;
                 }
+
+                OperationExecute(AddDetail, detail);
             }
             catch(Exception ex)
             {
                 ShowErrorMessage(ex.Message);
-                return null;
             }
-
-            return detail;
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            if( ! IsDetailSelected())
-                return;
-
-            DetailRelationEntity EditableDetail = new DetailRelationEntity();
-            DetailRelationEntity SelectedDetail = GetSelectedDetail();
-
-            PropertyInfo[] properties = typeof(DetailRelationEntity).GetProperties();
-            foreach(PropertyInfo property in properties)
-                property.SetValue(EditableDetail, property.GetValue(SelectedDetail));
-
-            if( ! string.IsNullOrWhiteSpace(textBoxName.Text))
-                EditableDetail.Name = textBoxName.Text;
-
-            if( ! EditableDetail.IsRoot)
-                if( ! SetAmount(EditableDetail, "Количество не указано."))
+            try
+            {
+                if( ! ThereIsSelectedNode())
                     return;
 
-            OperationExecute(EditDetail, EditableDetail);
+                DetailRelationEntity editableDetail = new DetailRelationEntity();
+                DetailRelationEntity selectedDetail = GetSelectedDetail();
+
+                PropertyInfo[] properties = typeof(DetailRelationEntity).GetProperties();
+                foreach(PropertyInfo property in properties)
+                    property.SetValue(editableDetail, property.GetValue(selectedDetail));
+
+                bool nameIsEmpty = string.IsNullOrWhiteSpace(textBoxName.Text);
+
+                if(editableDetail.IsRoot)
+                {
+                    if(nameIsEmpty)
+                    {
+                        ShowWarningMessage("Наименование не указано.");
+                        return;
+                    }
+                }
+                else
+                    if( ! SetAmount(editableDetail))
+                        return;
+
+                if( ! nameIsEmpty)
+                    editableDetail.Name = textBoxName.Text;
+
+                OperationExecute(EditDetail, editableDetail);
+
+            }
+            catch(Exception ex)
+            {
+                ShowErrorMessage(ex.Message);
+            }
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            if( ! IsDetailSelected())
-                return;
+            try
+            {
+                if( ! ThereIsSelectedNode())
+                    return;
 
-            OperationExecute(DeleteDetail, GetSelectedDetail());
+                OperationExecute(DeleteDetail, GetSelectedDetail());
+            }
+            catch(Exception ex)
+            {
+                ShowErrorMessage(ex.Message);
+            }
         }
 
         private void buttonCreateReport_Click(object sender, EventArgs e)
         {
-            if( ! IsDetailSelected())
+            if( ! ThereIsSelectedNode())
                 return;
 
             if(null != GetMSWord)
@@ -134,20 +167,6 @@ namespace UserInterfaceLayer.Forms.IViews
                     _Application word = new Word.Application();
                     _Document doc = word.Documents.Add(fileName);
                     word.Visible = true;
-                }
-                catch(Exception ex)
-                {
-                    ShowErrorMessage(ex.Message);
-                }
-        }
-
-        private void DetailEditor_Load(object sender, EventArgs e) => UpdateTree();
-        private void UpdateTree()
-        {
-            if(null != GetAllDetails)
-                try
-                {
-                    GetAllDetails();
                 }
                 catch(Exception ex)
                 {
@@ -171,32 +190,55 @@ namespace UserInterfaceLayer.Forms.IViews
             }
         }
 
-        private void ShowErrorMessage(string message) =>
-            MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        private bool IsDetailSelected()
-        {
-            if(null == treeViewDetails.SelectedNode)
-            {
-                MessageBox.Show("Ничего не выбрано.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-            return true;
-        }
-        private bool SetAmount(DetailRelationEntity detail, string message)
+        private bool SetAmount(DetailRelationEntity detail)
         {
             if(short.TryParse(maskedTextBoxAmount.Text, out short value))
             {
                 detail.Amount = value;
                 return true;
             }
-            ShowErrorMessage(message);
+
+            if(string.IsNullOrWhiteSpace(maskedTextBoxAmount.Text))
+                ShowErrorMessage("Количество не указано.");
+            else
+                ShowErrorMessage("Количество указано не верно.");
+
             return false;
         }
 
-        private DetailRelationEntity GetSelectedDetail()
+        public bool ThereIsSelectedNode()
         {
-            long selectedNodeId = (long)treeViewDetails.SelectedNode.Tag;
-            return AllDetails.Where(x => selectedNodeId.Equals(x.Id)).Single();
+            if(null == treeViewDetails.SelectedNode)
+            {
+                ShowWarningMessage("Деталь не выбрана.");
+                return false;
+            }
+            return true;
+        }
+
+        public object GetTagSelectedNode() => treeViewDetails.SelectedNode.Tag;
+        public long GetIdSelectedNode()
+        {
+            object tag = GetTagSelectedNode();
+            if(tag is long)
+                return (long)tag;
+            throw new Exception("Ошибка в работе программы. Обратитесь к разработчикам.");
+        }
+        public DetailRelationEntity GetSelectedDetail()
+        {
+            long id = GetIdSelectedNode();
+            return AllDetails.Where(x => id.Equals(x.Id)).Single();
+        }
+
+        public void ShowWarningMessage(string message)
+        {
+            if( ! string.IsNullOrEmpty(message))
+                MessageBox.Show(message, "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+        public void ShowErrorMessage(string message)
+        {
+            if( ! string.IsNullOrEmpty(message))
+                MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void maskedTextBoxNumber_MouseClick(object sender, MouseEventArgs e) =>
