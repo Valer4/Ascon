@@ -71,9 +71,8 @@ namespace UserInterfaceLayer.Forms.Views
         {
             try
             {
-                ShowWarningMessage(
-                    _detailRelationEntityClient.Add(GetSelectedDetail(), isRoot, textBoxName.Text, maskedTextBoxAmount.Text));
-                UpdateTree();
+                if( ! ShowWarningMessage(_detailRelationEntityClient.Add(GetSelectedDetail(), isRoot, textBoxName.Text, maskedTextBoxAmount.Text)))
+                    UpdateTree();
             }
             catch(Exception ex)
             {
@@ -85,9 +84,8 @@ namespace UserInterfaceLayer.Forms.Views
         {
             try
             {
-                ShowWarningMessage(
-                    _detailRelationEntityClient.Edit(GetSelectedDetail(), textBoxName.Text, maskedTextBoxAmount.Text));
-                UpdateTree();
+                if( ! ShowWarningMessage(_detailRelationEntityClient.Edit(GetSelectedDetail(), textBoxName.Text, maskedTextBoxAmount.Text)))
+                    UpdateTree();
             }
             catch(Exception ex)
             {
@@ -99,9 +97,8 @@ namespace UserInterfaceLayer.Forms.Views
         {
             try
             {
-                ShowWarningMessage(
-                    _detailRelationEntityClient.Delete(GetSelectedDetail()));
-                UpdateTree();
+                if( ! ShowWarningMessage(_detailRelationEntityClient.Delete(GetSelectedDetail())))
+                    UpdateTree();
             }
             catch(Exception ex)
             {
@@ -117,7 +114,7 @@ namespace UserInterfaceLayer.Forms.Views
 
                 byte[] file = _printClient.GetMSWord(GetSelectedDetail(), out string warningMessage);
 
-                if(string.IsNullOrEmpty(warningMessage))
+                if( ! ShowWarningMessage(warningMessage))
                 {
                     File.WriteAllBytes(fileName, file);
 
@@ -140,15 +137,16 @@ namespace UserInterfaceLayer.Forms.Views
             return AllDetails.Where(x => id.Equals(x.Id)).Single();
         }
 
-        public void ShowWarningMessage(string message)
+        public bool ShowWarningMessage(string message) => ShowProblemMessage(message, "Предупреждение", MessageBoxIcon.Warning);
+        public bool ShowErrorMessage(string message) => ShowProblemMessage(message, "Ошибка", MessageBoxIcon.Error);
+        public bool ShowProblemMessage(string message, string caption, MessageBoxIcon icon)
         {
             if( ! string.IsNullOrEmpty(message))
-                MessageBox.Show(message, "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-        public void ShowErrorMessage(string message)
-        {
-            if( ! string.IsNullOrEmpty(message))
-                MessageBox.Show(message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
+                MessageBox.Show(message, caption, MessageBoxButtons.OK, icon);
+                return true;
+            }
+            return false;
         }
 
         private void maskedTextBoxNumber_MouseClick(object sender, MouseEventArgs e) =>
