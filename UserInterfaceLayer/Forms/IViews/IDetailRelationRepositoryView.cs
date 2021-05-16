@@ -5,7 +5,7 @@ namespace UserInterfaceLayer.Forms.IViews
 {
     public interface IDetailRelationRepositoryView
     {
-        IQueryable<DetailRelationEntity> AllDetails { set; }
+        IQueryable<DetailRelationEntity> AllDetails { get; set; }
 
         event SimpleEventHandler GetAllDetails;
         event GenericEventHandler<DetailRelationEntity> AddDetail;

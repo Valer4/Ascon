@@ -184,7 +184,7 @@ namespace UserInterfaceLayer.Forms.IViews
         }
         private bool SetAmount(DetailRelationEntity detail, string message)
         {
-            if(short.TryParse(maskedTextBoxNumber.Text, out short value))
+            if(short.TryParse(maskedTextBoxAmount.Text, out short value))
             {
                 detail.Amount = value;
                 return true;
@@ -200,6 +200,6 @@ namespace UserInterfaceLayer.Forms.IViews
         }
 
         private void maskedTextBoxNumber_MouseClick(object sender, MouseEventArgs e) =>
-            (new MaskedTextBoxHelper()).MoveCaretBeforeSpaces(maskedTextBoxNumber);
+            (new MaskedTextBoxHelper()).MoveCaretBeforeSpaces(maskedTextBoxAmount);
     }
 }

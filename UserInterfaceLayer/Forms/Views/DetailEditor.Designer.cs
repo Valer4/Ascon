@@ -38,7 +38,7 @@ namespace UserInterfaceLayer.Forms.IViews
             this.labelName = new System.Windows.Forms.Label();
             this.labelNumber = new System.Windows.Forms.Label();
             this.buttonCreateReport = new System.Windows.Forms.Button();
-            this.maskedTextBoxNumber = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBoxAmount = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // treeViewDetails
@@ -138,21 +138,21 @@ namespace UserInterfaceLayer.Forms.IViews
             // 
             // maskedTextBoxNumber
             // 
-            this.maskedTextBoxNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.maskedTextBoxNumber.Location = new System.Drawing.Point(418, 90);
-            this.maskedTextBoxNumber.Mask = "0000";
-            this.maskedTextBoxNumber.Name = "maskedTextBoxNumber";
-            this.maskedTextBoxNumber.ResetOnSpace = false;
-            this.maskedTextBoxNumber.Size = new System.Drawing.Size(150, 20);
-            this.maskedTextBoxNumber.TabIndex = 2;
-            this.maskedTextBoxNumber.MouseClick += new System.Windows.Forms.MouseEventHandler(this.maskedTextBoxNumber_MouseClick);
+            this.maskedTextBoxAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.maskedTextBoxAmount.Location = new System.Drawing.Point(418, 90);
+            this.maskedTextBoxAmount.Mask = "0000";
+            this.maskedTextBoxAmount.Name = "maskedTextBoxNumber";
+            this.maskedTextBoxAmount.ResetOnSpace = false;
+            this.maskedTextBoxAmount.Size = new System.Drawing.Size(150, 20);
+            this.maskedTextBoxAmount.TabIndex = 2;
+            this.maskedTextBoxAmount.MouseClick += new System.Windows.Forms.MouseEventHandler(this.maskedTextBoxNumber_MouseClick);
             // 
             // DetailEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(580, 270);
-            this.Controls.Add(this.maskedTextBoxNumber);
+            this.Controls.Add(this.maskedTextBoxAmount);
             this.Controls.Add(this.buttonCreateReport);
             this.Controls.Add(this.labelNumber);
             this.Controls.Add(this.labelName);
@@ -181,7 +181,7 @@ namespace UserInterfaceLayer.Forms.IViews
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Label labelNumber;
         private System.Windows.Forms.Button buttonCreateReport;
-        private System.Windows.Forms.MaskedTextBox maskedTextBoxNumber;
+        private System.Windows.Forms.MaskedTextBox maskedTextBoxAmount;
     }
 }
 
