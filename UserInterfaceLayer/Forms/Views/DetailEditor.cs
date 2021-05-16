@@ -41,15 +41,14 @@ namespace UserInterfaceLayer.Forms.IViews
         private void DetailEditor_Load(object sender, EventArgs e) => UpdateTree();
         private void UpdateTree()
         {
-            if(null != GetAllDetails)
-                try
-                {
-                    GetAllDetails();
-                }
-                catch(Exception ex)
-                {
-                    ShowErrorMessage(ex.Message);
-                }
+            try
+            {
+                GetAllDetails();
+            }
+            catch(Exception ex)
+            {
+                ShowErrorMessage(ex.Message);
+            }
         }
 
         private void BuildTreeView<T>(TreeView treeView, IQueryable<T> collection)
@@ -81,11 +80,9 @@ namespace UserInterfaceLayer.Forms.IViews
                 {
                     if( ! ThereIsSelectedNode())
                         return;
-
-                    if( ! SetAmount(detail))
-                        return;
-
                     detail.ParentId = GetSelectedDetail().TypeId;
+
+                    SetAmount(detail);
                 }
 
                 OperationExecute(AddDetail, detail);
@@ -110,25 +107,17 @@ namespace UserInterfaceLayer.Forms.IViews
                 foreach(PropertyInfo property in properties)
                     property.SetValue(editableDetail, property.GetValue(selectedDetail));
 
-                bool nameIsEmpty = string.IsNullOrWhiteSpace(textBoxName.Text);
-
                 if(editableDetail.IsRoot)
-                {
-                    if(nameIsEmpty)
-                    {
-                        ShowWarningMessage("Наименование не указано.");
-                        return;
-                    }
-                }
-                else
-                    if( ! SetAmount(editableDetail))
-                        return;
-
-                if( ! nameIsEmpty)
                     editableDetail.Name = textBoxName.Text;
+                else
+                {
+                    if( ! string.IsNullOrWhiteSpace(textBoxName.Text))
+                        editableDetail.Name = textBoxName.Text;
+
+                    SetAmount(editableDetail);
+                }
 
                 OperationExecute(EditDetail, editableDetail);
-
             }
             catch(Exception ex)
             {
@@ -138,12 +127,27 @@ namespace UserInterfaceLayer.Forms.IViews
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
+            if( ! ThereIsSelectedNode())
+                return;
+
+            OperationExecute(DeleteDetail, GetSelectedDetail());
+        }
+
+        private void buttonCreateReport_Click(object sender, EventArgs e)
+        {
             try
             {
                 if( ! ThereIsSelectedNode())
                     return;
 
-                OperationExecute(DeleteDetail, GetSelectedDetail());
+                string fileName = "C:\\client.doc";
+
+                byte[] file = GetMSWord((long)treeViewDetails.SelectedNode.Tag);
+                File.WriteAllBytes(fileName, file);
+
+                _Application word = new Word.Application();
+                _Document doc = word.Documents.Add(fileName);
+                word.Visible = true;
             }
             catch(Exception ex)
             {
@@ -151,59 +155,17 @@ namespace UserInterfaceLayer.Forms.IViews
             }
         }
 
-        private void buttonCreateReport_Click(object sender, EventArgs e)
-        {
-            if( ! ThereIsSelectedNode())
-                return;
-
-            if(null != GetMSWord)
-                try
-                {
-                    string fileName = "C:\\client.doc";
-
-                    byte[] file = GetMSWord((long)treeViewDetails.SelectedNode.Tag);
-                    File.WriteAllBytes(fileName, file);
-
-                    _Application word = new Word.Application();
-                    _Document doc = word.Documents.Add(fileName);
-                    word.Visible = true;
-                }
-                catch(Exception ex)
-                {
-                    ShowErrorMessage(ex.Message);
-                }
-        }
-
         private void OperationExecute<T>(GenericEventHandler<T> operation, T operand)
         {
             try
             {
-                if(null != operation)
-                {
-                    operation(operand);
-                    UpdateTree();
-                }
+                operation(operand);
+                UpdateTree();
             }
             catch (Exception ex)
             {
                 ShowErrorMessage(ex.Message);
             }
-        }
-
-        private bool SetAmount(DetailRelationEntity detail)
-        {
-            if(short.TryParse(maskedTextBoxAmount.Text, out short value))
-            {
-                detail.Amount = value;
-                return true;
-            }
-
-            if(string.IsNullOrWhiteSpace(maskedTextBoxAmount.Text))
-                ShowErrorMessage("Количество не указано.");
-            else
-                ShowErrorMessage("Количество указано не верно.");
-
-            return false;
         }
 
         public bool ThereIsSelectedNode()
@@ -215,19 +177,16 @@ namespace UserInterfaceLayer.Forms.IViews
             }
             return true;
         }
-
-        public object GetTagSelectedNode() => treeViewDetails.SelectedNode.Tag;
-        public long GetIdSelectedNode()
-        {
-            object tag = GetTagSelectedNode();
-            if(tag is long)
-                return (long)tag;
-            throw new Exception("Ошибка в работе программы. Обратитесь к разработчикам.");
-        }
         public DetailRelationEntity GetSelectedDetail()
         {
-            long id = GetIdSelectedNode();
+            long id = (long)treeViewDetails.SelectedNode.Tag;
             return AllDetails.Where(x => id.Equals(x.Id)).Single();
+        }
+
+        private void SetAmount(DetailRelationEntity detail)
+        {
+            if(short.TryParse(maskedTextBoxAmount.Text, out short value))
+                detail.Amount = value;
         }
 
         public void ShowWarningMessage(string message)

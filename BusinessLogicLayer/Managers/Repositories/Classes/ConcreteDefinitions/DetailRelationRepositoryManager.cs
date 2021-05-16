@@ -47,10 +47,10 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
                     if(entity.RelationId == null) throw new Exception("Несоответствие данных.");
 
                 if(entity.ParentId == null) throw new Exception("Несоответствие данных.");
-                if(entity.Amount == null) throw new Exception("Несоответствие данных.");
+                if(entity.Amount == null) throw new Exception("Количество деталей не указано.");
 
                 if(entity.Amount < 1
-                || entity.Amount > 9999) throw new Exception("Несоответствие данных.");
+                || entity.Amount > 9999) throw new Exception("Количество деталей указано не верно.");
             }
         }
 
