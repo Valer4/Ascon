@@ -1,10 +1,8 @@
 ﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
-using System.Linq;
 
-namespace UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions
-
+namespace BusinessLogicLayer.Logic.Presenters.Interfaces.Repositories
 {
-    public interface IDetailRelationRepositoryClient : IAbstractRepositoryClient<DetailRelationEntity>
+    public interface IDetailRelationRepositoryPresenter
     {
         string Add(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount);
 

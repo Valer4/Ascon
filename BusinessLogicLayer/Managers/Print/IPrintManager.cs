@@ -1,7 +1,9 @@
-﻿namespace BusinessLogicLayer.Managers.Print
+﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
+
+namespace BusinessLogicLayer.Managers.Print
 {
     public interface IPrintManager
     {
-        byte[] GetMSWord(long id);
+        byte[] GetMSWord(DetailRelationEntity selectedDetail);
     }
 }

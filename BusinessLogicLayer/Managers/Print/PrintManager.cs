@@ -17,15 +17,13 @@ namespace BusinessLogicLayer.Managers.Print
         public PrintManager(IDetailRelationRepository repository) =>
             _repository = repository;
 
-        public byte[] GetMSWord(long id)
+        public byte[] GetMSWord(DetailRelationEntity selectedDetail)
         {
             DetailRelationRepositoryHelper helper = new DetailRelationRepositoryHelper();
             IQueryable<DetailRelationEntity> allDetailRelations = _repository.GetAll();
 
-            DetailRelationEntity selectedDetailRelation = helper.Find(id, allDetailRelations);
-
             ICollection<DetailRelationEntity> descendants = helper.GetDescendants(
-                selectedDetailRelation.TypeId, allDetailRelations, new List<DetailRelationEntity>()).ToList();
+                selectedDetail.TypeId, allDetailRelations, new List<DetailRelationEntity>()).ToList();
 
             DetailRelationEntity detailRelation;
             int lastId = descendants.Count - 1;
@@ -50,7 +48,7 @@ namespace BusinessLogicLayer.Managers.Print
             range = doc.Bookmarks.get_Item(ref oEndOfDoc).Range;
             Paragraph paragraph = doc.Content.Paragraphs.Add(ref missing);
             paragraph.Format.SpaceAfter = 12;
-            paragraph.Range.Text = $"«{selectedDetailRelation.Name}»";
+            paragraph.Range.Text = $"«{selectedDetail.Name}»";
             paragraph.Range.InsertParagraphAfter();
 
             range = doc.Bookmarks.get_Item(ref oEndOfDoc).Range;

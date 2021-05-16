@@ -6,14 +6,14 @@ namespace BusinessLogicLayer.DataAccessInterfaces.Repositories
     {
         void Save();
 
-        #region Entity.
+        #region Entity
         TEntity Get(TId id);
         void Add(TEntity entity);
         void Edit(TEntity entity);
         void Delete(TEntity entity);
         #endregion
 
-        #region Collection.
+        #region Collection
         IQueryable<TEntity> GetAll();
         void AddCollection(IQueryable<TEntity> collection);
         void EditCollection(IQueryable<TEntity> collection);

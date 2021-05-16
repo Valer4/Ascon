@@ -51,6 +51,10 @@
     <Compile Include="InversionOfControlWithWCFAndUnity\UnityServiceBehavior.cs" />
     <Compile Include="InversionOfControlWithWCFAndUnity\UnityServiceHost.cs" />
     <Compile Include="LINQExtensions.cs" />
+    <Compile Include="Logic\Presenters\Repositories\Classes\DetailRelationRepositoryPresenter.cs" />
+    <Compile Include="Logic\Presenters\Repositories\Interfaces\IDetailRelationRepositoryPresenter.cs" />
+    <Compile Include="Logic\Print\IPrintPresenter.cs" />
+    <Compile Include="Logic\Print\PrintPresenter.cs" />
     <Compile Include="Managers\Common\DetailRelationRepositoryHelper.cs" />
     <Compile Include="Managers\Print\IPrintManager.cs" />
     <Compile Include="Managers\Print\PrintManager.cs" />
@@ -72,8 +76,8 @@
     <Compile Include="Services\Print\PrintService.cs" />
     <Compile Include="Services\Repositories\Classes\AbstractRepositoryService.cs" />
     <Compile Include="Services\Repositories\Classes\ConcreteDefinitions\DetailRelationRepositoryService.cs" />
-    <Compile Include="Services\Repositories\Interfaces\IAbstractRepositoryService.cs" />
     <Compile Include="Services\Repositories\Interfaces\ConcreteDefinitions\IDetailRelationRepositoryService.cs" />
+    <Compile Include="Services\Repositories\Interfaces\IAbstractRepositoryService.cs" />
     <Compile Include="Services\UnitsOfWork\Classes\AbstractUnitOfWorkService.cs" />
     <Compile Include="Services\UnitsOfWork\Interfaces\IAbstractUnitOfWorkService.cs" />
     <Compile Include="Data\Entities\Classes\AbstractEntity.cs" />
@@ -96,7 +100,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\Models\" />
+    <Folder Include="Data\DataModels\" />
     <Folder Include="Managers\Print\DataFromStorage\" />
     <Folder Include="Managers\Print\DataFromViews\" />
     <Folder Include="Managers\UnitsOfWork\Classes\ConcreteDefinitions\" />

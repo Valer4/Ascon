@@ -3,9 +3,9 @@
 namespace BusinessLogicLayer.Services.UnitsOfWork.Interfaces
 {
     [ServiceContract(SessionMode = SessionMode.Required)]
-    public interface IAbstractUnitOfWorkService<TModel>
+    public interface IAbstractUnitOfWorkService<TDataModel>
     {
         [OperationContract]
-        TModel Get();
+        TDataModel Get();
     }
 }

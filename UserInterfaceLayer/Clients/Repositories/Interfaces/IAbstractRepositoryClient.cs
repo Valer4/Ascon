@@ -1,21 +1,10 @@
-﻿using System.Linq;
+﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
+using System.Linq;
 
 namespace UserInterfaceLayer.Clients.Repositories.Interfaces
 {
-    public interface IAbstractRepositoryClient<TEntity, TId>
+    public interface IAbstractRepositoryClient<T>
     {
-        #region Entity.
-        TEntity Get(TId id);
-        void Add(TEntity entity);
-        void Edit(TEntity entity);
-        void Delete(TEntity entity);
-        #endregion
-
-        #region Collection.
-        IQueryable<TEntity> GetAll();
-        void AddCollection(IQueryable<TEntity> collection);
-        void EditCollection(IQueryable<TEntity> collection);
-        void DeleteCollection(IQueryable<TEntity> collection);
-        #endregion
+        IQueryable<T> GetAll();
     }
 }

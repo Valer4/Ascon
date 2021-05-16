@@ -1,5 +1,5 @@
 ﻿
-namespace UserInterfaceLayer.Forms.IViews
+namespace UserInterfaceLayer.Forms.Views
 {
     partial class DetailEditor
     {

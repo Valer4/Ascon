@@ -26,14 +26,14 @@ namespace BusinessLogicLayer.Managers.Repositories.Classes
             }
         }
 
-        #region Entity.
+        #region Entity
         public virtual TEntity Get(TId id) => _repository.Get(id);
         public virtual void Add(TEntity entity) => _repository.Add(entity);
         public virtual void Edit(TEntity entity) => _repository.Edit(entity);
         public virtual void Delete(TEntity entity) => _repository.Delete(entity);
         #endregion
 
-        #region Collection.
+        #region Collection
         public virtual IQueryable<TEntity> GetAll() => _repository.GetAll();
         public virtual void AddCollection(IQueryable<TEntity> collection) => _repository.AddCollection(collection);
         public virtual void EditCollection(IQueryable<TEntity> collection) => _repository.EditCollection(collection);

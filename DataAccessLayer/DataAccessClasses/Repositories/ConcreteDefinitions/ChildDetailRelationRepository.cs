@@ -1,6 +1,5 @@
-﻿using BusinessLogicLayer.DataAccessInterfaces.Repositories.ConcreteDefinitions;
-using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
-using System;
+﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
+using BusinessLogicLayer.DataAccessInterfaces.Repositories.ConcreteDefinitions;
 using System.Linq;
 
 namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
@@ -10,7 +9,7 @@ namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
     {
         public ChildDetailRelationRepository(MainContext context) => _db = context;
 
-        #region Entity.
+        #region Entity
         public override void Add(ChildDetailRelationEntity item) => _db.ChildDetailRelations.Add(item);
 
         public void Delete(long id)
@@ -22,7 +21,7 @@ namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
         public override void Delete(ChildDetailRelationEntity item) => _db.ChildDetailRelations.Remove(item);
         #endregion
 
-        #region Collection.
+        #region Collection
         public override IQueryable<ChildDetailRelationEntity> GetAll() => _db.ChildDetailRelations;
         #endregion
     }

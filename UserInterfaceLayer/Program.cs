@@ -1,10 +1,7 @@
 ﻿using BusinessLogicLayer;
 using System;
 using System.Windows.Forms;
-using UserInterfaceLayer.Clients.Print;
-using UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions;
-using UserInterfaceLayer.Forms.IViews;
-using UserInterfaceLayer.Forms.Presenters;
+using UserInterfaceLayer.Forms.Views;
 
 namespace UserInterfaceLayer
 {
@@ -23,10 +20,7 @@ namespace UserInterfaceLayer
 
                 new Configurator(new ConnectInfoClientService("localhost", 10000));
 
-                DetailEditor view = new DetailEditor();
-                new DetailRelationRepositoryPresenter(view, Configurator._Container.Resolve<IDetailRelationRepositoryClient>());
-                new PrintPresenter(view, Configurator._Container.Resolve<IPrintClient>());
-                Application.Run(view);
+                Application.Run(Configurator._Container.Resolve<DetailEditor>());
             }
             catch(Exception ex)
             {

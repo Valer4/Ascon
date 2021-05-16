@@ -9,7 +9,7 @@ namespace DataAccessLayer.Configurations
         {
             ToTable("detail_types");
             Property(x => x.Id).IsRequired();
-            Property(x => x.IsRoot).IsRequired();
+            Property(x => x.IsRoot).IsRequired().HasColumnName("root");;
             Property(x => x.Name).IsRequired().HasMaxLength(64);
         }
     }

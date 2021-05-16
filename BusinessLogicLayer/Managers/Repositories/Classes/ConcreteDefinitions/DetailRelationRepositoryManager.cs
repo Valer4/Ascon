@@ -25,52 +25,52 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
             }
         }
 
-        #region Entity.
-        private void CheckData(DetailRelationEntity entity, bool isAdd = false)
+        #region Entity
+        private void CheckData(DetailRelationEntity selectedDetail, bool isAdd = false)
         {
-            if(string.IsNullOrWhiteSpace(entity.Name))
+            if(string.IsNullOrWhiteSpace(selectedDetail.Name))
                 throw new Exception("Несоответствие данных.");
 
-            if(entity.IsRoot)
+            if(selectedDetail.IsRoot)
             {
-                if(entity.RelationId != null) throw new Exception("Несоответствие данных.");
-                if(entity.ParentId != null) throw new Exception("Несоответствие данных.");
-                if(entity.Amount != null) throw new Exception("Несоответствие данных.");
+                if(selectedDetail.RelationId != null) throw new Exception("Несоответствие данных.");
+                if(selectedDetail.ParentId != null) throw new Exception("Несоответствие данных.");
+                if(selectedDetail.Amount != null) throw new Exception("Несоответствие данных.");
             }
             else
             {
                 if(isAdd)
                 {
-                    if(entity.RelationId != null) throw new Exception("Несоответствие данных.");
+                    if(selectedDetail.RelationId != null) throw new Exception("Несоответствие данных.");
                 }
                 else
-                    if(entity.RelationId == null) throw new Exception("Несоответствие данных.");
+                    if(selectedDetail.RelationId == null) throw new Exception("Несоответствие данных.");
 
-                if(entity.ParentId == null) throw new Exception("Несоответствие данных.");
-                if(entity.Amount == null) throw new Exception("Количество деталей не указано.");
+                if(selectedDetail.ParentId == null) throw new Exception("Несоответствие данных.");
+                if(selectedDetail.Amount == null) throw new Exception("Количество деталей не указано.");
 
-                if(entity.Amount < 1
-                || entity.Amount > 9999) throw new Exception("Количество деталей указано не верно.");
+                if(selectedDetail.Amount < 1
+                || selectedDetail.Amount > 9999) throw new Exception("Количество деталей указано не верно.");
             }
         }
 
-        public override void Add(DetailRelationEntity entity)
+        public override void Add(DetailRelationEntity selectedDetail)
         {
-            CheckData(entity, isAdd: true);
-            AddDetailRelation(entity);
+            CheckData(selectedDetail, isAdd: true);
+            AddDetailRelation(selectedDetail);
             Save("Произошла ошибка при обращении к базе данных.");
         }
 
-        public override void Edit(DetailRelationEntity entity)
+        public override void Edit(DetailRelationEntity selectedDetail)
         {
-            CheckData(entity);
-            EditDetailRelation(entity);
+            CheckData(selectedDetail);
+            EditDetailRelation(selectedDetail);
             Save("Произошла ошибка при обращении к базе данных.");
         }
-        public override void Delete(DetailRelationEntity entity)
+        public override void Delete(DetailRelationEntity selectedDetail)
         {
-            CheckData(entity);
-            DeleteDetailRelation(entity);
+            CheckData(selectedDetail);
+            DeleteDetailRelation(selectedDetail);
             Save("Произошла ошибка при обращении к базе данных.");
         }
         #endregion

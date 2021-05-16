@@ -4,8 +4,8 @@ using System.Security.Permissions;
 
 namespace BusinessLogicLayer.Services.UnitsOfWork.Classes
 {
-    public abstract class AbstractUnitOfWorkService<TModel, TInterfaceUnitOfWorkManager>
-        where TInterfaceUnitOfWorkManager : IAbstractUnitOfWorkManager<TModel>
+    public abstract class AbstractUnitOfWorkService<TDataModel, TInterfaceUnitOfWorkManager>
+        where TInterfaceUnitOfWorkManager : IAbstractUnitOfWorkManager<TDataModel>
     {
         TInterfaceUnitOfWorkManager _unitOfWorkManager;
 
@@ -13,6 +13,6 @@ namespace BusinessLogicLayer.Services.UnitsOfWork.Classes
             _unitOfWorkManager = repositoryManager;
 
         [PrincipalPermission(SecurityAction.Demand, Role = AppRoles.Admin)]
-        public TModel Get() => _unitOfWorkManager.Get();
+        public TDataModel Get() => _unitOfWorkManager.Get();
     }
 }

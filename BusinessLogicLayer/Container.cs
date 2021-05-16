@@ -15,6 +15,12 @@ namespace BusinessLogicLayer
                 new ContainerControlledLifetimeManager(),
                 new InjectionConstructor(constructorParams));
 
+        public void RegisterType<TClass>(params object[] constructorParams) =>
+            Main.RegisterType(
+                typeof(TClass),
+                new ContainerControlledLifetimeManager(),
+                new InjectionConstructor(constructorParams));
+
         public T Resolve<T>() => Main.Resolve<T>();
         public object Resolve(Type type) => Main.Resolve(type);
     }

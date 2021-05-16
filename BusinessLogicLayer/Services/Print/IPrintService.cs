@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
+using System.ServiceModel;
 
 namespace BusinessLogicLayer.Services.Print
 {
@@ -6,6 +7,6 @@ namespace BusinessLogicLayer.Services.Print
     public interface IPrintService
     {
         [OperationContract]
-        byte[] GetMSWord(long id);
+        byte[] GetMSWord(DetailRelationEntity selectedDetail, out string warningMessage);
     }
 }
