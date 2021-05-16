@@ -1,10 +1,9 @@
-﻿using BusinessLogicLayer.DataAccessInterfaces.Repositories.ConcreteDefinitions;
-using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
+﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
+using BusinessLogicLayer.DataAccessInterfaces.Repositories.ConcreteDefinitions;
 using BusinessLogicLayer.Managers.Common;
 using BusinessLogicLayer.Managers.Repositories.Classes;
 using BusinessLogicLayer.Managers.Repositories.Interfaces.ConcreteDefinitions;
 using System;
-using System.Linq;
 
 namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
 {

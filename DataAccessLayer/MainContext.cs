@@ -1,7 +1,5 @@
-﻿using BusinessLogicLayer.Data.Entities;
-using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
+﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
 using DataAccessLayer.Configurations;
-using System;
 using System.Data.Entity;
 
 namespace DataAccessLayer

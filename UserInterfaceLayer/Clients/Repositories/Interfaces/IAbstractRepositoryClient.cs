@@ -1,5 +1,4 @@
-﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
-using System.Linq;
+﻿using System.Linq;
 
 namespace UserInterfaceLayer.Clients.Repositories.Interfaces
 {
