@@ -1,5 +1,5 @@
-﻿using BusinessLogicLayer.Security.RoleBasedAccessControl;
-using BusinessLogicLayer.Managers.UnitsOfWorkManagers.Interfaces;
+﻿using BusinessLogicLayer.Managers.UnitsOfWorkManagers.Interfaces;
+using BusinessLogicLayer.Security.RoleBasedAccessControl;
 using System.Security.Permissions;
 
 namespace BusinessLogicLayer.Services.UnitsOfWork.Classes

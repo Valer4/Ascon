@@ -1,5 +1,5 @@
-﻿using BusinessLogicLayer.DataAccessInterfaces.Repositories.ConcreteDefinitions;
-using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
+﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
+using BusinessLogicLayer.DataAccessInterfaces.Repositories.ConcreteDefinitions;
 using BusinessLogicLayer.Managers.Common;
 using Microsoft.Office.Interop.Word;
 using System.Collections.Generic;
