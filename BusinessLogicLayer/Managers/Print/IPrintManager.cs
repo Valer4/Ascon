@@ -4,6 +4,6 @@ namespace BusinessLogicLayer.Managers.Print
 {
     public interface IPrintManager
     {
-        byte[] GetMSWord(DetailRelationEntity selectedDetail);
+        byte[] GetReportOnDetailInMSWord(long id);
     }
 }

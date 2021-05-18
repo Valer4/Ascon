@@ -17,10 +17,12 @@ namespace BusinessLogicLayer.Managers.Print
         public PrintManager(IDetailRelationRepository repository) =>
             _repository = repository;
 
-        public byte[] GetMSWord(DetailRelationEntity selectedDetail)
+        public byte[] GetReportOnDetailInMSWord(long id)
         {
             DetailRelationRepositoryHelper helper = new DetailRelationRepositoryHelper();
             IQueryable<DetailRelationEntity> allDetailRelations = _repository.GetAll();
+
+            DetailRelationEntity selectedDetail = helper.Find(id, allDetailRelations);
 
             ICollection<DetailRelationEntity> descendants = helper.GetDescendants(
                 selectedDetail.TypeId, allDetailRelations, new List<DetailRelationEntity>()).ToList();

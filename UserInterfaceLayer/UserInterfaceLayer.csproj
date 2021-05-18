@@ -51,6 +51,10 @@
     <Compile Include="Forms\HelpersToControls\TreeViewHelper\TreeViewBuilder.cs" />
     <Compile Include="Forms\HelpersToControls\TreeViewHelper\TreeViewStoresState\TreeViewNodeState.cs" />
     <Compile Include="Forms\HelpersToControls\TreeViewHelper\TreeViewStoresState\TreeViewState.cs" />
+    <Compile Include="Forms\IViews\IDetailRelationRepositoryView.cs" />
+    <Compile Include="Forms\IViews\IPrintView.cs" />
+    <Compile Include="Forms\Presenters\DetailRelationRepositoryPresenter.cs" />
+    <Compile Include="Forms\Presenters\PrintPresenter.cs" />
     <Compile Include="Forms\Views\DetailEditor.cs">
       <SubType>Form</SubType>
     </Compile>

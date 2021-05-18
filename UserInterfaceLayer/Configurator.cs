@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using UserInterfaceLayer.Clients.Print;
 using UserInterfaceLayer.Clients.Repositories.Classes.ConcreteDefinitions;
-using UserInterfaceLayer.Forms.Views;
+using UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions;
 
 namespace UserInterfaceLayer
 {
@@ -29,9 +29,8 @@ namespace UserInterfaceLayer
 
         private void RegisterTypes()
         {
-            _Container.RegisterType<DetailEditor>(constructorParams: new object[]{
-                new DetailRelationRepositoryClient(),
-                new PrintClient()});
+            _Container.RegisterType<IDetailRelationRepositoryClient, DetailRelationRepositoryClient>();
+            _Container.RegisterType<IPrintClient, PrintClient>();
         }
 
         private IEnumerable<Type> GetContractsServicesInterfacesTypes()

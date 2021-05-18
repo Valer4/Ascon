@@ -4,15 +4,7 @@ using System.ServiceModel;
 namespace BusinessLogicLayer.Services.Repositories.Interfaces.ConcreteDefinitions
 {
     [ServiceContract(SessionMode = SessionMode.Required)]
-    public interface IDetailRelationRepositoryService : IAbstractRepositoryService<DetailRelationEntity>
+    public interface IDetailRelationRepositoryService : IAbstractRepositoryService<DetailRelationEntity, long>
     {
-        [OperationContract]
-        string Add(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount);
-
-        [OperationContract]
-        string Edit(DetailRelationEntity selectedDetail, string name, string amount);
-
-        [OperationContract]
-        string Delete(DetailRelationEntity selectedDetail);
     }
 }
