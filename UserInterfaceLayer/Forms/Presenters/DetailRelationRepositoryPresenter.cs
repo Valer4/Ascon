@@ -87,7 +87,7 @@ namespace UserInterfaceLayer.Forms.Presenters
         {
             if(null == selectedDetail) return _detailNotSelected;
 
-            _detailRelationEntityClient.Delete(selectedDetail);
+            _detailRelationEntityClient.Delete(selectedDetail.Id);
             Update();
 
             return string.Empty;

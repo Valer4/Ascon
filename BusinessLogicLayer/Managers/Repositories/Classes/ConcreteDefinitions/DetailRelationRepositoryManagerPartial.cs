@@ -103,11 +103,11 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
         #endregion
 
         #region Удаление.
-        public void DeleteDetailRelation(DetailRelationEntity detailRelation)
+        public void DeleteDetailRelation(long id)
         {
             IQueryable<DetailRelationEntity> allDetailRelations = _repository.GetAll();
 
-            DetailRelationEntity current = _Helper.Find(detailRelation.Id, allDetailRelations);
+            DetailRelationEntity current = _Helper.Find(id, allDetailRelations);
 
             if(null != current)
                 DeleteRecursive(current, allDetailRelations);

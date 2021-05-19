@@ -12,13 +12,13 @@ namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
         #region Entity
         public override void Add(ChildDetailRelationEntity item) => _db.ChildDetailRelations.Add(item);
 
-        public void Delete(long id)
+        public override void Delete(long id)
         {
             ChildDetailRelationEntity item = GetAll().Where(x => id == x.Id).SingleOrDefault();
             if(null != item)
                 Delete(item);
         }
-        public override void Delete(ChildDetailRelationEntity item) => _db.ChildDetailRelations.Remove(item);
+        public void Delete(ChildDetailRelationEntity item) => _db.ChildDetailRelations.Remove(item);
         #endregion
 
         #region Collection

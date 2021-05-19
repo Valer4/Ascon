@@ -12,14 +12,17 @@ namespace UserInterfaceLayer.Clients.Repositories.Classes
         public TEntity Get(TId id) => new ChannelsManager().GetChannel<TInterfaceEntityService>().Get(id);
         public void Add(TEntity entity) => new ChannelsManager().GetChannel<TInterfaceEntityService>().Add(entity);
         public void Edit(TEntity entity) => new ChannelsManager().GetChannel<TInterfaceEntityService>().Edit(entity);
-        public void Delete(TEntity entity) => new ChannelsManager().GetChannel<TInterfaceEntityService>().Delete(entity);
+        public void Delete(TId id) => new ChannelsManager().GetChannel<TInterfaceEntityService>().Delete(id);
         #endregion
 
         #region Collection.
         public IQueryable<TEntity> GetAll() => new ChannelsManager().GetChannel<TInterfaceEntityService>().GetAll();
-        public void AddCollection(IQueryable<TEntity> collection) => new ChannelsManager().GetChannel<TInterfaceEntityService>().AddCollection(collection);
-        public void EditCollection(IQueryable<TEntity> collection) => new ChannelsManager().GetChannel<TInterfaceEntityService>().EditCollection(collection);
-        public void DeleteCollection(IQueryable<TEntity> collection) => new ChannelsManager().GetChannel<TInterfaceEntityService>().DeleteCollection(collection);
+        public void AddCollection(IQueryable<TEntity> collection) =>
+            new ChannelsManager().GetChannel<TInterfaceEntityService>().AddCollection(collection);
+        public void EditCollection(IQueryable<TEntity> collection) =>
+            new ChannelsManager().GetChannel<TInterfaceEntityService>().EditCollection(collection);
+        public void DeleteCollection(IQueryable<TEntity> collection) =>
+            new ChannelsManager().GetChannel<TInterfaceEntityService>().DeleteCollection(collection);
         #endregion
     }
 }

@@ -14,7 +14,7 @@ namespace DataAccessLayer.DataAccessClasses.Repositories
         public virtual TEntity Get(TId id) => throw new NotImplementedException();
         public virtual void Add(TEntity entity) => throw new NotImplementedException();
         public virtual void Edit(TEntity entity) => throw new NotImplementedException();
-        public virtual void Delete(TEntity entity) => throw new NotImplementedException();
+        public virtual void Delete(TId id) => throw new NotImplementedException();
         #endregion
 
         #region Collection

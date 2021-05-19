@@ -26,7 +26,7 @@ namespace BusinessLogicLayer.Services.Repositories.Classes
         public void Edit(TEntity entity) => _repositoryManager.Edit(entity);
 
         [PrincipalPermission(SecurityAction.Demand, Role = AppRoles.Admin)]
-        public void Delete(TEntity entity) => _repositoryManager.Delete(entity);
+        public void Delete(TId id) => _repositoryManager.Delete(id);
         #endregion
 
         #region Collection.

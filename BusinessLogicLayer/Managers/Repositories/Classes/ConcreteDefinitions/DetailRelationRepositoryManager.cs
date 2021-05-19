@@ -66,10 +66,9 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
             EditDetailRelation(selectedDetail);
             Save("Произошла ошибка при обращении к базе данных.");
         }
-        public override void Delete(DetailRelationEntity selectedDetail)
+        public override void Delete(long id)
         {
-            CheckData(selectedDetail);
-            DeleteDetailRelation(selectedDetail);
+            DeleteDetailRelation(id);
             Save("Произошла ошибка при обращении к базе данных.");
         }
         #endregion

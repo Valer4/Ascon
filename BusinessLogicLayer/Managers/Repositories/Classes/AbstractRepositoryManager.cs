@@ -30,7 +30,7 @@ namespace BusinessLogicLayer.Managers.Repositories.Classes
         public virtual TEntity Get(TId id) => _repository.Get(id);
         public virtual void Add(TEntity entity) => _repository.Add(entity);
         public virtual void Edit(TEntity entity) => _repository.Edit(entity);
-        public virtual void Delete(TEntity entity) => _repository.Delete(entity);
+        public virtual void Delete(TId id) => _repository.Delete(id);
         #endregion
 
         #region Collection

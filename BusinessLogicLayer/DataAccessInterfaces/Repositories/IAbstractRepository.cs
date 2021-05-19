@@ -10,7 +10,7 @@ namespace BusinessLogicLayer.DataAccessInterfaces.Repositories
         TEntity Get(TId id);
         void Add(TEntity entity);
         void Edit(TEntity entity);
-        void Delete(TEntity entity);
+        void Delete(TId id);
         #endregion
 
         #region Collection
