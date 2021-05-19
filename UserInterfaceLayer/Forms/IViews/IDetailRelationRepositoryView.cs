@@ -8,12 +8,12 @@ namespace UserInterfaceLayer.Forms.IViews
         IQueryable<DetailRelationEntity> AllDetails { get; set; }
 
         event SimpleEventHandler LoadData;
-        event AddEventHandler<DetailRelationEntity> AddDetail;
-        event EditEventHandler<DetailRelationEntity> EditDetail;
-        event DeleteEventHandler<DetailRelationEntity> DeleteDetail;
+        event AddEventHandler<string, DetailRelationEntity> AddDetail;
+        event EditEventHandler<string, DetailRelationEntity> EditDetail;
+        event ParamReturnDelegate<string, DetailRelationEntity> DeleteDetail;
     }
 
-    public delegate string AddEventHandler<T>(T entity, bool isRoot, string name, string amount);
-    public delegate string EditEventHandler<T>(T entity, string name, string amount);
+    public delegate TReturn AddEventHandler<TReturn, T>(T entity, bool isRoot, string name, string amount);
+    public delegate TReturn EditEventHandler<TReturn, T>(T entity, string name, string amount);
     public delegate string DeleteEventHandler<T>(T entity);
 }

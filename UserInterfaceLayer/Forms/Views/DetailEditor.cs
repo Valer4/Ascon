@@ -29,9 +29,9 @@ namespace UserInterfaceLayer.Forms.Views
             }
         }
         public event SimpleEventHandler LoadData;
-        public event AddEventHandler<DetailRelationEntity> AddDetail;
-        public event EditEventHandler<DetailRelationEntity> EditDetail;
-        public event DeleteEventHandler<DetailRelationEntity> DeleteDetail;
+        public event AddEventHandler<string, DetailRelationEntity> AddDetail;
+        public event EditEventHandler<string, DetailRelationEntity> EditDetail;
+        public event ParamReturnDelegate<string, DetailRelationEntity> DeleteDetail;
         #endregion
 
         #region Implementation of IPrintView
