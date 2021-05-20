@@ -1,4 +1,4 @@
-﻿namespace UserInterfaceLayer
+﻿namespace BusinessLogicLayer
 {
     public class UserInfo
     {

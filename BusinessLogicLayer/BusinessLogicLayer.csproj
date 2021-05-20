@@ -80,6 +80,7 @@
     <Compile Include="Data\Entities\Classes\AbstractEntity.cs" />
     <Compile Include="Data\Entities\Classes\ConcreteDefinitions\DetailRelationEntity.cs" />
     <Compile Include="ConnectInfoClientService.cs" />
+    <Compile Include="UserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
