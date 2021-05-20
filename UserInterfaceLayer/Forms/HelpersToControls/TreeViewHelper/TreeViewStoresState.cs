@@ -4,8 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper.TreeViewStoresState
+namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper
 {
+    public class TreeViewNodeState
+    {
+        public string FullPath;
+        public bool IsExpanded,
+                    IsSelected;
+
+        public TreeViewNodeState(string fullPath, bool isExpanded, bool isSelected)
+        {
+            FullPath = fullPath;
+            IsExpanded = isExpanded;
+            IsSelected = isSelected;
+        }
+    }
+
     public class TreeViewState
     {
         private IList<TreeViewNodeState> _nodeStates;

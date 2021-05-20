@@ -7,7 +7,6 @@ using System.Linq;
 using System.Windows.Forms;
 using UserInterfaceLayer.Forms.HelpersToControls;
 using UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper;
-using UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper.TreeViewStoresState;
 using UserInterfaceLayer.Forms.IViews;
 using Word = Microsoft.Office.Interop.Word;
 

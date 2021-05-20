@@ -49,8 +49,7 @@
     <Compile Include="Forms\HelpersToControls\MaskedTextBoxHelper.cs" />
     <Compile Include="Forms\HelpersToControls\MessageBoxHelper.cs" />
     <Compile Include="Forms\HelpersToControls\TreeViewHelper\TreeViewBuilder.cs" />
-    <Compile Include="Forms\HelpersToControls\TreeViewHelper\TreeViewStoresState\TreeViewNodeState.cs" />
-    <Compile Include="Forms\HelpersToControls\TreeViewHelper\TreeViewStoresState\TreeViewState.cs" />
+    <Compile Include="Forms\HelpersToControls\TreeViewHelper\TreeViewStoresState.cs" />
     <Compile Include="Forms\IViews\IDetailRelationRepositoryView.cs" />
     <Compile Include="Forms\IViews\IPrintView.cs" />
     <Compile Include="Forms\Presenters\DetailRelationRepositoryPresenter.cs" />
