@@ -3,9 +3,9 @@
     /// <summary>
     /// Роли, определяющие права пользователей приложения.
     /// </summary>
-    public static class AppRoles
+    internal static class AppRoles
     {
-        public const string Admin = "admin";
-        public const string User = "user";
+        internal const string Admin = "admin";
+        internal const string User = "user";
     }
 }

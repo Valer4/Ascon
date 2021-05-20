@@ -1,6 +1,6 @@
 ﻿namespace UserInterfaceLayer.Clients.Print
 {
-    public interface IPrintClient
+    internal interface IPrintClient
     {
         byte[] GetReportOnDetailInMSWord(long id);
     }

@@ -2,10 +2,11 @@
 
 namespace UserInterfaceLayer.Forms.HelpersToControls
 {
-    public class MaskedTextBoxHelper
+    internal class MaskedTextBoxHelper
     {
-        public void MoveCaretBeforeSpaces(MaskedTextBox maskedTextBox) =>
+        internal void MoveCaretBeforeSpaces(MaskedTextBox maskedTextBox) =>
             maskedTextBox.Select(GetPositionOfFirstSpace(maskedTextBox), 0);
+
         private int GetPositionOfFirstSpace(MaskedTextBox maskedTextBox)
         {
             string text = maskedTextBox.Text;

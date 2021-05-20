@@ -4,9 +4,9 @@ using System.ServiceModel.Security;
 
 namespace UserInterfaceLayer
 {
-    public class ChannelsManager
+    internal class ChannelsManager
     {
-        public T GetChannel<T>()
+        internal T GetChannel<T>()
         {
             if( ! Configurator._HostNames.TryGetValue(typeof(T), out string hostName))
                 throw new ArgumentException("Имя хоста не найдено.");

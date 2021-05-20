@@ -6,11 +6,11 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 
-public class UnityServiceBehavior : IServiceBehavior
+internal class UnityServiceBehavior : IServiceBehavior
 {
     private readonly IUnityContainer container;
 
-    public UnityServiceBehavior(IUnityContainer container) => this.container = container;
+    internal UnityServiceBehavior(IUnityContainer container) => this.container = container;
 
     public void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase) {}
 

@@ -4,7 +4,7 @@ using System.IdentityModel.Tokens;
 
 namespace BusinessLogicLayer.Security.Authorization
 {
-    public class Validator : UserNamePasswordValidator
+    internal class Validator : UserNamePasswordValidator
     {
         public override void Validate(string userName, string password)
         {

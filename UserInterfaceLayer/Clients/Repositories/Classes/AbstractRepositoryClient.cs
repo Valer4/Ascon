@@ -4,7 +4,7 @@ using UserInterfaceLayer.Clients.Repositories.Interfaces;
 
 namespace UserInterfaceLayer.Clients.Repositories.Classes
 {
-    public abstract class AbstractRepositoryClient<TEntity, TId, TInterfaceEntityService> :
+    internal abstract class AbstractRepositoryClient<TEntity, TId, TInterfaceEntityService> :
         IAbstractRepositoryClient<TEntity, TId>
             where TInterfaceEntityService : IAbstractRepositoryService<TEntity, TId>
     {

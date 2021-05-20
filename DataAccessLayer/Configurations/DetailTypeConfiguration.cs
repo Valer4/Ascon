@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace DataAccessLayer.Configurations
 {
-    public class DetailTypeConfiguration : EntityTypeConfiguration<DetailTypeEntity>
+    internal class DetailTypeConfiguration : EntityTypeConfiguration<DetailTypeEntity>
     {
-        public DetailTypeConfiguration()
+        internal DetailTypeConfiguration()
         {
             ToTable("detail_types");
             Property(x => x.Id).IsRequired();

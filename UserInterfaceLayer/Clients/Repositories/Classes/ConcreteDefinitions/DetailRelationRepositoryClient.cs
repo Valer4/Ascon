@@ -4,7 +4,7 @@ using UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions;
 
 namespace UserInterfaceLayer.Clients.Repositories.Classes.ConcreteDefinitions
 {
-    public class DetailRelationRepositoryClient :
+    internal class DetailRelationRepositoryClient :
         AbstractRepositoryClient<DetailRelationEntity, long, IDetailRelationRepositoryService>,
         IDetailRelationRepositoryClient
     {

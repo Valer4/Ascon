@@ -12,7 +12,7 @@ using Word = Microsoft.Office.Interop.Word;
 
 namespace UserInterfaceLayer.Forms.Views
 {
-    public partial class DetailEditor : Form, IDetailRelationRepositoryView, IPrintView
+    internal partial class DetailEditor : Form, IDetailRelationRepositoryView, IPrintView
     {
         private IQueryable<DetailRelationEntity> _allDetails;
         #region Implementation of IDetailRelationRepositoryView
@@ -36,7 +36,7 @@ namespace UserInterfaceLayer.Forms.Views
         public event GetReportEventHandler<DetailRelationEntity> GetReportOnDetailInMSWord;
         #endregion
 
-        public DetailEditor() => InitializeComponent();
+        internal DetailEditor() => InitializeComponent();
         private void DetailEditor_Load(object sender, EventArgs e)
         {
             CheckLink(LoadData);
@@ -123,7 +123,7 @@ namespace UserInterfaceLayer.Forms.Views
             }
         }
 
-        public DetailRelationEntity GetSelectedDetail()
+        private DetailRelationEntity GetSelectedDetail()
         {
             if(null == treeViewDetails.SelectedNode)
                 return null;

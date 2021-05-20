@@ -13,7 +13,7 @@ namespace BusinessLogicLayer.Security.RoleBasedAccessControl
 
         private string[] _roles;
 
-        public Principal(IIdentity identity) => Identity = identity;
+        internal Principal(IIdentity identity) => Identity = identity;
 
         public bool IsInRole(string role)
         {

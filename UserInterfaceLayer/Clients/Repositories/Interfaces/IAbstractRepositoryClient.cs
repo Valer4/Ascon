@@ -2,7 +2,7 @@
 
 namespace UserInterfaceLayer.Clients.Repositories.Interfaces
 {
-    public interface IAbstractRepositoryClient<TEntity, TId>
+    internal interface IAbstractRepositoryClient<TEntity, TId>
     {
         #region Entity.
         TEntity Get(TId id);

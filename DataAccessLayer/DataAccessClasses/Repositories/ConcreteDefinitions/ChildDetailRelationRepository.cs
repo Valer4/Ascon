@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
 {
-    public class ChildDetailRelationRepository :
+    internal class ChildDetailRelationRepository :
         AbstractRepository<ChildDetailRelationEntity, long>, IChildDetailRelationRepository
     {
         public ChildDetailRelationRepository(MainContext context) => _db = context;
@@ -18,7 +18,7 @@ namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
             if(null != item)
                 Delete(item);
         }
-        public void Delete(ChildDetailRelationEntity item) => _db.ChildDetailRelations.Remove(item);
+        private void Delete(ChildDetailRelationEntity item) => _db.ChildDetailRelations.Remove(item);
         #endregion
 
         #region Collection

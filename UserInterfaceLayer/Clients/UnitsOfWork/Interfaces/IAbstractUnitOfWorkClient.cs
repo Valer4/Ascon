@@ -1,6 +1,6 @@
 ﻿namespace UserInterfaceLayer.Clients.UnitsOfWork.Interfaces
 {
-    public interface IAbstractUnitOfWorkClient<TModel>
+    internal interface IAbstractUnitOfWorkClient<TModel>
     {
         TModel Get();
     }

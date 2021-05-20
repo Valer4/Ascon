@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace BusinessLogicLayer.Security.RoleBasedAccessControl
 {
-    public class RoleProvider : System.Web.Security.RoleProvider
+    internal class RoleProvider : System.Web.Security.RoleProvider
     {
         public override string ApplicationName
         {

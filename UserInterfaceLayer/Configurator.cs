@@ -9,14 +9,14 @@ using UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions;
 
 namespace UserInterfaceLayer
 {
-    public class Configurator
+    internal class Configurator
     {
-        public static Container _Container;
-        public static UserInfo _UserInfo;
-        public static ConnectInfoClientService _ConnectInfo;
-        public static Dictionary<Type, string> _HostNames;
+        internal static Container _Container;
+        internal static UserInfo _UserInfo;
+        internal static ConnectInfoClientService _ConnectInfo;
+        internal static Dictionary<Type, string> _HostNames;
 
-        public Configurator(ConnectInfoClientService connectInfo)
+        internal Configurator(ConnectInfoClientService connectInfo)
         {
             _Container = new Container();
             _ConnectInfo = connectInfo;
@@ -43,7 +43,7 @@ namespace UserInterfaceLayer
                 };
         }
 
-        public void FillHostNamesDictionary(IEnumerable<Type> contractsServicesInterfacesTypes)
+        internal void FillHostNamesDictionary(IEnumerable<Type> contractsServicesInterfacesTypes)
         {
             foreach(Type contractServiceInterfaceType in contractsServicesInterfacesTypes)
                 _HostNames.Add(contractServiceInterfaceType, contractServiceInterfaceType.Name);

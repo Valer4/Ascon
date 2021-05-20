@@ -2,7 +2,7 @@
 
 namespace UserInterfaceLayer.Forms.IViews
 {
-    public interface IPrintView
+    internal interface IPrintView
     {
         event GetReportEventHandler<DetailRelationEntity> GetReportOnDetailInMSWord;
     }

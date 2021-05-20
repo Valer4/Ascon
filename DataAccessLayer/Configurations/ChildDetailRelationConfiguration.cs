@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace DataAccessLayer.Configurations
 {
-    public class ChildDetailRelationConfiguration : EntityTypeConfiguration<ChildDetailRelationEntity>
+    internal class ChildDetailRelationConfiguration : EntityTypeConfiguration<ChildDetailRelationEntity>
     {
-        public ChildDetailRelationConfiguration()
+        internal ChildDetailRelationConfiguration()
         {
             ToTable("child_detail_relations");
             Property(x => x.Id).IsRequired();

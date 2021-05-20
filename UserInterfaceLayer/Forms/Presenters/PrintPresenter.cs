@@ -4,14 +4,14 @@ using UserInterfaceLayer.Forms.IViews;
 
 namespace UserInterfaceLayer.Forms.Presenters
 {
-    public class PrintPresenter
+    internal class PrintPresenter
     {
         private const string _detailNotSelected = "Деталь не выбрана.";
 
         private readonly IPrintView _view;
         private readonly IPrintClient _printClient;
 
-        public PrintPresenter(IPrintView view, IPrintClient printClient)
+        internal PrintPresenter(IPrintView view, IPrintClient printClient)
         {
             _view = view;
             _printClient = printClient;
@@ -21,7 +21,7 @@ namespace UserInterfaceLayer.Forms.Presenters
 
         private void EventBinding() => _view.GetReportOnDetailInMSWord += OnGetReportOnDetailInMSWord;
 
-        public byte[] OnGetReportOnDetailInMSWord(DetailRelationEntity selectedDetail, out string warningMessage)
+        internal byte[] OnGetReportOnDetailInMSWord(DetailRelationEntity selectedDetail, out string warningMessage)
         {
             warningMessage = string.Empty;
 

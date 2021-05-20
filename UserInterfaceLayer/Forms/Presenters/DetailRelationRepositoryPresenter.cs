@@ -5,14 +5,14 @@ using UserInterfaceLayer.Forms.IViews;
 
 namespace UserInterfaceLayer.Forms.Presenters
 {
-    public class DetailRelationRepositoryPresenter
+    internal class DetailRelationRepositoryPresenter
     {
         private const string _detailNotSelected = "Деталь не выбрана.";
 
         private readonly IDetailRelationRepositoryView _view;
         private readonly IDetailRelationRepositoryClient _detailRelationEntityClient;
 
-        public DetailRelationRepositoryPresenter
+        internal DetailRelationRepositoryPresenter
             (IDetailRelationRepositoryView view, IDetailRelationRepositoryClient detailRelationEntityClient)
         {
             _view = view;
@@ -28,12 +28,12 @@ namespace UserInterfaceLayer.Forms.Presenters
             _view.DeleteDetail += OnDeleteDetail;
         }
 
-        public void Update() =>
+        private void Update() =>
             _view.AllDetails = _detailRelationEntityClient.GetAll();
 
-        public void OnLoadData() => Update();
+        private void OnLoadData() => Update();
 
-        public string OnAddDetail(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount)
+        private string OnAddDetail(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount)
         {
             DetailRelationEntity detail = new DetailRelationEntity();
 
@@ -56,7 +56,7 @@ namespace UserInterfaceLayer.Forms.Presenters
             return string.Empty;
         }
 
-        public string OnEditDetail(DetailRelationEntity selectedDetail, string name, string amount)
+        private string OnEditDetail(DetailRelationEntity selectedDetail, string name, string amount)
         {
             if(null == selectedDetail) return _detailNotSelected;
 
@@ -83,7 +83,7 @@ namespace UserInterfaceLayer.Forms.Presenters
             return string.Empty;
         }
 
-        public string OnDeleteDetail(DetailRelationEntity selectedDetail)
+        private string OnDeleteDetail(DetailRelationEntity selectedDetail)
         {
             if(null == selectedDetail) return _detailNotSelected;
 

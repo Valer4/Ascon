@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace DataAccessLayer.Configurations
 {
-    public class UserConfiguration : EntityTypeConfiguration<UserEntity>
+    internal class UserConfiguration : EntityTypeConfiguration<UserEntity>
     {
-        public UserConfiguration()
+        internal UserConfiguration()
         {
             ToTable("users");
 

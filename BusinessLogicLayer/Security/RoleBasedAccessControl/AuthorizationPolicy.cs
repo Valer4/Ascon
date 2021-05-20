@@ -7,7 +7,7 @@ using System.Security.Principal;
 
 namespace BusinessLogicLayer.Security.RoleBasedAccessControl
 {
-    public class AuthorizationPolicy : IAuthorizationPolicy
+    internal class AuthorizationPolicy : IAuthorizationPolicy
     {
         private string _id = Guid.NewGuid().ToString();
         public string Id

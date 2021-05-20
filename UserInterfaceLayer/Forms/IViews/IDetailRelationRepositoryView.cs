@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace UserInterfaceLayer.Forms.IViews
 {
-    public interface IDetailRelationRepositoryView
+    internal interface IDetailRelationRepositoryView
     {
         IQueryable<DetailRelationEntity> AllDetails { get; set; }
 

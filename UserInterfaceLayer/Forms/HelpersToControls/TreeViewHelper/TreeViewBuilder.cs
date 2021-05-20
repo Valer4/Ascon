@@ -4,10 +4,10 @@ using System.Windows.Forms;
 
 namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper
 {
-    public class TreeViewBuilder
+    internal class TreeViewBuilder
     {
         #region Построение TreeView.
-        public void BuildTreeView<TItem, TId, TParentId, TTypeId>(TreeView treeView, IQueryable<TItem> collection)
+        internal void BuildTreeView<TItem, TId, TParentId, TTypeId>(TreeView treeView, IQueryable<TItem> collection)
             where TItem : ITreeLogicalNode<TId, TParentId, TTypeId>
         {
             BuildRootNodesTreeView<TItem, TId, TParentId, TTypeId>(treeView, collection);

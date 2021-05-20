@@ -1,6 +1,4 @@
-﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
-
-namespace BusinessLogicLayer.Managers.Print
+﻿namespace BusinessLogicLayer.Managers.Print
 {
     public interface IPrintManager
     {

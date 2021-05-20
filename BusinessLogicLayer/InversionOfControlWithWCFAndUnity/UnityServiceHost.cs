@@ -2,11 +2,11 @@
 using System;
 using System.ServiceModel;
 
-public class UnityServiceHost : ServiceHost
+internal class UnityServiceHost : ServiceHost
 {
     private IUnityContainer unityContainer;
 
-    public UnityServiceHost(IUnityContainer unityContainer, Type serviceType) :
+    internal UnityServiceHost(IUnityContainer unityContainer, Type serviceType) :
         base(serviceType) =>
             this.unityContainer = unityContainer;
 

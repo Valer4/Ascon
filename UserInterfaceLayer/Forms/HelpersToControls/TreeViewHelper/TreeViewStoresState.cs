@@ -6,13 +6,13 @@ using System.Windows.Forms;
 
 namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper
 {
-    public class TreeViewNodeState
+    internal class TreeViewNodeStateLib
     {
-        public string FullPath;
-        public bool IsExpanded,
+        internal string FullPath;
+        internal bool IsExpanded,
                     IsSelected;
 
-        public TreeViewNodeState(string fullPath, bool isExpanded, bool isSelected)
+        internal TreeViewNodeStateLib(string fullPath, bool isExpanded, bool isSelected)
         {
             FullPath = fullPath;
             IsExpanded = isExpanded;
@@ -20,9 +20,9 @@ namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper
         }
     }
 
-    public class TreeViewState
+    internal class TreeViewState
     {
-        private IList<TreeViewNodeState> _nodeStates;
+        private IList<TreeViewNodeStateLib> _nodeStates;
 
         private string GetFullPath(TreeNode node)
         {
@@ -38,22 +38,22 @@ namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper
                 GetFullPathRecursive(node.Parent, ref fullPath);
         }
 
-        public void SaveState(TreeView treeView)
+        internal void SaveState(TreeView treeView)
         {
             if(null == treeView)
                 throw new ArgumentNullException("Дерево не создано.");
 
-            _nodeStates = new List<TreeViewNodeState>();
+            _nodeStates = new List<TreeViewNodeStateLib>();
             SaveStateRecursive(treeView.Nodes);
         }
 
         // В девэкспресс есть итератор, он быстрее рекурсий, если дерево не ленивое.
-        public void SaveStateRecursive(TreeNodeCollection nodes)
+        internal void SaveStateRecursive(TreeNodeCollection nodes)
         {
             foreach(TreeNode node in nodes)
             {
                 _nodeStates.Add(
-                    new TreeViewNodeState(
+                    new TreeViewNodeStateLib(
                         GetFullPath(node),
                         node.IsExpanded,
                         node.IsSelected));
@@ -62,7 +62,7 @@ namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper
             }
         }
 
-        public void RestoreState(TreeView treeView)
+        internal void RestoreState(TreeView treeView)
         {
             if(null == _nodeStates)
                 throw new InvalidOperationException("Состояние дерева не сохранено.");
@@ -72,12 +72,12 @@ namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper
             RestoreStateRecursive(treeView.Nodes);
         }
 
-        public void RestoreStateRecursive(TreeNodeCollection nodes)
+        internal void RestoreStateRecursive(TreeNodeCollection nodes)
         {
             foreach(TreeNode node in nodes)
             {
                 string fullPath = GetFullPath(node);
-                TreeViewNodeState nodeState = _nodeStates.Where(x => fullPath == x.FullPath).SingleOrDefault();
+                TreeViewNodeStateLib nodeState = _nodeStates.Where(x => fullPath == x.FullPath).SingleOrDefault();
 
                 if(null != nodeState)
                 {

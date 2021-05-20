@@ -2,12 +2,12 @@
 
 namespace BusinessLogicLayer
 {
-    public class RelatedTypes
+    internal class RelatedTypes
     {
-        public Type _Interface;
-        public Type _Class;
+        internal Type _Interface;
+        internal Type _Class;
 
-        public RelatedTypes(Type @interface, Type @class)
+        internal RelatedTypes(Type @interface, Type @class)
         {
             _Interface = @interface;
             _Class = @class;

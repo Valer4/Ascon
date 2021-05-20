@@ -10,9 +10,9 @@ using System.ServiceModel.Security;
 
 namespace BusinessLogicLayer
 {
-    public class HostsManager
+    internal class HostsManager
     {
-        public void CreateHost(Type contractInterface, Type contractClass, string hostName)
+        internal void CreateHost(Type contractInterface, Type contractClass, string hostName)
         {
             NetTcpBinding binding = new NetTcpBinding(SecurityMode.Message);
             binding.Security.Message.ClientCredentialType = MessageCredentialType.UserName;
