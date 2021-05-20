@@ -27,13 +27,13 @@ namespace UserInterfaceLayer.Forms.Views
             }
         }
         public event SimpleEventHandler LoadData;
-        public event ParamReturnDelegate<string, DetailRelationEntity, bool, string, string> AddDetail;
-        public event ParamReturnDelegate<string, DetailRelationEntity, string, string> EditDetail;
-        public event ParamReturnDelegate<string, DetailRelationEntity> DeleteDetail;
+        public event ReturnDelegate<string, DetailRelationEntity, bool, string, string> AddDetail;
+        public event ReturnDelegate<string, DetailRelationEntity, string, string> EditDetail;
+        public event ReturnDelegate<string, DetailRelationEntity> DeleteDetail;
         #endregion
 
         #region Implementation of IPrintView
-        public event GetReportEventHandler<DetailRelationEntity> GetReportOnDetailInMSWord;
+        public event ReturnOutDelegate<byte[], DetailRelationEntity, string> GetReportOnDetailInMSWord;
         #endregion
 
         internal DetailEditor() => InitializeComponent();

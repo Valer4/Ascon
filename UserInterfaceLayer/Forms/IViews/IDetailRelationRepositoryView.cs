@@ -9,8 +9,8 @@ namespace UserInterfaceLayer.Forms.IViews
         IQueryable<DetailRelationEntity> AllDetails { get; set; }
 
         event SimpleEventHandler LoadData;
-        event ParamReturnDelegate<string, DetailRelationEntity, bool, string, string> AddDetail;
-        event ParamReturnDelegate<string, DetailRelationEntity, string, string> EditDetail;
-        event ParamReturnDelegate<string, DetailRelationEntity> DeleteDetail;
+        event ReturnDelegate<string, DetailRelationEntity, bool, string, string> AddDetail;
+        event ReturnDelegate<string, DetailRelationEntity, string, string> EditDetail;
+        event ReturnDelegate<string, DetailRelationEntity> DeleteDetail;
     }
 }
