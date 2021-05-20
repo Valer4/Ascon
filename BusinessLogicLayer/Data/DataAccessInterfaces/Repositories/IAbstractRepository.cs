@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace BusinessLogicLayer.DataAccessInterfaces.Repositories
+namespace BusinessLogicLayer.Data.DataAccessInterfaces.Repositories
 {
     public interface IAbstractRepository<TEntity, TId>
     {

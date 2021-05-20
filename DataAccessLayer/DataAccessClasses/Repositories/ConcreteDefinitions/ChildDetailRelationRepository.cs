@@ -1,5 +1,5 @@
-﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
-using BusinessLogicLayer.DataAccessInterfaces.Repositories.ConcreteDefinitions;
+﻿using BusinessLogicLayer.Data.DataAccessInterfaces.Repositories.ConcreteDefinitions;
+using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
 using System.Linq;
 
 namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions

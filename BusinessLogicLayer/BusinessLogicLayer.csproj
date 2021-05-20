@@ -34,11 +34,11 @@
   <ItemGroup>
     <Compile Include="Container.cs" />
     <Compile Include="ConnectInfoDataAccess.cs" />
-    <Compile Include="DataAccessInterfaces\Repositories\ConcreteDefinitions\IChildDetailRelationRepository.cs" />
-    <Compile Include="DataAccessInterfaces\Repositories\ConcreteDefinitions\IDetailTypeRepository.cs" />
-    <Compile Include="DataAccessInterfaces\Repositories\IAbstractRepository.cs" />
-    <Compile Include="DataAccessInterfaces\Repositories\ConcreteDefinitions\IDetailRelationRepository.cs" />
-    <Compile Include="DataAccessInterfaces\UnitsOfWork\IAbstractUnitOfWork.cs" />
+    <Compile Include="Data\DataAccessInterfaces\Repositories\ConcreteDefinitions\IChildDetailRelationRepository.cs" />
+    <Compile Include="Data\DataAccessInterfaces\Repositories\ConcreteDefinitions\IDetailTypeRepository.cs" />
+    <Compile Include="Data\DataAccessInterfaces\Repositories\IAbstractRepository.cs" />
+    <Compile Include="Data\DataAccessInterfaces\Repositories\ConcreteDefinitions\IDetailRelationRepository.cs" />
+    <Compile Include="Data\DataAccessInterfaces\UnitsOfWork\IAbstractUnitOfWork.cs" />
     <Compile Include="Data\Entities\Classes\ConcreteDefinitions\RoleEntity.cs" />
     <Compile Include="Data\Entities\Classes\ConcreteDefinitions\UserEntity.cs" />
     <Compile Include="Data\Entities\Classes\ConcreteDefinitions\ChildDetailRelationEntity.cs" />

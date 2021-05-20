@@ -1,4 +1,4 @@
-﻿using BusinessLogicLayer.DataAccessInterfaces.Repositories;
+﻿using BusinessLogicLayer.Data.DataAccessInterfaces.Repositories;
 using BusinessLogicLayer.Managers.Repositories.Interfaces;
 using System;
 using System.Linq;

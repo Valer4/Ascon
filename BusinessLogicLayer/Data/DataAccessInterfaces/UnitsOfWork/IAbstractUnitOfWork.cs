@@ -1,4 +1,4 @@
-﻿namespace BusinessLogicLayer.DataAccessInterfaces.UnitsOfWork
+﻿namespace BusinessLogicLayer.Data.DataAccessInterfaces.UnitsOfWork
 {
     public interface IAbstractUnitOfWork<TModel>
     {
