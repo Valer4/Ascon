@@ -18,17 +18,17 @@ namespace Server
             {
                 new Configurator(new ConnectInfoClientService("localhost", 10000));
 
-                Configurator._Container.RegisterType<IDetailRelationRepository, DetailRelationRepository>(
+                Configurator.Container.RegisterType<IDetailRelationRepository, DetailRelationRepository>(
                     constructorParams: new ConnectInfoDataAccess("localhost", "Kuznetsov", "msroot", "msroot", 1433).
                         ConnectionString);
 
-                Configurator._Container.RegisterType<IDetailRelationRepositoryService, DetailRelationRepositoryService>(
+                Configurator.Container.RegisterType<IDetailRelationRepositoryService, DetailRelationRepositoryService>(
                     constructorParams: new DetailRelationRepositoryManager(
-                        Configurator._Container.Resolve<IDetailRelationRepository>()));
+                        Configurator.Container.Resolve<IDetailRelationRepository>()));
 
-                Configurator._Container.RegisterType<IPrintService, PrintService>(
+                Configurator.Container.RegisterType<IPrintService, PrintService>(
                     constructorParams: new PrintManager(
-                        Configurator._Container.Resolve<IDetailRelationRepository>()));
+                        Configurator.Container.Resolve<IDetailRelationRepository>()));
 
                 Console.ReadKey();
             }

@@ -4,7 +4,7 @@ namespace BusinessLogicLayer.Data.DataAccessInterfaces.Repositories.ConcreteDefi
 {
     public interface IDetailRelationRepository : IAbstractRepository<DetailRelationEntity, long>
     {
-        IDetailTypeRepository _DetailTypeRepository { get; }
-        IChildDetailRelationRepository _ChildDetailRelationRepository { get; }
+        IDetailTypeRepository DetailTypeRepository { get; }
+        IChildDetailRelationRepository ChildDetailRelationRepository { get; }
     }
 }

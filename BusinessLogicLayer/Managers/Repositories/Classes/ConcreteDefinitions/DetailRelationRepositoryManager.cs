@@ -14,7 +14,7 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
             base(detailRelationRepository) {}
 
         private DetailRelationRepositoryHelper _helper;
-        private DetailRelationRepositoryHelper _Helper
+        private DetailRelationRepositoryHelper Helper
         {
             get
             {

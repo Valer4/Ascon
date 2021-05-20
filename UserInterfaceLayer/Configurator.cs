@@ -11,17 +11,17 @@ namespace UserInterfaceLayer
 {
     internal class Configurator
     {
-        internal static Container _Container;
-        internal static UserInfo _UserInfo;
-        internal static ConnectInfoClientService _ConnectInfo;
-        internal static Dictionary<Type, string> _HostNames;
+        internal static Container Container;
+        internal static UserInfo UserInfo;
+        internal static ConnectInfoClientService ConnectInfo;
+        internal static Dictionary<Type, string> HostNames;
 
         internal Configurator(ConnectInfoClientService connectInfo)
         {
-            _Container = new Container();
-            _ConnectInfo = connectInfo;
-            _UserInfo = new UserInfo("LoginX", "PasswordX");
-            _HostNames = new Dictionary<Type, string>();
+            Container = new Container();
+            ConnectInfo = connectInfo;
+            UserInfo = new UserInfo("LoginX", "PasswordX");
+            HostNames = new Dictionary<Type, string>();
 
             RegisterTypes();
             FillHostNamesDictionary(GetContractsServicesInterfacesTypes());
@@ -29,8 +29,8 @@ namespace UserInterfaceLayer
 
         private void RegisterTypes()
         {
-            _Container.RegisterType<IDetailRelationRepositoryClient, DetailRelationRepositoryClient>();
-            _Container.RegisterType<IPrintClient, PrintClient>();
+            Container.RegisterType<IDetailRelationRepositoryClient, DetailRelationRepositoryClient>();
+            Container.RegisterType<IPrintClient, PrintClient>();
         }
 
         private IEnumerable<Type> GetContractsServicesInterfacesTypes()
@@ -46,7 +46,7 @@ namespace UserInterfaceLayer
         internal void FillHostNamesDictionary(IEnumerable<Type> contractsServicesInterfacesTypes)
         {
             foreach(Type contractServiceInterfaceType in contractsServicesInterfacesTypes)
-                _HostNames.Add(contractServiceInterfaceType, contractServiceInterfaceType.Name);
+                HostNames.Add(contractServiceInterfaceType, contractServiceInterfaceType.Name);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace DataAccessLayer.DataAccessClasses.Repositories
     {
         protected MainContext _db;
 
-        public virtual void Save() => throw new NotImplementedException();
+        public virtual void Save() => _db.SaveChanges();
 
         #region Entity
         public virtual TEntity Get(TId id) => throw new NotImplementedException();

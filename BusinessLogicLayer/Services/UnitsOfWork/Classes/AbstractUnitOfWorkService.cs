@@ -7,7 +7,7 @@ namespace BusinessLogicLayer.Services.UnitsOfWork.Classes
     public abstract class AbstractUnitOfWorkService<TDataModel, TInterfaceUnitOfWorkManager>
         where TInterfaceUnitOfWorkManager : IAbstractUnitOfWorkManager<TDataModel>
     {
-        TInterfaceUnitOfWorkManager _unitOfWorkManager;
+        private TInterfaceUnitOfWorkManager _unitOfWorkManager;
 
         public AbstractUnitOfWorkService(TInterfaceUnitOfWorkManager repositoryManager) =>
             _unitOfWorkManager = repositoryManager;

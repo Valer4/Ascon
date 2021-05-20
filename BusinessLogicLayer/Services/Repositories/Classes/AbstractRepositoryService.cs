@@ -10,7 +10,7 @@ namespace BusinessLogicLayer.Services.Repositories.Classes
         IAbstractRepositoryService<TEntity, TId>
             where TInterfaceRepositoryManager : IAbstractRepositoryManager<TEntity, TId>
     {
-        TInterfaceRepositoryManager _repositoryManager;
+        private TInterfaceRepositoryManager _repositoryManager;
 
         public AbstractRepositoryService(TInterfaceRepositoryManager repositoryManager) =>
             _repositoryManager = repositoryManager;

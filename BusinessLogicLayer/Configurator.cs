@@ -7,13 +7,13 @@ namespace BusinessLogicLayer
 {
     public class Configurator
     {
-        public static Container _Container;
-        public static ConnectInfoClientService _ConnectInfo;
+        public static Container Container;
+        public static ConnectInfoClientService ConnectInfo;
 
         public Configurator(ConnectInfoClientService connectInfo)
         {
-            _Container = new Container();
-            _ConnectInfo = connectInfo;
+            Container = new Container();
+            ConnectInfo = connectInfo;
 
             CreateHosts(GetRelatedTypes());
         }
@@ -32,7 +32,7 @@ namespace BusinessLogicLayer
         {
             HostsManager hostsManager = new HostsManager();
             foreach(RelatedTypes relatedTypes in relatedTypesList)
-                hostsManager.CreateHost(relatedTypes._Interface, relatedTypes._Class, relatedTypes._Interface.Name);
+                hostsManager.CreateHost(relatedTypes.Interface, relatedTypes.Class, relatedTypes.Interface.Name);
         }
     }
 }

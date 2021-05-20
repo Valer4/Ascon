@@ -5,7 +5,7 @@ namespace BusinessLogicLayer
 {
     public class Container
     {
-        public IUnityContainer _main = new UnityContainer();
+        private IUnityContainer _main = new UnityContainer();
         public IUnityContainer Main => _main;
 
         public void RegisterType<TInterface, TClass>(params object[] constructorParams) =>

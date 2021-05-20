@@ -6,7 +6,7 @@ namespace BusinessLogicLayer.Services.Print
 {
     public class PrintService : IPrintService
     {
-        IPrintManager _printManager;
+        private IPrintManager _printManager;
 
         public PrintService(IPrintManager printManager) => _printManager = printManager;
 

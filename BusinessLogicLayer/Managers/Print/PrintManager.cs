@@ -12,7 +12,7 @@ namespace BusinessLogicLayer.Managers.Print
 {
     public class PrintManager : IPrintManager
     {
-        public IDetailRelationRepository _repository;
+        private IDetailRelationRepository _repository;
 
         public PrintManager(IDetailRelationRepository repository) =>
             _repository = repository;

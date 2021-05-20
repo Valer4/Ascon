@@ -8,7 +8,7 @@ namespace BusinessLogicLayer.Services.Repositories.Classes.ConcreteDefinitions
         AbstractRepositoryService<DetailRelationEntity, long, IDetailRelationRepositoryManager>,
         IDetailRelationRepositoryService
     {
-        public DetailRelationRepositoryService(IDetailRelationRepositoryManager _detailRelationRepositoryManager) :
-            base(_detailRelationRepositoryManager) {}
+        public DetailRelationRepositoryService(IDetailRelationRepositoryManager detailRelationRepositoryManager) :
+            base(detailRelationRepositoryManager) {}
     }
 }

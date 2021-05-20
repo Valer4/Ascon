@@ -2,13 +2,13 @@
 {
     public class UserInfo
     {
-        public string _Login;
-        public string _Password;
+        public string Login;
+        public string Password;
 
         public UserInfo(string login, string password)
         {
-            _Login = login;
-            _Password = password;
+            Login = login;
+            Password = password;
         }
     }
 }

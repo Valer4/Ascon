@@ -10,7 +10,7 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
         #region Добавление.        
         public void AddDetailRelation(DetailRelationEntity detailRelation)
         {
-            IQueryable<DetailRelationEntity> allDetailRelations = _repository.GetAll();
+            IQueryable<DetailRelationEntity> allDetailRelations = Repository.GetAll();
 
             string name = detailRelation.Name;
             DetailRelationEntity sameName = allDetailRelations.Where(x => name == x.Name).FirstOrDefault();
@@ -20,7 +20,7 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
 
                 try
                 {
-                    _repository.Save();
+                    Repository.Save();
                 }
                 catch(Exception ex)
                 {
@@ -37,13 +37,13 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
 
                 long typeId = sameName.TypeId;
 
-                IQueryable<DetailRelationEntity> neighbors = _Helper.GetChilds((long)detailRelation.ParentId, allDetailRelations);
+                IQueryable<DetailRelationEntity> neighbors = Helper.GetChilds((long)detailRelation.ParentId, allDetailRelations);
                 if(neighbors.Any(x => typeId == x.TypeId))
                     throw new Exception("Добавление дублей не допускается.");
 
-                IEnumerable<DetailRelationEntity> ancestors = _Helper.GetAncestors(
+                IEnumerable<DetailRelationEntity> ancestors = Helper.GetAncestors(
                     detailRelation.ParentId, allDetailRelations, new List<DetailRelationEntity>());
-                IEnumerable<DetailRelationEntity> descendants = _Helper.GetDescendants(
+                IEnumerable<DetailRelationEntity> descendants = Helper.GetDescendants(
                     typeId, allDetailRelations, new List<DetailRelationEntity>());
 
                 if( ! ancestors.Any(x => typeId == x.TypeId)
@@ -59,7 +59,7 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
             DetailTypeEntity detailType = new DetailTypeEntity();
             detailType.IsRoot = detailRelation.IsRoot;
             detailType.Name = detailRelation.Name;
-            _repository._DetailTypeRepository.Add(detailType);
+            Repository.DetailTypeRepository.Add(detailType);
             return detailType;
         }
         private ChildDetailRelationEntity AddChildDetailRelation(long TypeId, DetailRelationEntity detailRelation)
@@ -68,7 +68,7 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
             childDetailRelation.ParentId = (long)detailRelation.ParentId;
             childDetailRelation.TypeId = TypeId;
             childDetailRelation.Amount = (short)detailRelation.Amount;
-            _repository._ChildDetailRelationRepository.Add(childDetailRelation);
+            Repository.ChildDetailRelationRepository.Add(childDetailRelation);
             return childDetailRelation;
         }
         #endregion
@@ -76,7 +76,7 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
         #region Редактирование.
         public void EditDetailRelation(DetailRelationEntity detailRelation)
         {
-            IQueryable<DetailTypeEntity> allDetailTypes = _repository._DetailTypeRepository.GetAll();
+            IQueryable<DetailTypeEntity> allDetailTypes = Repository.DetailTypeRepository.GetAll();
             long typeId = detailRelation.TypeId;
             DetailTypeEntity detailType = allDetailTypes.Where(x => typeId == x.Id).SingleOrDefault();
 
@@ -93,7 +93,7 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
             {
                 long relationId = (long)detailRelation.RelationId;
                 ChildDetailRelationEntity childDetailRelation =
-                    _repository._ChildDetailRelationRepository.GetAll().
+                    Repository.ChildDetailRelationRepository.GetAll().
                         Where(x => relationId == x.Id).SingleOrDefault();
 
                 if(null != childDetailRelation)
@@ -105,9 +105,9 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
         #region Удаление.
         public void DeleteDetailRelation(long id)
         {
-            IQueryable<DetailRelationEntity> allDetailRelations = _repository.GetAll();
+            IQueryable<DetailRelationEntity> allDetailRelations = Repository.GetAll();
 
-            DetailRelationEntity current = _Helper.Find(id, allDetailRelations);
+            DetailRelationEntity current = Helper.Find(id, allDetailRelations);
 
             if(null != current)
                 DeleteRecursive(current, allDetailRelations);
@@ -115,14 +115,14 @@ namespace BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions
         public void DeleteRecursive(DetailRelationEntity detailRelation, IQueryable<DetailRelationEntity> allDetailRelations)
         {
             if( ! detailRelation.IsRoot)
-                _repository._ChildDetailRelationRepository.Delete((long)detailRelation.RelationId);
+                Repository.ChildDetailRelationRepository.Delete((long)detailRelation.RelationId);
 
             long typeId = detailRelation.TypeId;
             if(allDetailRelations.Where(x => typeId == x.TypeId).Count() == 1)
             {
-                _repository._DetailTypeRepository.Delete(typeId);
+                Repository.DetailTypeRepository.Delete(typeId);
 
-                IQueryable<DetailRelationEntity> childs = _Helper.GetChilds(typeId, allDetailRelations);
+                IQueryable<DetailRelationEntity> childs = Helper.GetChilds(typeId, allDetailRelations);
 
                 foreach(DetailRelationEntity child in childs)
                     DeleteRecursive(child, allDetailRelations);

@@ -10,7 +10,7 @@ namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
         AbstractRepository<DetailRelationEntity, long>, IDetailRelationRepository
     {
         private IDetailTypeRepository _detailTypeRepository;
-        public IDetailTypeRepository _DetailTypeRepository
+        public IDetailTypeRepository DetailTypeRepository
         {
             get
             {
@@ -21,7 +21,7 @@ namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
         }
 
         private IChildDetailRelationRepository _childDetailRelationRepository;
-        public IChildDetailRelationRepository _ChildDetailRelationRepository
+        public IChildDetailRelationRepository ChildDetailRelationRepository
         {
             get
             {
@@ -33,12 +33,10 @@ namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
 
         public DetailRelationRepository(string nameOrConnectionString) => _db = new MainContext(nameOrConnectionString);
 
-        public override void Save() => _db.SaveChanges();
-
         public override IQueryable<DetailRelationEntity> GetAll()
         {
-            var listA = _DetailTypeRepository.GetAll();
-            var listB = _ChildDetailRelationRepository.GetAll();
+            var listA = DetailTypeRepository.GetAll();
+            var listB = ChildDetailRelationRepository.GetAll();
 
             IEnumerable<DetailRelationEntity> query = 
 		        from itemA in listA.Outer()

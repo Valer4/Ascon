@@ -9,16 +9,16 @@ namespace BusinessLogicLayer.Managers.Repositories.Classes
         IAbstractRepositoryManager<TEntity, TId>
             where TInterfaceRepository : IAbstractRepository<TEntity, TId>
     {
-        public TInterfaceRepository _repository;
+        internal TInterfaceRepository Repository;
 
         public AbstractRepositoryManager(TInterfaceRepository repository) =>
-            _repository = repository;
+            Repository = repository;
 
         public virtual void Save(string message = null)
         {
             try
             {
-                _repository.Save();
+                Repository.Save();
             }
             catch(Exception ex)
             {
@@ -27,17 +27,17 @@ namespace BusinessLogicLayer.Managers.Repositories.Classes
         }
 
         #region Entity
-        public virtual TEntity Get(TId id) => _repository.Get(id);
-        public virtual void Add(TEntity entity) => _repository.Add(entity);
-        public virtual void Edit(TEntity entity) => _repository.Edit(entity);
-        public virtual void Delete(TId id) => _repository.Delete(id);
+        public virtual TEntity Get(TId id) => Repository.Get(id);
+        public virtual void Add(TEntity entity) => Repository.Add(entity);
+        public virtual void Edit(TEntity entity) => Repository.Edit(entity);
+        public virtual void Delete(TId id) => Repository.Delete(id);
         #endregion
 
         #region Collection
-        public virtual IQueryable<TEntity> GetAll() => _repository.GetAll();
-        public virtual void AddCollection(IQueryable<TEntity> collection) => _repository.AddCollection(collection);
-        public virtual void EditCollection(IQueryable<TEntity> collection) => _repository.EditCollection(collection);
-        public virtual void DeleteCollection(IQueryable<TEntity> collection) => _repository.DeleteCollection(collection);
+        public virtual IQueryable<TEntity> GetAll() => Repository.GetAll();
+        public virtual void AddCollection(IQueryable<TEntity> collection) => Repository.AddCollection(collection);
+        public virtual void EditCollection(IQueryable<TEntity> collection) => Repository.EditCollection(collection);
+        public virtual void DeleteCollection(IQueryable<TEntity> collection) => Repository.DeleteCollection(collection);
         #endregion
     }
 }

@@ -24,8 +24,8 @@ namespace UserInterfaceLayer
                 new Configurator(new ConnectInfoClientService("localhost", 10000));
 
                 DetailEditor view = new DetailEditor();
-                new DetailRelationRepositoryPresenter(view, Configurator._Container.Resolve<IDetailRelationRepositoryClient>());
-                new PrintPresenter(view, Configurator._Container.Resolve<IPrintClient>());
+                new DetailRelationRepositoryPresenter(view, Configurator.Container.Resolve<IDetailRelationRepositoryClient>());
+                new PrintPresenter(view, Configurator.Container.Resolve<IPrintClient>());
                 Application.Run(view);
             }
             catch(Exception ex)

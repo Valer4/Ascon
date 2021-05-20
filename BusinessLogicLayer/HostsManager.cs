@@ -17,11 +17,11 @@ namespace BusinessLogicLayer
             NetTcpBinding binding = new NetTcpBinding(SecurityMode.Message);
             binding.Security.Message.ClientCredentialType = MessageCredentialType.UserName;
 
-            string hostAddress = Configurator._ConnectInfo.HostAddress;
+            string hostAddress = Configurator.ConnectInfo.HostAddress;
             string uriString = $"net.tcp://{hostAddress}/{hostName}";
             Uri uri = new Uri(uriString);
 
-            ServiceHost host = new UnityServiceHost(Configurator._Container._main, contractClass);
+            ServiceHost host = new UnityServiceHost(Configurator.Container.Main, contractClass);
 
             host.Credentials.ServiceCertificate.SetCertificate
                 (StoreLocation.LocalMachine, StoreName.My, X509FindType.FindBySerialNumber, "01");
