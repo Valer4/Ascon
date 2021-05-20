@@ -29,8 +29,8 @@ namespace UserInterfaceLayer.Forms.Views
             }
         }
         public event SimpleEventHandler LoadData;
-        public event AddEventHandler<string, DetailRelationEntity> AddDetail;
-        public event EditEventHandler<string, DetailRelationEntity> EditDetail;
+        public event ParamReturnDelegate<string, DetailRelationEntity, bool, string, string> AddDetail;
+        public event ParamReturnDelegate<string, DetailRelationEntity, string, string> EditDetail;
         public event ParamReturnDelegate<string, DetailRelationEntity> DeleteDetail;
         #endregion
 
