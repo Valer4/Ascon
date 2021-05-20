@@ -46,6 +46,7 @@
     <Compile Include="Data\Entities\Classes\TreeLogicalNode.cs" />
     <Compile Include="Data\Entities\Interfaces\IAbstractEntity.cs" />
     <Compile Include="Data\Entities\Interfaces\ITreeLogicalNode.cs" />
+    <Compile Include="Delegates.cs" />
     <Compile Include="HostsManager.cs" />
     <Compile Include="InversionOfControlWithWCFAndUnity\UnityInstanceProvider.cs" />
     <Compile Include="InversionOfControlWithWCFAndUnity\UnityServiceBehavior.cs" />

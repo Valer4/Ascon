@@ -1,4 +1,5 @@
-﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
+﻿using BusinessLogicLayer;
+using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
 using System.Linq;
 
 namespace UserInterfaceLayer.Forms.IViews

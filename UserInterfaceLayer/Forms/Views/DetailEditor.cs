@@ -1,11 +1,10 @@
-﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
+﻿using BusinessLogicLayer;
+using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
 using Microsoft.Office.Interop.Word;
 using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using UserInterfaceLayer.Clients.Print;
-using UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions;
 using UserInterfaceLayer.Forms.HelpersToControls;
 using UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper;
 using UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper.TreeViewStoresState;
