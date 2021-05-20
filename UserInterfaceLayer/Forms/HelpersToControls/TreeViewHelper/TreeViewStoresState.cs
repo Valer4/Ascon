@@ -6,13 +6,13 @@ using System.Windows.Forms;
 
 namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper
 {
-    internal class TreeViewNodeStateLib
+    internal class TreeViewNodeState
     {
         internal string FullPath;
         internal bool IsExpanded,
                     IsSelected;
 
-        internal TreeViewNodeStateLib(string fullPath, bool isExpanded, bool isSelected)
+        internal TreeViewNodeState(string fullPath, bool isExpanded, bool isSelected)
         {
             FullPath = fullPath;
             IsExpanded = isExpanded;
@@ -22,7 +22,7 @@ namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper
 
     internal class TreeViewState
     {
-        private IList<TreeViewNodeStateLib> _nodeStates;
+        private IList<TreeViewNodeState> _nodeStates;
 
         private string GetFullPath(TreeNode node)
         {
@@ -43,7 +43,7 @@ namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper
             if(null == treeView)
                 throw new ArgumentNullException("Дерево не создано.");
 
-            _nodeStates = new List<TreeViewNodeStateLib>();
+            _nodeStates = new List<TreeViewNodeState>();
             SaveStateRecursive(treeView.Nodes);
         }
 
@@ -53,7 +53,7 @@ namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper
             foreach(TreeNode node in nodes)
             {
                 _nodeStates.Add(
-                    new TreeViewNodeStateLib(
+                    new TreeViewNodeState(
                         GetFullPath(node),
                         node.IsExpanded,
                         node.IsSelected));
@@ -77,7 +77,7 @@ namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper
             foreach(TreeNode node in nodes)
             {
                 string fullPath = GetFullPath(node);
-                TreeViewNodeStateLib nodeState = _nodeStates.Where(x => fullPath == x.FullPath).SingleOrDefault();
+                TreeViewNodeState nodeState = _nodeStates.Where(x => fullPath == x.FullPath).SingleOrDefault();
 
                 if(null != nodeState)
                 {
