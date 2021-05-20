@@ -52,7 +52,7 @@ namespace UserInterfaceLayer.Forms.Views
 
             treeView.Nodes.Clear();
 
-            (new TreeViewBuilder()).BuildTreeView<T, long, long?, long>(treeView, collection);
+            new TreeViewBuilder().BuildTreeView<T, long, long?, long>(treeView, collection);
 
             treeState.RestoreState(treeView);
         }
@@ -64,12 +64,12 @@ namespace UserInterfaceLayer.Forms.Views
             try
             {
                 CheckLink(AddDetail);
-                ShowWarningMessage(
+                new MessageBoxHelper().ShowWarningMessage(
                     AddDetail(GetSelectedDetail(), isRoot, textBoxName.Text, maskedTextBoxAmount.Text));
             }
             catch(Exception ex)
             {
-                ShowErrorMessage(ex.Message);
+                new MessageBoxHelper().ShowErrorMessage(ex.Message);
             }
         }
 
@@ -78,12 +78,12 @@ namespace UserInterfaceLayer.Forms.Views
             try
             {
                 CheckLink(EditDetail);
-                ShowWarningMessage(
+                new MessageBoxHelper().ShowWarningMessage(
                     EditDetail(GetSelectedDetail(), textBoxName.Text, maskedTextBoxAmount.Text));
             }
             catch(Exception ex)
             {
-                ShowErrorMessage(ex.Message);
+                new MessageBoxHelper().ShowErrorMessage(ex.Message);
             }
         }
 
@@ -92,12 +92,12 @@ namespace UserInterfaceLayer.Forms.Views
             try
             {
                 CheckLink(DeleteDetail);
-                ShowWarningMessage(
+                new MessageBoxHelper().ShowWarningMessage(
                     DeleteDetail(GetSelectedDetail()));
             }
             catch(Exception ex)
             {
-                ShowErrorMessage(ex.Message);
+                new MessageBoxHelper().ShowErrorMessage(ex.Message);
             }
         }
 
@@ -109,7 +109,7 @@ namespace UserInterfaceLayer.Forms.Views
 
                 byte[] file = GetReportOnDetailInMSWord(GetSelectedDetail(), out string warningMessage);
 
-                if( ! ShowWarningMessage(warningMessage))
+                if( ! new MessageBoxHelper().ShowWarningMessage(warningMessage))
                 {
                     File.WriteAllBytes(fileName, file);
 
@@ -120,7 +120,7 @@ namespace UserInterfaceLayer.Forms.Views
             }
             catch(Exception ex)
             {
-                ShowErrorMessage(ex.Message);
+                new MessageBoxHelper().ShowErrorMessage(ex.Message);
             }
         }
 
@@ -139,23 +139,11 @@ namespace UserInterfaceLayer.Forms.Views
                 if(null == errorMessage)
                     errorMessage = "Ошибка в работе программы. Обратитесь к разработчикам.";
 
-                ShowErrorMessage(errorMessage);
+                new MessageBoxHelper().ShowErrorMessage(errorMessage);
             }
-        }
-
-        public bool ShowWarningMessage(string message) => ShowProblemMessage(message, "Предупреждение", MessageBoxIcon.Warning);
-        public bool ShowErrorMessage(string message) => ShowProblemMessage(message, "Ошибка", MessageBoxIcon.Error);
-        public bool ShowProblemMessage(string message, string caption, MessageBoxIcon icon)
-        {
-            if( ! string.IsNullOrEmpty(message))
-            {
-                MessageBox.Show(message, caption, MessageBoxButtons.OK, icon);
-                return true;
-            }
-            return false;
         }
 
         private void maskedTextBoxNumber_MouseClick(object sender, MouseEventArgs e) =>
-            (new MaskedTextBoxHelper()).MoveCaretBeforeSpaces(maskedTextBoxAmount);
+            new MaskedTextBoxHelper().MoveCaretBeforeSpaces(maskedTextBoxAmount);
     }
 }
