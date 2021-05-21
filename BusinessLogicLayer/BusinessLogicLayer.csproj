@@ -52,21 +52,21 @@
     <Compile Include="InversionOfControlWithWCFAndUnity\UnityServiceBehavior.cs" />
     <Compile Include="InversionOfControlWithWCFAndUnity\UnityServiceHost.cs" />
     <Compile Include="LINQExtensions.cs" />
-    <Compile Include="Logic\Presenters\Repositories\Classes\AbstractRepositoryPresenter.cs" />
-    <Compile Include="Logic\Presenters\Repositories\Classes\ConcreteDefinitions\DetailRelationRepositoryPresenter.cs" />
-    <Compile Include="Logic\Presenters\Print\IPrintPresenter.cs" />
-    <Compile Include="Logic\Presenters\Print\PrintPresenter.cs" />
-    <Compile Include="Logic\Presenters\Repositories\Interfaces\ConcreteDefinitions\IDetailRelationRepositoryPresenter.cs" />
-    <Compile Include="Logic\Presenters\Repositories\Interfaces\IAbstractRepositoryPresenter.cs" />
-    <Compile Include="Managers\Common\DetailRelationRepositoryHelper.cs" />
-    <Compile Include="Managers\Print\IPrintManager.cs" />
-    <Compile Include="Managers\Print\PrintManager.cs" />
-    <Compile Include="Managers\Repositories\Classes\AbstractRepositoryManager.cs" />
-    <Compile Include="Managers\Repositories\Classes\ConcreteDefinitions\DetailRelationRepositoryManager.cs" />
-    <Compile Include="Managers\Repositories\Classes\ConcreteDefinitions\DetailRelationRepositoryManagerPartial.cs" />
-    <Compile Include="Managers\Repositories\Interfaces\IAbstractRepositoryManager.cs" />
-    <Compile Include="Managers\Repositories\Interfaces\ConcreteDefinitions\IDetailRelationRepositoryManager.cs" />
-    <Compile Include="Managers\UnitsOfWork\Interfaces\IAbstractUnitOfWorkManager.cs" />
+    <Compile Include="LogicMain\Presenters\Repositories\Classes\AbstractRepositoryPresenter.cs" />
+    <Compile Include="LogicMain\Presenters\Repositories\Classes\ConcreteDefinitions\DetailRelationRepositoryPresenter.cs" />
+    <Compile Include="LogicMain\Presenters\Print\IPrintPresenter.cs" />
+    <Compile Include="LogicMain\Presenters\Print\PrintPresenter.cs" />
+    <Compile Include="LogicMain\Presenters\Repositories\Interfaces\ConcreteDefinitions\IDetailRelationRepositoryPresenter.cs" />
+    <Compile Include="LogicMain\Presenters\Repositories\Interfaces\IAbstractRepositoryPresenter.cs" />
+    <Compile Include="LogicMain\Managers\Common\DetailRelationRepositoryHelper.cs" />
+    <Compile Include="LogicMain\Managers\Print\IPrintManager.cs" />
+    <Compile Include="LogicMain\Managers\Print\PrintManager.cs" />
+    <Compile Include="LogicMain\Managers\Repositories\Classes\AbstractRepositoryManager.cs" />
+    <Compile Include="LogicMain\Managers\Repositories\Classes\ConcreteDefinitions\DetailRelationRepositoryManager.cs" />
+    <Compile Include="LogicMain\Managers\Repositories\Classes\ConcreteDefinitions\DetailRelationRepositoryManagerPartial.cs" />
+    <Compile Include="LogicMain\Managers\Repositories\Interfaces\IAbstractRepositoryManager.cs" />
+    <Compile Include="LogicMain\Managers\Repositories\Interfaces\ConcreteDefinitions\IDetailRelationRepositoryManager.cs" />
+    <Compile Include="LogicMain\Managers\UnitsOfWork\Interfaces\IAbstractUnitOfWorkManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelatedTypes.cs" />
     <Compile Include="Security\RoleBasedAccessControl\AppRoles.cs" />
@@ -105,10 +105,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\DataModels\" />
-    <Folder Include="Managers\Print\DataFromStorage\" />
-    <Folder Include="Managers\Print\DataFromViews\" />
-    <Folder Include="Managers\UnitsOfWork\Classes\ConcreteDefinitions\" />
-    <Folder Include="Managers\UnitsOfWork\Interfaces\ConcreteDefinitions\" />
+    <Folder Include="LogicMain\Managers\Print\DataFromStorage\" />
+    <Folder Include="LogicMain\Managers\Print\DataFromViews\" />
+    <Folder Include="LogicMain\Managers\UnitsOfWork\Classes\ConcreteDefinitions\" />
+    <Folder Include="LogicMain\Managers\UnitsOfWork\Interfaces\ConcreteDefinitions\" />
     <Folder Include="Services\UnitsOfWork\Classes\ConcreteDefinitions\" />
     <Folder Include="Services\UnitsOfWork\Interfaces\ConcreteDefinitions\" />
   </ItemGroup>

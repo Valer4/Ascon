@@ -1,4 +1,4 @@
-﻿using BusinessLogicLayer.Managers.UnitsOfWorkManagers.Interfaces;
+﻿using BusinessLogicLayer.LogicMain.Managers.UnitsOfWorkManagers.Interfaces;
 using BusinessLogicLayer.Security.RoleBasedAccessControl;
 using System.Security.Permissions;
 

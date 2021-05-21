@@ -1,5 +1,5 @@
 ﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
-using BusinessLogicLayer.Logic.Presenters.Print;
+using BusinessLogicLayer.LogicMain.Presenters.Print;
 using BusinessLogicLayer.Security.RoleBasedAccessControl;
 using System.Security.Permissions;
 

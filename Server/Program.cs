@@ -1,9 +1,9 @@
 ﻿using BusinessLogicLayer;
 using BusinessLogicLayer.Data.DataAccessInterfaces.Repositories.ConcreteDefinitions;
-using BusinessLogicLayer.Logic.Presenters.Print;
-using BusinessLogicLayer.Logic.Presenters.Repositories.Classes.ConcreteDefinitions;
-using BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions;
-using BusinessLogicLayer.Managers.Print;
+using BusinessLogicLayer.LogicMain.Presenters.Print;
+using BusinessLogicLayer.LogicMain.Presenters.Repositories.Classes.ConcreteDefinitions;
+using BusinessLogicLayer.LogicMain.Managers.EntityManagers.Classes.ConcreteDefinitions;
+using BusinessLogicLayer.LogicMain.Managers.Print;
 using BusinessLogicLayer.Services.Print;
 using BusinessLogicLayer.Services.Repositories.Classes.ConcreteDefinitions;
 using BusinessLogicLayer.Services.Repositories.Interfaces.ConcreteDefinitions;
