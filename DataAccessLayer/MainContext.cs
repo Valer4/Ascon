@@ -17,10 +17,10 @@ namespace DataAccessLayer
             modelBuilder.Configurations.Add(new ChildDetailRelationConfiguration());
         }
 
-        internal DbSet<UserEntity> Users { get; set; }
-        internal DbSet<RoleEntity> Roles { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
+        public DbSet<RoleEntity> Roles { get; set; }
 
-        internal DbSet<DetailTypeEntity> DetailTypes { get; set; }
-        internal DbSet<ChildDetailRelationEntity> ChildDetailRelations { get; set; }
+        public DbSet<DetailTypeEntity> DetailTypes { get; set; }
+        public DbSet<ChildDetailRelationEntity> ChildDetailRelations { get; set; }
     }
 }
