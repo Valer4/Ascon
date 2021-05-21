@@ -11,8 +11,5 @@ namespace BusinessLogicLayer.Services.Repositories.Interfaces.ConcreteDefinition
 
         [OperationContract]
         string Edit(DetailRelationEntity selectedDetail, string name, string amount);
-
-        [OperationContract]
-        string Delete(DetailRelationEntity selectedDetail);
     }
 }

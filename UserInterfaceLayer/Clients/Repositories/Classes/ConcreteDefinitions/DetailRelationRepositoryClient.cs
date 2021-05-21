@@ -13,8 +13,5 @@ namespace UserInterfaceLayer.Clients.Repositories.Classes.ConcreteDefinitions
 
         public string Edit(DetailRelationEntity selectedDetail, string name, string amount) =>
             new ChannelsManager().GetChannel<IDetailRelationRepositoryService>().Edit(selectedDetail, name, amount);
-
-        public string Delete(DetailRelationEntity selectedDetail) =>
-            new ChannelsManager().GetChannel<IDetailRelationRepositoryService>().Delete(selectedDetail);
     }
 }

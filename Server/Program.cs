@@ -1,7 +1,7 @@
 ﻿using BusinessLogicLayer;
 using BusinessLogicLayer.Data.DataAccessInterfaces.Repositories.ConcreteDefinitions;
 using BusinessLogicLayer.Logic.Presenters.Print;
-using BusinessLogicLayer.Logic.Presenters.Repositories.Classes;
+using BusinessLogicLayer.Logic.Presenters.Repositories.Classes.ConcreteDefinitions;
 using BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions;
 using BusinessLogicLayer.Managers.Print;
 using BusinessLogicLayer.Services.Print;

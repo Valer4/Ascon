@@ -12,6 +12,8 @@ namespace BusinessLogicLayer.Services.Repositories.Interfaces
 
         [OperationContract]
         void DeleteById(TId id);
+        [OperationContract]
+        string Delete(TEntity entity);
         #endregion
 
         #region Collection.

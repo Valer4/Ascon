@@ -1,11 +1,11 @@
 ﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
-using BusinessLogicLayer.Logic.Presenters.Interfaces.Repositories;
+using BusinessLogicLayer.Logic.Presenters.Interfaces.Repositories.ConcreteDefinitions;
 using BusinessLogicLayer.Managers.Repositories.Interfaces.ConcreteDefinitions;
 using System.Reflection;
 
-namespace BusinessLogicLayer.Logic.Presenters.Repositories.Classes
+namespace BusinessLogicLayer.Logic.Presenters.Repositories.Classes.ConcreteDefinitions
 {
-    public class DetailRelationRepositoryPresenter : IDetailRelationRepositoryPresenter
+    public class DetailRelationRepositoryPresenter : AbstractRepositoryPresenter<DetailRelationEntity>, IDetailRelationRepositoryPresenter
     {
         private const string _detailNotSelected = "Деталь не выбрана.";
 
@@ -62,7 +62,7 @@ namespace BusinessLogicLayer.Logic.Presenters.Repositories.Classes
             return string.Empty;
         }
 
-        public string Delete(DetailRelationEntity selectedDetail)
+        public override string Delete(DetailRelationEntity selectedDetail)
         {
             if(null == selectedDetail) return _detailNotSelected;
 

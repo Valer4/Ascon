@@ -52,10 +52,12 @@
     <Compile Include="InversionOfControlWithWCFAndUnity\UnityServiceBehavior.cs" />
     <Compile Include="InversionOfControlWithWCFAndUnity\UnityServiceHost.cs" />
     <Compile Include="LINQExtensions.cs" />
-    <Compile Include="Logic\Presenters\Repositories\Classes\DetailRelationRepositoryPresenter.cs" />
+    <Compile Include="Logic\Presenters\Repositories\Classes\AbstractRepositoryPresenter.cs" />
+    <Compile Include="Logic\Presenters\Repositories\Classes\ConcreteDefinitions\DetailRelationRepositoryPresenter.cs" />
     <Compile Include="Logic\Presenters\Print\IPrintPresenter.cs" />
     <Compile Include="Logic\Presenters\Print\PrintPresenter.cs" />
-    <Compile Include="Logic\Presenters\Repositories\Interfaces\IDetailRelationRepositoryPresenter.cs" />
+    <Compile Include="Logic\Presenters\Repositories\Interfaces\ConcreteDefinitions\IDetailRelationRepositoryPresenter.cs" />
+    <Compile Include="Logic\Presenters\Repositories\Interfaces\IAbstractRepositoryPresenter.cs" />
     <Compile Include="Managers\Common\DetailRelationRepositoryHelper.cs" />
     <Compile Include="Managers\Print\IPrintManager.cs" />
     <Compile Include="Managers\Print\PrintManager.cs" />

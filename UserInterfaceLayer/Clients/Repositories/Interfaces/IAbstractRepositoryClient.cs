@@ -6,7 +6,9 @@ namespace UserInterfaceLayer.Clients.Repositories.Interfaces
     {
         #region Entity.
         TEntity Get(TId id);
+
         void Delete(TId id);
+        string Delete(TEntity entity);
         #endregion
 
         #region Collection.

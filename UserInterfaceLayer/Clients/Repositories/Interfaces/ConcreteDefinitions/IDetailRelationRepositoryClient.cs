@@ -7,7 +7,5 @@ namespace UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions
         string Add(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount);
 
         string Edit(DetailRelationEntity selectedDetail, string name, string amount);
-
-        string Delete(DetailRelationEntity selectedDetail);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
-using BusinessLogicLayer.Logic.Presenters.Interfaces.Repositories;
+using BusinessLogicLayer.Logic.Presenters.Interfaces.Repositories.ConcreteDefinitions;
 using BusinessLogicLayer.Managers.Repositories.Interfaces.ConcreteDefinitions;
 using BusinessLogicLayer.Security.RoleBasedAccessControl;
 using BusinessLogicLayer.Services.Repositories.Interfaces.ConcreteDefinitions;
@@ -8,7 +8,7 @@ using System.Security.Permissions;
 namespace BusinessLogicLayer.Services.Repositories.Classes.ConcreteDefinitions
 {
     public class DetailRelationRepositoryService :
-        AbstractRepositoryService<DetailRelationEntity, long, IDetailRelationRepositoryManager>,
+        AbstractRepositoryService<DetailRelationEntity, long, IDetailRelationRepositoryPresenter, IDetailRelationRepositoryManager>,
         IDetailRelationRepositoryService
     {
         IDetailRelationRepositoryPresenter _detailRelationRepositoryPresenter;
@@ -16,8 +16,10 @@ namespace BusinessLogicLayer.Services.Repositories.Classes.ConcreteDefinitions
         public DetailRelationRepositoryService(
             IDetailRelationRepositoryPresenter detailRelationRepositoryPresenter,
             IDetailRelationRepositoryManager detailRelationRepositoryManager) :
-                base(detailRelationRepositoryManager) =>
-                    _detailRelationRepositoryPresenter = detailRelationRepositoryPresenter;
+                base(
+                    detailRelationRepositoryPresenter,
+                    detailRelationRepositoryManager) =>
+                        _detailRelationRepositoryPresenter = detailRelationRepositoryPresenter;
 
         [PrincipalPermission(SecurityAction.Demand, Role = AppRoles.Admin)]
         public string Add(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount) =>
@@ -26,9 +28,5 @@ namespace BusinessLogicLayer.Services.Repositories.Classes.ConcreteDefinitions
         [PrincipalPermission(SecurityAction.Demand, Role = AppRoles.Admin)]
         public string Edit(DetailRelationEntity selectedDetail, string name, string amount) =>
             _detailRelationRepositoryPresenter.Edit(selectedDetail, name, amount);
-
-        [PrincipalPermission(SecurityAction.Demand, Role = AppRoles.Admin)]
-        public string Delete(DetailRelationEntity selectedDetail) =>
-            _detailRelationRepositoryPresenter.Delete(selectedDetail);
     }
 }

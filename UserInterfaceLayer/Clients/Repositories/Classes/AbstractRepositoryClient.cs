@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.Services.Repositories.Interfaces;
+using BusinessLogicLayer.Services.Repositories.Interfaces.ConcreteDefinitions;
 using System.Linq;
 using UserInterfaceLayer.Clients.Repositories.Interfaces;
 
@@ -10,7 +11,10 @@ namespace UserInterfaceLayer.Clients.Repositories.Classes
     {
         #region Entity.
         public TEntity Get(TId id) => new ChannelsManager().GetChannel<TInterfaceEntityService>().Get(id);
+
         public void Delete(TId id) => new ChannelsManager().GetChannel<TInterfaceEntityService>().DeleteById(id);
+        public string Delete(TEntity entity) =>
+            new ChannelsManager().GetChannel<TInterfaceEntityService>().Delete(entity);
         #endregion
 
         #region Collection.
