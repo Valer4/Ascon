@@ -1,5 +1,7 @@
 ﻿using BusinessLogicLayer;
 using BusinessLogicLayer.Data.DataAccessInterfaces.Repositories.ConcreteDefinitions;
+using BusinessLogicLayer.Logic.Presenters.Print;
+using BusinessLogicLayer.Logic.Presenters.Repositories.Classes;
 using BusinessLogicLayer.Managers.EntityManagers.Classes.ConcreteDefinitions;
 using BusinessLogicLayer.Managers.Print;
 using BusinessLogicLayer.Services.Print;
@@ -23,12 +25,16 @@ namespace Server
                         ConnectionString);
 
                 Configurator.Container.RegisterType<IDetailRelationRepositoryService, DetailRelationRepositoryService>(
-                    constructorParams: new DetailRelationRepositoryManager(
-                        Configurator.Container.Resolve<IDetailRelationRepository>()));
+                    constructorParams: new object[] {
+                        new DetailRelationRepositoryPresenter(
+                            new DetailRelationRepositoryManager(Configurator.Container.Resolve<IDetailRelationRepository>())),
+                        new DetailRelationRepositoryManager(
+                            Configurator.Container.Resolve<IDetailRelationRepository>())});
 
                 Configurator.Container.RegisterType<IPrintService, PrintService>(
-                    constructorParams: new PrintManager(
-                        Configurator.Container.Resolve<IDetailRelationRepository>()));
+                    constructorParams: new PrintPresenter(
+                        new PrintManager(
+                            Configurator.Container.Resolve<IDetailRelationRepository>())));
 
                 Console.ReadKey();
             }

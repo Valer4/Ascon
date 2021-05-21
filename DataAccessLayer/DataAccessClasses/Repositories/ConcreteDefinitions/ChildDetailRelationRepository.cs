@@ -5,7 +5,8 @@ using System.Linq;
 namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
 {
     internal class ChildDetailRelationRepository :
-        AbstractRepository<ChildDetailRelationEntity, long>, IChildDetailRelationRepository
+        AbstractRepository<ChildDetailRelationEntity, long>,
+        IChildDetailRelationRepository
     {
         public ChildDetailRelationRepository(MainContext context) => _db = context;
 

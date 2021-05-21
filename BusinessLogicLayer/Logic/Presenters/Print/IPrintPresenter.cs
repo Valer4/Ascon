@@ -1,12 +1,9 @@
 ﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
-using System.ServiceModel;
 
-namespace BusinessLogicLayer.Services.Print
+namespace BusinessLogicLayer.Logic.Presenters.Print
 {
-    [ServiceContract(SessionMode = SessionMode.Required)]
-    public interface IPrintService
+    public interface IPrintPresenter
     {
-        [OperationContract]
         byte[] GetReportOnDetailInMSWord(DetailRelationEntity selectedDetail, out string warningMessage);
     }
 }

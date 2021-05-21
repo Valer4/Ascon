@@ -1,7 +1,9 @@
-﻿namespace UserInterfaceLayer.Clients.Print
+﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
+
+namespace UserInterfaceLayer.Clients.Print
 {
     internal interface IPrintClient
     {
-        byte[] GetReportOnDetailInMSWord(long id);
+        byte[] GetReportOnDetailInMSWord(DetailRelationEntity selectedDetail, out string message);
     }
 }

@@ -4,8 +4,7 @@ using System.Linq;
 
 namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
 {
-    internal class DetailTypeRepository :
-        AbstractRepository<DetailTypeEntity, long>, IDetailTypeRepository
+    internal class DetailTypeRepository : AbstractRepository<DetailTypeEntity, long>, IDetailTypeRepository
     {
         public DetailTypeRepository(MainContext context) => _db = context;
 

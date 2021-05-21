@@ -10,9 +10,7 @@ namespace UserInterfaceLayer.Clients.Repositories.Classes
     {
         #region Entity.
         public TEntity Get(TId id) => new ChannelsManager().GetChannel<TInterfaceEntityService>().Get(id);
-        public void Add(TEntity entity) => new ChannelsManager().GetChannel<TInterfaceEntityService>().Add(entity);
-        public void Edit(TEntity entity) => new ChannelsManager().GetChannel<TInterfaceEntityService>().Edit(entity);
-        public void Delete(TId id) => new ChannelsManager().GetChannel<TInterfaceEntityService>().Delete(id);
+        public void Delete(TId id) => new ChannelsManager().GetChannel<TInterfaceEntityService>().DeleteById(id);
         #endregion
 
         #region Collection.

@@ -6,5 +6,13 @@ namespace BusinessLogicLayer.Services.Repositories.Interfaces.ConcreteDefinition
     [ServiceContract(SessionMode = SessionMode.Required)]
     public interface IDetailRelationRepositoryService : IAbstractRepositoryService<DetailRelationEntity, long>
     {
+        [OperationContract]
+        string Add(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount);
+
+        [OperationContract]
+        string Edit(DetailRelationEntity selectedDetail, string name, string amount);
+
+        [OperationContract]
+        string Delete(DetailRelationEntity selectedDetail);
     }
 }

@@ -11,13 +11,7 @@ namespace BusinessLogicLayer.Services.Repositories.Interfaces
         TEntity Get(TId id);
 
         [OperationContract]
-        void Add(TEntity entity);
-
-        [OperationContract]
-        void Edit(TEntity entity);
-
-        [OperationContract]
-        void Delete(TId id);
+        void DeleteById(TId id);
         #endregion
 
         #region Collection.

@@ -1,39 +1,20 @@
 ﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
+using BusinessLogicLayer.Logic.Presenters.Interfaces.Repositories;
+using BusinessLogicLayer.Managers.Repositories.Interfaces.ConcreteDefinitions;
 using System.Reflection;
-using UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions;
-using UserInterfaceLayer.Forms.IViews;
 
-namespace UserInterfaceLayer.Forms.Presenters
+namespace BusinessLogicLayer.Logic.Presenters.Repositories.Classes
 {
-    internal class DetailRelationRepositoryPresenter
+    public class DetailRelationRepositoryPresenter : IDetailRelationRepositoryPresenter
     {
         private const string _detailNotSelected = "Деталь не выбрана.";
 
-        private readonly IDetailRelationRepositoryView _view;
-        private readonly IDetailRelationRepositoryClient _detailRelationEntityClient;
+        IDetailRelationRepositoryManager _detailRelationEntityManager;
 
-        internal DetailRelationRepositoryPresenter
-            (IDetailRelationRepositoryView view, IDetailRelationRepositoryClient detailRelationEntityClient)
-        {
-            _view = view;
-            _detailRelationEntityClient = detailRelationEntityClient;
+        public DetailRelationRepositoryPresenter(IDetailRelationRepositoryManager detailRelationEntityManager) =>
+            _detailRelationEntityManager = detailRelationEntityManager;
 
-            EventBinding();
-        }
-        private void EventBinding()
-        {
-            _view.LoadData += OnLoadData;
-            _view.AddDetail += OnAddDetail;
-            _view.EditDetail += OnEditDetail;
-            _view.DeleteDetail += OnDeleteDetail;
-        }
-
-        private void Update() =>
-            _view.AllDetails = _detailRelationEntityClient.GetAll();
-
-        private void OnLoadData() => Update();
-
-        private string OnAddDetail(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount)
+        public string Add(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount)
         {
             DetailRelationEntity detail = new DetailRelationEntity();
 
@@ -50,13 +31,12 @@ namespace UserInterfaceLayer.Forms.Presenters
                 SetAmount(detail, amount);
             }
 
-            _detailRelationEntityClient.Add(detail);
-            Update();
+            _detailRelationEntityManager.Add(detail);
 
             return string.Empty;
         }
 
-        private string OnEditDetail(DetailRelationEntity selectedDetail, string name, string amount)
+        public string Edit(DetailRelationEntity selectedDetail, string name, string amount)
         {
             if(null == selectedDetail) return _detailNotSelected;
 
@@ -77,18 +57,16 @@ namespace UserInterfaceLayer.Forms.Presenters
                 SetAmount(editableDetail, amount);
             }
 
-            _detailRelationEntityClient.Edit(editableDetail);
-            Update();
+            _detailRelationEntityManager.Edit(editableDetail);
 
             return string.Empty;
         }
 
-        private string OnDeleteDetail(DetailRelationEntity selectedDetail)
+        public string Delete(DetailRelationEntity selectedDetail)
         {
             if(null == selectedDetail) return _detailNotSelected;
 
-            _detailRelationEntityClient.Delete(selectedDetail.Id);
-            Update();
+            _detailRelationEntityManager.Delete(selectedDetail.Id);
 
             return string.Empty;
         }

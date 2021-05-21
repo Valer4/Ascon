@@ -1,21 +1,31 @@
-﻿using BusinessLogicLayer;
-using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
+﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
 using Microsoft.Office.Interop.Word;
 using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using UserInterfaceLayer.Clients.Print;
+using UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions;
 using UserInterfaceLayer.Forms.HelpersToControls;
 using UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper;
-using UserInterfaceLayer.Forms.IViews;
 using Word = Microsoft.Office.Interop.Word;
 
 namespace UserInterfaceLayer.Forms.Views
 {
-    internal partial class DetailEditor : Form, IDetailRelationRepositoryView, IPrintView
+    internal partial class DetailEditor : Form
     {
+        private readonly IDetailRelationRepositoryClient _detailRelationEntityClient;
+        private readonly IPrintClient _printClient;
+
+        public DetailEditor(IDetailRelationRepositoryClient detailRelationEntityClient, IPrintClient printClient)
+        {
+            _detailRelationEntityClient = detailRelationEntityClient;
+            _printClient = printClient;
+
+            InitializeComponent();
+        }
+
         private IQueryable<DetailRelationEntity> _allDetails;
-        #region Implementation of IDetailRelationRepositoryView
         public IQueryable<DetailRelationEntity> AllDetails
         {
             get { return _allDetails; }
@@ -26,21 +36,20 @@ namespace UserInterfaceLayer.Forms.Views
                 BuildTreeView(treeViewDetails, _allDetails);
             }
         }
-        public event SimpleEventHandler LoadData;
-        public event ReturnDelegate<string, DetailRelationEntity, bool, string, string> AddDetail;
-        public event ReturnDelegate<string, DetailRelationEntity, string, string> EditDetail;
-        public event ReturnDelegate<string, DetailRelationEntity> DeleteDetail;
-        #endregion
-
-        #region Implementation of IPrintView
-        public event ReturnOutDelegate<byte[], DetailRelationEntity, string> GetReportOnDetailInMSWord;
-        #endregion
 
         internal DetailEditor() => InitializeComponent();
-        private void DetailEditor_Load(object sender, EventArgs e)
+        private void DetailEditor_Load(object sender, EventArgs e) => UpdateTree();
+
+        private void UpdateTree()
         {
-            CheckLink(LoadData);
-            LoadData();
+            try
+            {
+                AllDetails = _detailRelationEntityClient.GetAll();
+            }
+            catch(Exception ex)
+            {
+                new MessageBoxHelper().ShowErrorMessage(ex.Message);
+            }
         }
 
         private void BuildTreeView<T>(TreeView treeView, IQueryable<T> collection)
@@ -62,9 +71,9 @@ namespace UserInterfaceLayer.Forms.Views
         {
             try
             {
-                CheckLink(AddDetail);
                 new MessageBoxHelper().ShowWarningMessage(
-                    AddDetail(GetSelectedDetail(), isRoot, textBoxName.Text, maskedTextBoxAmount.Text));
+                    _detailRelationEntityClient.Add(GetSelectedDetail(), isRoot, textBoxName.Text, maskedTextBoxAmount.Text));
+                UpdateTree();
             }
             catch(Exception ex)
             {
@@ -76,9 +85,9 @@ namespace UserInterfaceLayer.Forms.Views
         {
             try
             {
-                CheckLink(EditDetail);
                 new MessageBoxHelper().ShowWarningMessage(
-                    EditDetail(GetSelectedDetail(), textBoxName.Text, maskedTextBoxAmount.Text));
+                    _detailRelationEntityClient.Edit(GetSelectedDetail(), textBoxName.Text, maskedTextBoxAmount.Text));
+                UpdateTree();
             }
             catch(Exception ex)
             {
@@ -90,9 +99,9 @@ namespace UserInterfaceLayer.Forms.Views
         {
             try
             {
-                CheckLink(DeleteDetail);
                 new MessageBoxHelper().ShowWarningMessage(
-                    DeleteDetail(GetSelectedDetail()));
+                    _detailRelationEntityClient.Delete(GetSelectedDetail()));
+                UpdateTree();
             }
             catch(Exception ex)
             {
@@ -106,7 +115,7 @@ namespace UserInterfaceLayer.Forms.Views
             {
                 string fileName = "C:\\client.doc";
 
-                byte[] file = GetReportOnDetailInMSWord(GetSelectedDetail(), out string warningMessage);
+                byte[] file = _printClient.GetReportOnDetailInMSWord(GetSelectedDetail(), out string warningMessage);
 
                 if( ! new MessageBoxHelper().ShowWarningMessage(warningMessage))
                 {
@@ -129,17 +138,6 @@ namespace UserInterfaceLayer.Forms.Views
                 return null;
             long id = (long)treeViewDetails.SelectedNode.Tag;
             return AllDetails.Where(x => id.Equals(x.Id)).Single();
-        }
-
-        private void CheckLink(object obj, string errorMessage = null)
-        {
-            if(null == obj)
-            {
-                if(null == errorMessage)
-                    errorMessage = "Ошибка в работе программы. Обратитесь к разработчикам.";
-
-                new MessageBoxHelper().ShowErrorMessage(errorMessage);
-            }
         }
 
         private void maskedTextBoxNumber_MouseClick(object sender, MouseEventArgs e) =>

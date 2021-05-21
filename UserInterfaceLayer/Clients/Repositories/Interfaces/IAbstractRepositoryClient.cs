@@ -6,8 +6,6 @@ namespace UserInterfaceLayer.Clients.Repositories.Interfaces
     {
         #region Entity.
         TEntity Get(TId id);
-        void Add(TEntity entity);
-        void Edit(TEntity entity);
         void Delete(TId id);
         #endregion
 

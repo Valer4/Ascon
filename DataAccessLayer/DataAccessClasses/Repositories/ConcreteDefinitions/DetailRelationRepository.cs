@@ -6,8 +6,7 @@ using System.Linq;
 
 namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
 {
-    public class DetailRelationRepository :
-        AbstractRepository<DetailRelationEntity, long>, IDetailRelationRepository
+    public class DetailRelationRepository : AbstractRepository<DetailRelationEntity, long>, IDetailRelationRepository
     {
         private IDetailTypeRepository _detailTypeRepository;
         public IDetailTypeRepository DetailTypeRepository
