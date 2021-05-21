@@ -1,5 +1,4 @@
 ﻿using BusinessLogicLayer.Services.Repositories.Interfaces;
-using BusinessLogicLayer.Services.Repositories.Interfaces.ConcreteDefinitions;
 using System.Linq;
 using UserInterfaceLayer.Clients.Repositories.Interfaces;
 

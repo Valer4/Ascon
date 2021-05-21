@@ -1,5 +1,5 @@
-﻿using BusinessLogicLayer.LogicMain.Presenters.Repositories.Interfaces;
-using BusinessLogicLayer.LogicMain.Managers.Repositories.Interfaces;
+﻿using BusinessLogicLayer.LogicMain.Managers.Repositories.Interfaces;
+using BusinessLogicLayer.LogicMain.Presenters.Repositories.Interfaces;
 using BusinessLogicLayer.Security.RoleBasedAccessControl;
 using BusinessLogicLayer.Services.Repositories.Interfaces;
 using System.Linq;
