@@ -108,3 +108,5 @@ Thumbs.db
 /UserInterfaceLayer/obj/Debug/TempPE/Properties.Resources.Designer.cs.dll
 /UserInterfaceLayer/obj/Debug/DesignTimeResolveAssemblyReferences.cache
 /UserInterfaceLayer/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/BusinessLogicLayer/obj/Debug/BusinessLogicLayer.csprojAssemblyReference.cache
+/UserInterfaceLayer/obj/Debug/UserInterfaceLayer.Forms.Views.DetailsEditor.resources
