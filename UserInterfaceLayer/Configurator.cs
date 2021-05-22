@@ -29,7 +29,7 @@ namespace UserInterfaceLayer
 
         private void RegisterTypes()
         {
-            Container.RegisterType<DetailEditor>(constructorParams: new object[]{
+            Container.RegisterType<DetailsEditor>(constructorParams: new object[]{
                 new DetailRelationRepositoryClient(),
                 new PrintClient()});
         }

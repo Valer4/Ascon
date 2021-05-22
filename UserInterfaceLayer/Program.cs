@@ -20,7 +20,7 @@ namespace UserInterfaceLayer
 
                 new Configurator(new ConnectInfoClientService("localhost", 10000));
 
-                Application.Run(Configurator.Container.Resolve<DetailEditor>());
+                Application.Run(Configurator.Container.Resolve<DetailsEditor>());
             }
             catch(Exception ex)
             {

@@ -1,7 +1,7 @@
 ﻿
 namespace UserInterfaceLayer.Forms.Views
 {
-    partial class DetailEditor
+    partial class DetailsEditor
     {
         /// <summary>
         /// Обязательная переменная конструктора.

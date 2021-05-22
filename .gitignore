@@ -105,3 +105,6 @@ Thumbs.db
 /UserInterfaceLayer/bin/Debug/Microsoft.Practices.Unity.dll
 /UserInterfaceLayer/bin/Debug/UserInterfaceLayer.exe.config
 /UserInterfaceLayer/bin/Debug/UserInterfaceLayer.pdb
+/UserInterfaceLayer/obj/Debug/TempPE/Properties.Resources.Designer.cs.dll
+/UserInterfaceLayer/obj/Debug/DesignTimeResolveAssemblyReferences.cache
+/UserInterfaceLayer/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache

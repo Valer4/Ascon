@@ -50,16 +50,16 @@
     <Compile Include="Forms\HelpersToControls\MessageBoxHelper.cs" />
     <Compile Include="Forms\HelpersToControls\TreeViewHelper\TreeViewBuilder.cs" />
     <Compile Include="Forms\HelpersToControls\TreeViewHelper\TreeViewStoresState.cs" />
-    <Compile Include="Forms\Views\DetailEditor.cs">
+    <Compile Include="Forms\Views\DetailsEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Views\DetailEditor.Designer.cs">
-      <DependentUpon>DetailEditor.cs</DependentUpon>
+    <Compile Include="Forms\Views\DetailsEditor.Designer.cs">
+      <DependentUpon>DetailsEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\Views\DetailEditor.resx">
-      <DependentUpon>DetailEditor.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Views\DetailsEditor.resx">
+      <DependentUpon>DetailsEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

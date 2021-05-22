@@ -12,12 +12,12 @@ using Word = Microsoft.Office.Interop.Word;
 
 namespace UserInterfaceLayer.Forms.Views
 {
-    internal partial class DetailEditor : Form
+    internal partial class DetailsEditor : Form
     {
         private readonly IDetailRelationRepositoryClient _detailRelationEntityClient;
         private readonly IPrintClient _printClient;
 
-        public DetailEditor(IDetailRelationRepositoryClient detailRelationEntityClient, IPrintClient printClient)
+        public DetailsEditor(IDetailRelationRepositoryClient detailRelationEntityClient, IPrintClient printClient)
         {
             _detailRelationEntityClient = detailRelationEntityClient;
             _printClient = printClient;
@@ -37,7 +37,7 @@ namespace UserInterfaceLayer.Forms.Views
             }
         }
 
-        internal DetailEditor() => InitializeComponent();
+        internal DetailsEditor() => InitializeComponent();
         private void DetailEditor_Load(object sender, EventArgs e) => UpdateTree();
 
         private void UpdateTree()
