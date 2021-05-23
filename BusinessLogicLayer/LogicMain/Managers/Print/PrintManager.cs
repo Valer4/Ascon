@@ -76,7 +76,7 @@ namespace BusinessLogicLayer.LogicMain.Managers.Print
             SaveAs(doc, filePath);
             word.Application.Documents.Close(SaveChanges: true);
             word.Visible = false;
-            word.Application.Quit(false);
+            word.Application.Quit(SaveChanges: false);
             Marshal.ReleaseComObject(word);
 
             return File.ReadAllBytes(filePath);
