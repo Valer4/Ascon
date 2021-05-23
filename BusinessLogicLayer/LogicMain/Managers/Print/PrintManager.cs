@@ -2,6 +2,7 @@
 using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
 using BusinessLogicLayer.LogicMain.Managers.Common;
 using Microsoft.Office.Interop.Word;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -68,16 +69,27 @@ namespace BusinessLogicLayer.LogicMain.Managers.Print
             table.Borders[WdBorderType.wdBorderLeft].LineStyle =
             table.Borders[WdBorderType.wdBorderTop].LineStyle = WdLineStyle.wdLineStyleSingle;
 
-            string fileName = "C:\\service.doc";
+            string filePath = "C:\\service.doc";
+
 
             word.DisplayAlerts = WdAlertLevel.wdAlertsNone;
-            doc.SaveAs(fileName);
-            word.Application.Documents.Close();
+            SaveAs(doc, filePath);
+            word.Application.Documents.Close(SaveChanges: true);
             word.Visible = false;
             word.Application.Quit(false);
             Marshal.ReleaseComObject((Application)word);
 
-            return File.ReadAllBytes(fileName);
+            return File.ReadAllBytes(filePath);
+        }
+
+        private void SaveAs(_Document doc, string filePath)
+        {
+            int applicationVersion = Convert.ToInt32(doc.Application.Version.Split(new char[] { '.' }, 2)[0]);
+            
+            if(applicationVersion < 14)
+                doc.SaveAs(filePath);
+            else
+                doc.SaveAs2(filePath);
         }
     }
 }
