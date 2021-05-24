@@ -71,7 +71,6 @@ namespace BusinessLogicLayer.LogicMain.Managers.Print
 
             string filePath = "C:\\service.doc";
 
-
             word.DisplayAlerts = WdAlertLevel.wdAlertsNone;
             SaveAs(doc, filePath);
             word.Application.Documents.Close(SaveChanges: true);
