@@ -73,7 +73,7 @@ namespace BusinessLogicLayer.LogicMain.Managers.Print
 
             word.DisplayAlerts = WdAlertLevel.wdAlertsNone;
             SaveAs(doc, filePath);
-            word.Application.Documents.Close(SaveChanges: true);
+            doc.Close(SaveChanges: true);
             word.Visible = false;
             word.Application.Quit(SaveChanges: false);
             Marshal.ReleaseComObject(word);
