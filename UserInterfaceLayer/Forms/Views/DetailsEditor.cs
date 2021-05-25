@@ -121,15 +121,19 @@ namespace UserInterfaceLayer.Forms.Views
                 {
                     File.WriteAllBytes(filePath, fileBytes);
 
-                    _Application word = new Application();
-                    _Document doc = word.Documents.Add(filePath);
-                    word.Visible = true;
+                    ShowMSWord(filePath);
                 }
             }
             catch(Exception ex)
             {
                 new MessageBoxHelper().ShowErrorMessage(ex.Message);
             }
+        }
+        private void ShowMSWord(string filePath)
+        {
+            _Application word = new Application();
+            word.Documents.Add(filePath);
+            word.Visible = true;
         }
 
         private DetailRelationEntity GetSelectedDetail()
