@@ -8,7 +8,7 @@ using UserInterfaceLayer.Clients.Print;
 using UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions;
 using UserInterfaceLayer.Forms.HelpersToControls;
 using UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper;
-using Word = Microsoft.Office.Interop.Word;
+using Application = Microsoft.Office.Interop.Word.Application;
 
 namespace UserInterfaceLayer.Forms.Views
 {
@@ -121,7 +121,7 @@ namespace UserInterfaceLayer.Forms.Views
                 {
                     File.WriteAllBytes(filePath, fileBytes);
 
-                    _Application word = new Word.Application();
+                    _Application word = new Application();
                     _Document doc = word.Documents.Add(filePath);
                     word.Visible = true;
                 }
