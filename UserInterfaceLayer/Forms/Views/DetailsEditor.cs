@@ -113,16 +113,16 @@ namespace UserInterfaceLayer.Forms.Views
         {
             try
             {
-                string fileName = "C:\\client.doc";
+                string filePath = "C:\\client.doc";
 
-                byte[] file = _printClient.GetReportOnDetailInMSWord(GetSelectedDetail(), out string warningMessage);
+                byte[] fileBytes = _printClient.GetReportOnDetailInMSWord(GetSelectedDetail(), out string warningMessage);
 
                 if( ! new MessageBoxHelper().ShowWarningMessage(warningMessage))
                 {
-                    File.WriteAllBytes(fileName, file);
+                    File.WriteAllBytes(filePath, fileBytes);
 
                     _Application word = new Word.Application();
-                    _Document doc = word.Documents.Add(fileName);
+                    _Document doc = word.Documents.Add(filePath);
                     word.Visible = true;
                 }
             }
