@@ -50,7 +50,6 @@ Thumbs.db
 
 /DataAccessLayer/bin/Debug/EntityFramework.SqlServer.dll
 /Server/bin/Debug/EntityFramework.dll
-/Server/bin/Debug/EntityFramework.SqlServer.dll
 /UserInterfaceLayer/.vs/Ascon/v16/.suo
 /BusinessLogicLayer/BusinessLogicLayer.csproj.user
 /DataAccessLayer/DataAccessLayer.csproj.user
@@ -110,3 +109,4 @@ Thumbs.db
 /UserInterfaceLayer/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 /BusinessLogicLayer/obj/Debug/BusinessLogicLayer.csprojAssemblyReference.cache
 /UserInterfaceLayer/obj/Debug/UserInterfaceLayer.Forms.Views.DetailsEditor.resources
+/Server/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
