@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace UserInterfaceLayer.Forms.HelpersToControls
+namespace UserInterfaceLayer.HelpersToControls
 {
     internal class MessageBoxHelper
     {

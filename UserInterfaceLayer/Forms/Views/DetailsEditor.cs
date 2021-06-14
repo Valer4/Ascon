@@ -6,8 +6,8 @@ using System.Linq;
 using System.Windows.Forms;
 using UserInterfaceLayer.Clients.Print;
 using UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions;
-using UserInterfaceLayer.Forms.HelpersToControls;
-using UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper;
+using UserInterfaceLayer.HelpersToControls;
+using UserInterfaceLayer.HelpersToControls.TreeViewHelper;
 using Application = Microsoft.Office.Interop.Word.Application;
 
 namespace UserInterfaceLayer.Forms.Views

@@ -46,10 +46,10 @@
     <Compile Include="Clients\UnitsOfWork\Classes\AbstractUnitOfWorkClient.cs" />
     <Compile Include="Clients\UnitsOfWork\Interfaces\IAbstractUnitOfWorkClient.cs" />
     <Compile Include="Configurator.cs" />
-    <Compile Include="Forms\HelpersToControls\MaskedTextBoxHelper.cs" />
-    <Compile Include="Forms\HelpersToControls\MessageBoxHelper.cs" />
-    <Compile Include="Forms\HelpersToControls\TreeViewHelper\TreeViewBuilder.cs" />
-    <Compile Include="Forms\HelpersToControls\TreeViewHelper\TreeViewStoresState.cs" />
+    <Compile Include="HelpersToControls\MaskedTextBoxHelper.cs" />
+    <Compile Include="HelpersToControls\MessageBoxHelper.cs" />
+    <Compile Include="HelpersToControls\TreeViewHelper\TreeViewBuilder.cs" />
+    <Compile Include="HelpersToControls\TreeViewHelper\TreeViewStoresState.cs" />
     <Compile Include="Forms\Views\DetailsEditor.cs">
       <SubType>Form</SubType>
     </Compile>

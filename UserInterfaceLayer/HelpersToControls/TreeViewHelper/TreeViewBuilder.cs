@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 
-namespace UserInterfaceLayer.Forms.HelpersToControls.TreeViewHelper
+namespace UserInterfaceLayer.HelpersToControls.TreeViewHelper
 {
     internal class TreeViewBuilder
     {
