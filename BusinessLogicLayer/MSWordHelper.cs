@@ -9,7 +9,7 @@ using Application = Microsoft.Office.Interop.Word.Application;
 
 namespace BusinessLogicLayer
 {
-    internal class MSWordHelper
+    public class MSWordHelper
     {
         internal class ParagraphSettings
         {
@@ -413,7 +413,7 @@ namespace BusinessLogicLayer
             }
         }
 
-        internal void ShowMSWord(string filePath)
+        public void ShowMSWord(string filePath)
         {
             try
             {

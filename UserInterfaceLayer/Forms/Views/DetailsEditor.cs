@@ -1,5 +1,5 @@
-﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
-using Microsoft.Office.Interop.Word;
+﻿using BusinessLogicLayer;
+using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
 using System;
 using System.IO;
 using System.Linq;
@@ -8,7 +8,6 @@ using UserInterfaceLayer.Clients.Print;
 using UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions;
 using UserInterfaceLayer.HelpersToControls;
 using UserInterfaceLayer.HelpersToControls.TreeViewHelper;
-using Application = Microsoft.Office.Interop.Word.Application;
 
 namespace UserInterfaceLayer.Forms.Views
 {
@@ -121,26 +120,12 @@ namespace UserInterfaceLayer.Forms.Views
                 {
                     File.WriteAllBytes(filePath, fileBytes);
 
-                    ShowMSWord(filePath);
+                    new MSWordHelper().ShowMSWord(filePath);
                 }
             }
             catch(Exception ex)
             {
                 new MessageBoxHelper().ShowErrorMessage(ex.Message);
-            }
-        }
-        internal void ShowMSWord(string filePath)
-        {
-            try
-            {
-                _Application word = new Application();
-                word.Documents.Add(filePath);
-                word.Visible = true;
-            }
-            catch(Exception ex)
-            {
-                throw new Exception(
-                    $@"Не удалось загрузить шаблон для экспорта {filePath}{'\n'}{ex.Message}");
             }
         }
 

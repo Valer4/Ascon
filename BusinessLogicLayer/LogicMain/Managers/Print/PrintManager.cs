@@ -71,12 +71,7 @@ namespace BusinessLogicLayer.LogicMain.Managers.Print
 
             string filePath = "C:\\service.doc";
 
-            word.DisplayAlerts = WdAlertLevel.wdAlertsNone;
-            SaveAs(doc, filePath);
-            doc.Close(SaveChanges: true);
-            word.Visible = false;
-            word.Application.Quit(SaveChanges: false);
-            Marshal.ReleaseComObject(word);
+            new MSWordHelper().ReleaseMSWord(word, doc, filePath);
 
             return File.ReadAllBytes(filePath);
         }
