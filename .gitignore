@@ -114,3 +114,4 @@ Thumbs.db
 /DataAccessLayer/obj/Debug/DataAccessLayer.csproj.AssemblyReference.cache
 /Server/obj/Debug/Server.csproj.AssemblyReference.cache
 /UserInterfaceLayer/obj/Debug/UserInterfaceLayer.csproj.AssemblyReference.cache
+/BusinessLogicLayer/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
