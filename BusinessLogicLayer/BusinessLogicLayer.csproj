@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CommonStrings.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="ConnectInfoDataAccess.cs" />
     <Compile Include="Data\DataAccessInterfaces\Repositories\ConcreteDefinitions\IChildDetailRelationRepository.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="LogicMain\Managers\Repositories\Interfaces\IAbstractRepositoryManager.cs" />
     <Compile Include="LogicMain\Managers\Repositories\Interfaces\ConcreteDefinitions\IDetailRelationRepositoryManager.cs" />
     <Compile Include="LogicMain\Managers\UnitsOfWork\Interfaces\IAbstractUnitOfWorkManager.cs" />
+    <Compile Include="MSWordHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelatedTypes.cs" />
     <Compile Include="Security\RoleBasedAccessControl\AppRoles.cs" />
@@ -90,6 +92,7 @@
     <Compile Include="UserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
