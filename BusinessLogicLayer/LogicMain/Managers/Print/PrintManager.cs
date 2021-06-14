@@ -54,20 +54,23 @@ namespace BusinessLogicLayer.LogicMain.Managers.Print
             paragraph.Range.Text = $"«{selectedDetail.Name}»";
             paragraph.Range.InsertParagraphAfter();
 
-            range = doc.Bookmarks.get_Item(ref oEndOfDoc).Range;
-            Table table = doc.Tables.Add(range, countRows, 2, ref missing, ref missing);
-            table.Range.ParagraphFormat.SpaceAfter = 6;
-            for(int r = 0; r < countRows; ++ r)
+            if(countRows > 0)
             {
-                table.Cell(r + 1, 1).Range.Text = descendants.ElementAt(r).Name;
-                table.Cell(r + 1, 2).Range.Text = $"{descendants.ElementAt(r).Amount} шт";
+                range = doc.Bookmarks.get_Item(ref oEndOfDoc).Range;
+                Table table = doc.Tables.Add(range, countRows, 2, ref missing, ref missing);
+                table.Range.ParagraphFormat.SpaceAfter = 6;
+                for(int r = 0; r < countRows; ++ r)
+                {
+                    table.Cell(r + 1, 1).Range.Text = descendants.ElementAt(r).Name;
+                    table.Cell(r + 1, 2).Range.Text = $"{descendants.ElementAt(r).Amount} шт";
+                }
+                table.Borders[WdBorderType.wdBorderVertical].LineStyle =
+                table.Borders[WdBorderType.wdBorderHorizontal].LineStyle =
+                table.Borders[WdBorderType.wdBorderRight].LineStyle =
+                table.Borders[WdBorderType.wdBorderBottom].LineStyle = 
+                table.Borders[WdBorderType.wdBorderLeft].LineStyle =
+                table.Borders[WdBorderType.wdBorderTop].LineStyle = WdLineStyle.wdLineStyleSingle;
             }
-            table.Borders[WdBorderType.wdBorderVertical].LineStyle =
-            table.Borders[WdBorderType.wdBorderHorizontal].LineStyle =
-            table.Borders[WdBorderType.wdBorderRight].LineStyle =
-            table.Borders[WdBorderType.wdBorderBottom].LineStyle = 
-            table.Borders[WdBorderType.wdBorderLeft].LineStyle =
-            table.Borders[WdBorderType.wdBorderTop].LineStyle = WdLineStyle.wdLineStyleSingle;
 
             string filePath = "C:\\service.doc";
 
