@@ -365,7 +365,7 @@ namespace BusinessLogicLayer
             Marshal.ReleaseComObject(word);
         }
 
-        private void SaveAs(_Document doc, string filePath, WdSaveFormat format = WdSaveFormat.wdFormatDocument)
+        private void SaveAs(_Document doc, string filePath, WdSaveFormat format = WdSaveFormat.wdFormatDocumentDefault)
         {
             int applicationVersion = Convert.ToInt32(doc.Application.Version.Split(new char[] { '.' }, 2)[0]);
             
