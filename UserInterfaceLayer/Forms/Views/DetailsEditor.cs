@@ -129,11 +129,19 @@ namespace UserInterfaceLayer.Forms.Views
                 new MessageBoxHelper().ShowErrorMessage(ex.Message);
             }
         }
-        private void ShowMSWord(string filePath)
+        internal void ShowMSWord(string filePath)
         {
-            _Application word = new Application();
-            word.Documents.Add(filePath);
-            word.Visible = true;
+            try
+            {
+                _Application word = new Application();
+                word.Documents.Add(filePath);
+                word.Visible = true;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(
+                    $@"Не удалось загрузить шаблон для экспорта {filePath}{'\n'}{ex.Message}");
+            }
         }
 
         private DetailRelationEntity GetSelectedDetail()
