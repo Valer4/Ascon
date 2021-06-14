@@ -81,14 +81,14 @@ namespace BusinessLogicLayer.LogicMain.Managers.Print
             return File.ReadAllBytes(filePath);
         }
 
-        private void SaveAs(_Document doc, string filePath)
+        private void SaveAs(_Document doc, string filePath, WdSaveFormat format = WdSaveFormat.wdFormatDocument)
         {
             int applicationVersion = Convert.ToInt32(doc.Application.Version.Split(new char[] { '.' }, 2)[0]);
             
             if(applicationVersion < 14)
-                doc.SaveAs(filePath);
+                doc.SaveAs(filePath, format);
             else
-                doc.SaveAs2(filePath);
+                doc.SaveAs2(filePath, format);
         }
     }
 }
