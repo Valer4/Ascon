@@ -115,3 +115,7 @@ Thumbs.db
 /Server/obj/Debug/Server.csproj.AssemblyReference.cache
 /UserInterfaceLayer/obj/Debug/UserInterfaceLayer.csproj.AssemblyReference.cache
 /BusinessLogicLayer/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/DataAccessLayer/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/Server/obj/Debug/Server.csproj.SuggestedBindingRedirects.cache
+/UserInterfaceLayer/obj/Debug/UserInterfaceLayer.csproj.SuggestedBindingRedirects.cache
+/UserInterfaceLayer/.vs/Ascon/v17/.suo
