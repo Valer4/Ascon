@@ -51,7 +51,7 @@ namespace CommonHelpers.Any
 
             if (useCertificate) // CMS/PKCS #7.
             {
-                SignedCms signedCms = new SignedCms();
+                var signedCms = new SignedCms();
                 signedCms.Decode(array);
                 signedCms.CheckSignature(true);
 

@@ -32,7 +32,7 @@ namespace CommonHelpers.CryptoProvider
             CspParameters cspParameters = BuildCertificateCspParameters(isMachineKeyStore); // Открываем контейнер.
             try
             {
-                Gost3410_2012_256CryptoServiceProvider provider = new Gost3410_2012_256CryptoServiceProvider(cspParameters);
+                var provider = new Gost3410_2012_256CryptoServiceProvider(cspParameters);
 
                 return provider;
             }
@@ -53,7 +53,7 @@ namespace CommonHelpers.CryptoProvider
         /// <returns></returns>
         private CspParameters BuildCertificateCspParameters(bool isMachineKeyStore)
         {
-            CspParameters cspParameters = new CspParameters();
+            var cspParameters = new CspParameters();
 
             cspParameters.KeyContainerName = _cfgCryptoProvider.KeyContainerName;
             // cspParameters.KeyNumber = 1;
@@ -74,7 +74,7 @@ namespace CommonHelpers.CryptoProvider
         /// <returns></returns>
         private SecureString BuildCspParametersPassword()
         {
-            SecureString secure = new SecureString();
+            var secure = new SecureString();
             string password = _cfgCryptoProvider.KeyPassword;
 
             foreach (char charPass in password)
@@ -89,7 +89,7 @@ namespace CommonHelpers.CryptoProvider
         /// <param name="provider"></param>
         private void CheckCertificatePassword(Gost3410_2012_256CryptoServiceProvider provider)
         {
-            byte[] dummyHash = new byte[32];
+            var dummyHash = new byte[32];
             try
             {
                 provider.SignHash(dummyHash); // Если ошибка - пароль не верный.

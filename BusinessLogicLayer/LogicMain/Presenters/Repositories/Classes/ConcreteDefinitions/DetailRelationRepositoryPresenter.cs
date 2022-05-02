@@ -13,7 +13,7 @@ namespace BusinessLogicLayer.LogicMain.Presenters.Repositories.Classes.ConcreteD
 
         public string Add(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount)
         {
-            DetailRelationEntity detail = new DetailRelationEntity();
+            var detail = new DetailRelationEntity();
 
             detail.Name = name;
 
@@ -37,7 +37,7 @@ namespace BusinessLogicLayer.LogicMain.Presenters.Repositories.Classes.ConcreteD
         {
             if (null == selectedDetail) return _detailNotSelected;
 
-            DetailRelationEntity editableDetail = new DetailRelationEntity();
+            var editableDetail = new DetailRelationEntity();
 
             PropertyInfo[] properties = typeof(DetailRelationEntity).GetProperties();
             foreach (PropertyInfo property in properties)

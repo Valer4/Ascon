@@ -56,7 +56,7 @@ namespace BusinessLogicLayer.LogicMain.Managers.Repositories.Classes.ConcreteDef
 
         private DetailTypeEntity AddDetailType(DetailRelationEntity detailRelation)
         {
-            DetailTypeEntity detailType = new DetailTypeEntity();
+            var detailType = new DetailTypeEntity();
             detailType.IsRoot = detailRelation.IsRoot;
             detailType.Name = detailRelation.Name;
             Repository.DetailTypeRepository.Add(detailType);
@@ -64,7 +64,7 @@ namespace BusinessLogicLayer.LogicMain.Managers.Repositories.Classes.ConcreteDef
         }
         private ChildDetailRelationEntity AddChildDetailRelation(long TypeId, DetailRelationEntity detailRelation)
         {
-            ChildDetailRelationEntity childDetailRelation = new ChildDetailRelationEntity();
+            var childDetailRelation = new ChildDetailRelationEntity();
             childDetailRelation.ParentId = (long)detailRelation.ParentId;
             childDetailRelation.TypeId = TypeId;
             childDetailRelation.Amount = (short)detailRelation.Amount;

@@ -19,7 +19,7 @@ namespace BusinessLogicLayer.LogicMain.Managers.Print
 
         public byte[] GetReportOnDetailInMSWord(long id)
         {
-            DetailRelationRepositoryHelper helper = new DetailRelationRepositoryHelper();
+            var helper = new DetailRelationRepositoryHelper();
             IQueryable<DetailRelationEntity> allDetailRelations = _repository.GetAll();
 
             DetailRelationEntity selectedDetail = helper.Find(id, allDetailRelations);
@@ -43,7 +43,7 @@ namespace BusinessLogicLayer.LogicMain.Managers.Print
             object missing = Missing.Value;
             object oEndOfDoc = "\\endofdoc"; /* \endofdoc is a predefined bookmark */
 
-            _Application word = new Application();
+            var word = new Application();
             _Document doc = word.Documents.Add(ref missing, ref missing, ref missing, ref missing);
             Range range;
 

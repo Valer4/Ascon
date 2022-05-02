@@ -431,7 +431,7 @@ namespace BusinessLogicLayer
 		{
 			try
 			{
-				_Application word = new Application();
+				var word = new Application();
 				word.Documents.Add(filePath);
 				word.Visible = true;
 			}

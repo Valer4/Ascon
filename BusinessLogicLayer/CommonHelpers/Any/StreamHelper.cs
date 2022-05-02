@@ -22,7 +22,7 @@ namespace CommonHelpers.Any
         public byte[] StreamToByteArray(Stream input)
         {
             byte[] result;
-            using (MemoryStream memoryStream = new MemoryStream())
+            using (var memoryStream = new MemoryStream())
             {
                 input.CopyTo(memoryStream);
                 result = memoryStream.ToArray();
@@ -31,16 +31,16 @@ namespace CommonHelpers.Any
         }
         public T XmlToObj<T>(byte[] array, Encoding encoding)
         {
-            MemoryStream stream = new MemoryStream(array);
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-            StreamReader streamReader = new StreamReader(stream, encoding);
+            var stream = new MemoryStream(array);
+            var xmlSerializer = new XmlSerializer(typeof(T));
+            var streamReader = new StreamReader(stream, encoding);
             return (T)xmlSerializer.Deserialize(streamReader);
         }
         public byte[] ObjToXml<T>(T obj)
         {
             byte[] productTypeByteArray;
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-            using (MemoryStream ms = new MemoryStream())
+            var xmlSerializer = new XmlSerializer(typeof(T));
+            using (var ms = new MemoryStream())
             {
                 xmlSerializer.Serialize(ms, obj);
                 productTypeByteArray = ms.ToArray();
@@ -50,7 +50,7 @@ namespace CommonHelpers.Any
 
         public void WriteFile(byte[] array, Encoding encoding, string filePath)
         {
-            using (BinaryWriter binaryWriter = new BinaryWriter(File.Open(filePath, FileMode.Create), encoding))
+            using (var binaryWriter = new BinaryWriter(File.Open(filePath, FileMode.Create), encoding))
             {
                 binaryWriter.Write(array);
                 binaryWriter.Flush();
