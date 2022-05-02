@@ -11,23 +11,19 @@ namespace BusinessLogicLayer
 	{
 		internal string GetSplit(
 			out bool needFitText,
-			string paragraph,
+			ParagraphParams paragraphParams,
 			int[] pixelsInLines,
 			ref IList<StringBuilder> linesParagraph,
-			ref Font fontBookmark,
-				float minFontSize = 8.0F,
-				bool cropText = true,
-				bool breakWords = false,
-				bool addSpaces = true,
-				int pixelsAddLines = 0)
+			ref Font fontBookmark)
 		{
-			string result = string.Empty;
+			string result;
 
 			int[] pixelsInLines2 = pixelsInLines.ToArray();
 			int countLines = pixelsInLines.Length,
 				p,
 				l;
 
+			ParagraphParams paragraphParamsCropTextOff = new ParagraphParams(paragraphParams,cropText: false);
 			IList<string> results = new List<string>();
 			IList<IList<StringBuilder>> linesList = new List<IList<StringBuilder>>();
 			IList<Font> fonts = new List<Font>();
@@ -35,9 +31,9 @@ namespace BusinessLogicLayer
 			for (p = 0; p <= 50; p += 5)
 			{
 				for (l = 0; l < countLines; ++l)
-					pixelsInLines2[l] = (int)(pixelsInLines[l] / 100.0 * (100.0 + p) + 0.5);
+					pixelsInLines2[l] = (int)(pixelsInLines[l] / 100.0D * (100.0D + p) + 0.5D);
 
-				result = GetSplit(paragraph, pixelsInLines2, ref linesParagraph, ref fontBookmark, isTable: true, pickUpFontSize: false, minFontSize, cropText: false, breakWords, addSpaces, pixelsAddLines);
+				result = GetSplit(paragraphParamsCropTextOff, pixelsInLines2, ref linesParagraph, ref fontBookmark, isTable: true, pickUpFontSize: false);
 
 				results.Add(result);
 				linesList.Add(linesParagraph);
@@ -62,11 +58,11 @@ namespace BusinessLogicLayer
 
 			needFitText = trueLinesList > 0;
 
-			if (cropText && countLines < linesParagraph.Count)
+			if (paragraphParams.CropText && countLines < linesParagraph.Count)
 			{
 				int trueLastLineID = countLines - 1;
 				StringBuilder lastLine = new StringBuilder(linesParagraph[trueLastLineID].ToString());
-				CropText(ref lastLine, fontBookmark, pixelsInLines2[trueLastLineID], addSpaces);
+				CropText(ref lastLine, fontBookmark, pixelsInLines2[trueLastLineID], paragraphParams.PadRemainingLineWidthWithSpaces);
 				linesParagraph[trueLastLineID].Clear();
 				linesParagraph[trueLastLineID].Append(lastLine);
 
@@ -79,43 +75,33 @@ namespace BusinessLogicLayer
 		/// <summary>
 		/// Разбивает строку на несколько строк указанной в пикселях ширины.
 		/// </summary>
-		/// <param name="paragraph">Исходный текст.</param>
+		/// <param name="paragraphParams">Параметры формирования абзаца.</param>
 		/// <param name="pixelsInLines">Ширина каждой строки в пикселях.</param>
 		/// <param name="linesParagraph">Результат - несколько строк.</param>
 		/// <param name="fontBookmark">Шрифт метки.</param>
 		/// <param name="isTable">Таблицы или нет.</param>
 		/// <param name="pickUpFontSize">Подбирать или нет размер шрифта.</param>
-		/// <param name="minFontSize">Размер минимального шрифта.</param>
-		/// <param name="cropText">Обрезать или нет текст, в конце добавляется многоточие.</param>
-		/// <param name="breakWords">Разбивать или нет слова на части при переносе на следующую строку.</param>
-		/// <param name="addSpaces">Заполнять или нет оставшуюся ширину пробелами.</param>
-		/// <param name="pixelsAddLines">Ширина добавляемых строк в пикселях. Когда в шаблоне не таблица и допустимо добалять строки.</param>
 		/// <returns></returns>
 		internal string GetSplit(
-			string paragraph,
+			ParagraphParams paragraphParams,
 			int[] pixelsInLines,
 			ref IList<StringBuilder> linesParagraph,
 			ref Font fontBookmark,
 				bool isTable = false,
-				bool pickUpFontSize = true,
-					float minFontSize = 8.0F,
-					bool cropText = true,
-					bool breakWords = false,
-					bool addSpaces = true,
-					int pixelsAddLines = 0)
+				bool pickUpFontSize = true)
 		{
-			if (null == paragraph) throw new ArgumentException();
+			if (null == paragraphParams) throw new ArgumentException();
 			if (0 == pixelsInLines.Length) throw new ArgumentException("Не указана ширина строк для форматируемого текста!");
 			if (null == fontBookmark) throw new ArgumentException();
-			if (fontBookmark.Size <= minFontSize) throw new ArgumentException();
+			if (paragraphParams.MinFontSize > fontBookmark.Size) throw new ArgumentException();
 
-			if (pixelsAddLines <= 0)
-				pixelsAddLines = pixelsInLines[pixelsInLines.Length - 1];
+			if (paragraphParams.PixelsAddLines <= 0)
+				paragraphParams = new ParagraphParams(paragraphParams, pixelsInLines[pixelsInLines.Length - 1]);
 
 			List<List<StringBuilder>> linesList = new List<List<StringBuilder>>();
 			int countDecreaseFont = -1;
 
-			int paragraphCount = paragraph.Count(),
+			int paragraphCount = paragraphParams.Text.Count(),
 				paragraphLastID = paragraphCount - 1;
 
 			const float stepFontSize = 0.5F;
@@ -135,7 +121,7 @@ namespace BusinessLogicLayer
 			bool stop = false;
 			bool addLines;
 			int l;
-			for (; fontSize > minFontSize && stop == false; fontSize -= stepFontSize)
+			for (; fontSize > paragraphParams.MinFontSize && stop == false; fontSize -= stepFontSize)
 			{
 				addLines = false;
 				startID = 0;
@@ -152,26 +138,26 @@ namespace BusinessLogicLayer
 
 				for (l = 0; l < countLines; ++l)
 				{
-					endID = startID + GetLastID(pixels[l], font, paragraph.Substring(startID));
+					endID = startID + GetLastID(pixels[l], font, paragraphParams.Text.Substring(startID));
 
-					if (addSpaces)
+					if (paragraphParams.PadRemainingLineWidthWithSpaces)
 					{
-						linesList[countDecreaseFont][l].Append(paragraph.Substring(startID, endID - startID + 1));
+						linesList[countDecreaseFont][l].Append(paragraphParams.Text.Substring(startID, endID - startID + 1));
 						endIDInLine = linesList[countDecreaseFont][l].Length - 1;
 
-						if ( ! breakWords)
-							if (endID < paragraphLastID && paragraph[endID + 1] != ' ')
+						if ( ! paragraphParams.BreakWords)
+							if (endID < paragraphLastID && paragraphParams.Text[endID + 1] != ' ')
 								for (; endID >= startID; --endID, --endIDInLine)
 									if (linesList[countDecreaseFont][l][endIDInLine] != ' ')
 										linesList[countDecreaseFont][l][endIDInLine] = ' ';
 									else
 										break;
 
-						if (endID <= startID || string.IsNullOrWhiteSpace(paragraph.Substring(startID, endID - startID + 1)))
+						if (endID <= startID || string.IsNullOrWhiteSpace(paragraphParams.Text.Substring(startID, endID - startID + 1)))
 						{
-							endID = startID + GetLastID(pixels[l], font, paragraph.Substring(startID));
+							endID = startID + GetLastID(pixels[l], font, paragraphParams.Text.Substring(startID));
 							linesList[countDecreaseFont][l].Clear();
-							linesList[countDecreaseFont][l].Append(paragraph.Substring(startID, endID - startID + 1));
+							linesList[countDecreaseFont][l].Append(paragraphParams.Text.Substring(startID, endID - startID + 1));
 						}
 
 						tempSB = new StringBuilder(linesList[countDecreaseFont][l].ToString());
@@ -181,25 +167,25 @@ namespace BusinessLogicLayer
 					}
 					else
 					{
-						if ( ! breakWords)
-							if (endID < paragraphLastID && paragraph[endID + 1] != ' ')
+						if ( ! paragraphParams.BreakWords)
+							if (endID < paragraphLastID && paragraphParams.Text[endID + 1] != ' ')
 								for (; endID >= startID; --endID)
-									if (paragraph[endID] == ' ')
+									if (paragraphParams.Text[endID] == ' ')
 										break;
 
-						if (endID <= startID || string.IsNullOrWhiteSpace(paragraph.Substring(startID, endID - startID + 1)))
-							endID = startID + GetLastID(pixels[l], font, paragraph.Substring(startID));
+						if (endID <= startID || string.IsNullOrWhiteSpace(paragraphParams.Text.Substring(startID, endID - startID + 1)))
+							endID = startID + GetLastID(pixels[l], font, paragraphParams.Text.Substring(startID));
 
-						linesList[countDecreaseFont][l].Append(paragraph.Substring(startID, endID - startID + 1));
+						linesList[countDecreaseFont][l].Append(paragraphParams.Text.Substring(startID, endID - startID + 1));
 					}
 
 					if (l == countLines - 1)
 						if (endID < paragraphLastID)
 						{
-							if (cropText)
+							if (paragraphParams.CropText)
 							{
 								tempSB = new StringBuilder(linesList[countDecreaseFont][l].ToString());
-								CropText(ref tempSB, font, pixels[l], addSpaces);
+								CropText(ref tempSB, font, pixels[l], paragraphParams.PadRemainingLineWidthWithSpaces);
 								linesList[countDecreaseFont][l].Clear();
 								linesList[countDecreaseFont][l].Append(tempSB);
 							}
@@ -209,7 +195,7 @@ namespace BusinessLogicLayer
 									linesList[countDecreaseFont][l].Append("\n");
 								addLines = true;
 								countLines++;
-								pixels.Add(pixelsAddLines);
+								pixels.Add(paragraphParams.PixelsAddLines);
 								linesList[countDecreaseFont].Add(new StringBuilder());
 							}
 
@@ -217,8 +203,15 @@ namespace BusinessLogicLayer
 								stop = true;
 						}
 
-					if (endID < paragraphLastID)
-						startID = endID + 1;
+					endID++;
+
+					if (paragraphParams.RemoveSpacesAtBeginningOfLine)
+						for (; endID <= paragraphLastID; ++endID)
+							if (paragraphParams.Text[endID] != ' ')
+								break;
+
+					if (endID <= paragraphLastID)
+						startID = endID;
 					else
 					{
 						if ( ! addLines)
@@ -230,7 +223,7 @@ namespace BusinessLogicLayer
 
 			int trueLinesList;
 
-			if (cropText)
+			if (paragraphParams.CropText)
 			{
 				trueLinesList = countDecreaseFont;
 				fontBookmark = new Font(fontBookmark.Name, fontSize + stepFontSize, fontBookmark.Style);
@@ -270,7 +263,6 @@ namespace BusinessLogicLayer
 
 		private int GetLastID(int pixelsInLine, Font font, string text)
 		{
-
 			int step = 32;
 			const int ITERATIONS = 555;
 			int lenText = text.Length;

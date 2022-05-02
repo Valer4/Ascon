@@ -157,7 +157,7 @@ namespace UserInterfaceLayer.Forms.Views
                     {
                         File.WriteAllBytes(filePath, fileBytes);
 
-                        new MSWordHelper().ShowMSWord(filePath);
+                        new MSDocHelper().ShowMSWord(filePath);
                     }
                 });
             }

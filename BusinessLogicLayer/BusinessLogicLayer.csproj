@@ -75,7 +75,8 @@
     <Compile Include="LogicMain\Managers\Repositories\Interfaces\IAbstractRepositoryManager.cs" />
     <Compile Include="LogicMain\Managers\Repositories\Interfaces\ConcreteDefinitions\IDetailRelationRepositoryManager.cs" />
     <Compile Include="LogicMain\Managers\UnitsOfWork\Interfaces\IAbstractUnitOfWorkManager.cs" />
-    <Compile Include="MSWordHelper.cs" />
+    <Compile Include="MSDocHelper.cs" />
+    <Compile Include="ParagraphParams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelatedTypes.cs" />
     <Compile Include="Data\Entities\Classes\AbstractEntity.cs" />

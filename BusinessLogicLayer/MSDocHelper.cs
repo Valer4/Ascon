@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -9,7 +10,7 @@ using Application = Microsoft.Office.Interop.Word.Application;
 
 namespace BusinessLogicLayer
 {
-	public class MSWordHelper
+	public class MSDocHelper
 	{
 		internal class ParagraphSettings
 		{
@@ -27,29 +28,24 @@ namespace BusinessLogicLayer
 			_Application word,
 			_Document doc,
 			string bookmarkName,
-				string paragraph,
+				ParagraphParams paragraphParams,
 					int countLines = 1,
 					int[] pixelsInLines = null,
 					int[] startLens = null,
 					bool fitText = true,
 						bool isTable = true,
-						bool pickUpFontSize = false,
-							float minFontSize = 8.0F,
-							bool cropText = true,
-							bool breakWords = false,
-							bool addSpaces = true,
-							int pixelsAddLines = 0)
+						bool pickUpFontSize = false)
 		{
 			bool hereIsOneLine = countLines == 1;
 
 			int l;
 			IList<StringBuilder> linesParagraph = new List<StringBuilder>();
 
-			System.Drawing.Font fontBookmark = GetFontBookmark(word, doc, hereIsOneLine ? bookmarkName : $"{bookmarkName}1");
+			System.Drawing.Font fontBookmark = GetFontBookmark(word, doc, hereIsOneLine ? bookmarkName : $"{ bookmarkName }1");
 
 			IList<string> bookmarksNames = new List<string>();
 			for (l = 0; l < countLines; ++l)
-				bookmarksNames.Add(hereIsOneLine ? bookmarkName : $"{bookmarkName}{l + 1}");
+				bookmarksNames.Add(hereIsOneLine ? bookmarkName : $"{ bookmarkName }{ l + 1 }");
 
 			if (null == pixelsInLines)
 			{
@@ -67,13 +63,12 @@ namespace BusinessLogicLayer
 			{
 				if (pickUpFontSize) throw new ArgumentException();
 
-				stringParser.GetSplit(out needFitText, paragraph, pixelsInLines, ref linesParagraph, ref fontBookmark,
-					minFontSize, cropText, breakWords, addSpaces, pixelsAddLines);
+				stringParser.GetSplit(out needFitText, paragraphParams, pixelsInLines, ref linesParagraph, ref fontBookmark);
 			}
 			else
 			{
-				stringParser.GetSplit(paragraph, pixelsInLines, ref linesParagraph, ref fontBookmark,
-					isTable, pickUpFontSize, minFontSize, cropText, breakWords, addSpaces, pixelsAddLines);
+				stringParser.GetSplit(paragraphParams, pixelsInLines, ref linesParagraph, ref fontBookmark,
+					isTable, pickUpFontSize);
 			}
 
 			if (isTable)
@@ -89,7 +84,7 @@ namespace BusinessLogicLayer
 						word.Selection.Tables[1].Rows.Add();
 						word.Selection.Tables[1].Rows.Last.Select();
 						word.Selection.MoveLeft();
-						word.Selection.Bookmarks.Add($"{bookmarkName}{l + 1}");
+						word.Selection.Bookmarks.Add($"{ bookmarkName }{ l + 1 }");
 					}
 
 					countLines = linesParagraph.Count;
@@ -99,11 +94,11 @@ namespace BusinessLogicLayer
 			float fontSize = fontBookmark?.Size ?? 0.0F;
 
 			SetBookmarkExcel2003Compatibility(
-				word, doc, hereIsOneLine ? bookmarkName : $"{bookmarkName}1", linesParagraph[0].ToString(), needFitText, fontSize);
+				word, doc, hereIsOneLine ? bookmarkName : $"{ bookmarkName }1", linesParagraph[0].ToString(), needFitText, fontSize);
 
 			for (l = 1; l < countLines; ++l)
 				SetBookmarkExcel2003Compatibility(
-					word, doc, $"{bookmarkName}{l + 1}", linesParagraph[l].ToString(), needFitText, fontSize);
+					word, doc, $"{ bookmarkName }{ l + 1 }", linesParagraph[l].ToString(), needFitText, fontSize);
 		}
 
 		private int GetPixelsInLineCell(
@@ -217,11 +212,11 @@ namespace BusinessLogicLayer
 			}
 
 			string text = textSB.ToString();
-
+			
 			if (0 == offset
 			&& ! string.IsNullOrEmpty(text))
 				offset = 1;
-
+			
 			return TextRenderer.MeasureText(text, fontBookmark).Width - offset;
 		}
 
@@ -307,9 +302,13 @@ namespace BusinessLogicLayer
 					if ( ! string.IsNullOrEmpty(text))
 					{
 						if (needFitText)
-							if (BookmarkInTable(word, doc, bookmarkName)) selection.Range.Cells[1].FitText = true;
-							else throw new ArgumentException();
+						{
+							if ( ! BookmarkInTable(word, doc, bookmarkName))
+								throw new ArgumentException();
 
+							selection.Range.Cells[1].FitText = true;
+						}
+					
 						if (fontSize >= 1.0F) selection.Font.Size = fontSize;
 
 						selection.TypeText(text);
@@ -322,7 +321,7 @@ namespace BusinessLogicLayer
 			{
 				bool hereIsOneLine = countLines == 1;
 
-				System.Drawing.Font fontBookmark = GetFontBookmark(word, doc, hereIsOneLine ? bookmarkName : $"{bookmarkName}1");
+				System.Drawing.Font fontBookmark = GetFontBookmark(word, doc, hereIsOneLine ? bookmarkName : $"{ bookmarkName }1");
 
 				string bookmarkName2 = bookmarkName;
 				int pixelsInLine;
@@ -330,11 +329,11 @@ namespace BusinessLogicLayer
 				for (int l = 0; l < countLines; ++l)
 				{
 					if ( ! hereIsOneLine)
-						bookmarkName2 = $"{bookmarkName}{l + 1}";
+						bookmarkName2 = $"{ bookmarkName }{l + 1}";
 
 					pixelsInLine = GetPixelsInLineCell(word, doc, bookmarkName2, fontBookmark);
 
-					word.Selection.TypeText($"[{bookmarkName2}][{pixelsInLine}]");
+					word.Selection.TypeText($"[{ bookmarkName2 }][{ pixelsInLine }]");
 				}
 			}
 		}
@@ -348,27 +347,42 @@ namespace BusinessLogicLayer
 			if ( ! Directory.Exists(dir))
 				Directory.CreateDirectory(dir);
 
-			return $"{dir}/word{Guid.NewGuid()}.doc";
+			return $"{ dir }/word{Guid.NewGuid()}.doc";
 		}
 
 		/// <summary>
 		/// Закрывает Word.
 		/// </summary>
-		internal void ReleaseMSWord(_Application word, _Document doc, string filePath = null)
+		public void ReleaseMSWord(_Application word)
 		{
 			word.DisplayAlerts = WdAlertLevel.wdAlertsNone;
-			if ( ! string.IsNullOrEmpty(filePath))
-				SaveAs(doc, filePath);
-			doc.Close(SaveChanges: false);
+
+			Documents documents = word.Documents;
+			foreach (_Document doc in documents)
+				CloseDocument(word, doc);
+
 			word.Visible = false;
 			word.Application.Quit(SaveChanges: false);
 			Marshal.ReleaseComObject(word);
 		}
 
+		private void CloseDocument(_Application word, _Document doc, string filePath = null)
+		{
+			WdAlertLevel backup = word.DisplayAlerts;
+			word.DisplayAlerts = WdAlertLevel.wdAlertsNone;
+
+			if ( ! string.IsNullOrEmpty(filePath))
+				SaveAs(doc, filePath);
+
+			doc.Close(SaveChanges: false);
+
+			word.DisplayAlerts = backup;
+		}
+
 		private void SaveAs(_Document doc, string filePath, WdSaveFormat format = WdSaveFormat.wdFormatDocumentDefault)
 		{
 			int applicationVersion = Convert.ToInt32(doc.Application.Version.Split(new char[] { '.' }, 2)[0]);
-
+			
 			if (applicationVersion < 14)
 				doc.SaveAs(filePath, format);
 			else
@@ -392,24 +406,24 @@ namespace BusinessLogicLayer
 		/// <summary>
 		/// Создает документ, используя шаблон по заданному пути.
 		/// </summary>
-		internal _Document GetDoc(string typeReport, ref _Application word)
+		public Document GetDoc(string typeReport, ref _Application word, string templatesDirectory = "document_templates", bool useOnlyTemplatesDirectory = false)
 		{
-			const string TemplatesDirectory = "templates";
-
-			string startupPath = string.Empty;
+			string filePath = null;
 
 			try
 			{
-				startupPath = System.Windows.Forms.Application.StartupPath;
-				string filePath = $"{startupPath}/{TemplatesDirectory}/{typeReport}";
-				_Document doc = word.Documents.Add(filePath);
+				filePath = $@"{(
+					!useOnlyTemplatesDirectory ?
+						// AppDomain.CurrentDomain.BaseDirectory : // Папка с .exe.
+						(Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath) + @"\") :
+						string.Empty)
+							}{templatesDirectory}\{typeReport}";
 
-				return doc;
+				return word.Documents.Add(filePath);
 			}
 			catch (Exception ex)
 			{
-				throw new Exception(
-					$@"Не удалось загрузить шаблон для экспорта {startupPath}\{TemplatesDirectory}\{typeReport}{'\n'}{ex.Message}");
+				throw new Exception($@"Не удалось загрузить шаблон документа { filePath }{ '\n' }{ ex.Message }");
 			}
 		}
 
@@ -424,7 +438,7 @@ namespace BusinessLogicLayer
 			catch (Exception ex)
 			{
 				throw new Exception(
-					$@"Не удалось загрузить шаблон для экспорта {filePath}{'\n'}{ex.Message}");
+					$@"Не удалось загрузить шаблон для экспорта { filePath }{'\n'}{ ex.Message }");
 			}
 		}
 
@@ -436,5 +450,25 @@ namespace BusinessLogicLayer
 
 			return word.Selection.Text;
 		}
+
+		internal void CopyPaste(_Document docCopy, _Document docPaste, bool inEnd = true)
+		{
+			docCopy.ActiveWindow.Selection.WholeStory();
+			docCopy.ActiveWindow.Selection.Copy();
+
+			if (inEnd)
+				MovePointerToEnd(docPaste);
+
+			docPaste.ActiveWindow.Selection.PasteAndFormat(WdRecoveryType.wdFormatOriginalFormatting);
+		}
+
+		internal void MovePointerToEnd(_Document doc)
+		{
+			doc.Range(
+				doc.Content.End - 1,
+				doc.Content.End - 1).Select();
+		}
+
+		public int GetPagesCount(_Document doc) => doc.ComputeStatistics(WdStatistic.wdStatisticPages, Type.Missing);
 	}
 }
