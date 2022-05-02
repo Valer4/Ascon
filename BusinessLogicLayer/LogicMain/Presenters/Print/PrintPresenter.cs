@@ -7,7 +7,7 @@ namespace BusinessLogicLayer.LogicMain.Presenters.Print
     {
         private const string _detailNotSelected = "Деталь не выбрана.";
 
-        IPrintManager _printManager;
+        public IPrintManager _printManager;
 
         public PrintPresenter(IPrintManager printManager) =>
             _printManager = printManager;
@@ -16,7 +16,7 @@ namespace BusinessLogicLayer.LogicMain.Presenters.Print
         {
             warningMessage = string.Empty;
 
-            if(null == selectedDetail)
+            if (null == selectedDetail)
             {
                 warningMessage = _detailNotSelected;
                 return new byte[] {};

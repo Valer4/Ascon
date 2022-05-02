@@ -3,7 +3,9 @@ using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using UserInterfaceLayer.Clients.Authorization;
 using UserInterfaceLayer.Clients.Print;
 using UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions;
 using UserInterfaceLayer.HelpersToControls;
@@ -11,17 +13,23 @@ using UserInterfaceLayer.HelpersToControls.TreeViewHelper;
 
 namespace UserInterfaceLayer.Forms.Views
 {
-    internal partial class DetailsEditor : Form
+    internal partial class DetailsEditor : FormHelper
     {
         private readonly IDetailRelationRepositoryClient _detailRelationEntityClient;
         private readonly IPrintClient _printClient;
+        private readonly IAuthorizationClient _authorizationClient;
 
-        public DetailsEditor(IDetailRelationRepositoryClient detailRelationEntityClient, IPrintClient printClient)
+        public DetailsEditor(IDetailRelationRepositoryClient detailRelationEntityClient, IPrintClient printClient, IAuthorizationClient authorizationClient)
         {
             _detailRelationEntityClient = detailRelationEntityClient;
             _printClient = printClient;
+            _authorizationClient = authorizationClient;
 
             InitializeComponent();
+
+#if WCF
+            buttonAuthorization.Visible = false;
+#endif
         }
 
         private IQueryable<DetailRelationEntity> _allDetails;
@@ -39,13 +47,21 @@ namespace UserInterfaceLayer.Forms.Views
         internal DetailsEditor() => InitializeComponent();
         private void DetailEditor_Load(object sender, EventArgs e) => UpdateTree();
 
+#if WCF
         private void UpdateTree()
+#elif REST
+        private async void UpdateTree()
+#endif
         {
             try
             {
+#if REST
+                await Task.Run(() => _authorizationClient.GetAuthorization());
+#endif
+
                 AllDetails = _detailRelationEntityClient.GetAll();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 new MessageBoxHelper().ShowErrorMessage(ex.Message);
             }
@@ -64,80 +80,123 @@ namespace UserInterfaceLayer.Forms.Views
             treeState.RestoreState(treeView);
         }
 
-        private void buttonAddRoot_Click(object sender, EventArgs e) => CreateAndAddDetail(isRoot: true);
-        private void buttonAddChild_Click(object sender, EventArgs e) => CreateAndAddDetail();
-        private void CreateAndAddDetail(bool isRoot = false)
+        private void ButtonAddRoot_Click(object sender, EventArgs e) => CreateAndAddDetail(isRoot: true);
+        private void ButtonAddChild_Click(object sender, EventArgs e) => CreateAndAddDetail();
+        private async void CreateAndAddDetail(bool isRoot = false)
         {
+            Button button = isRoot ? buttonAddRoot : buttonCreateReport;
             try
             {
-                new MessageBoxHelper().ShowWarningMessage(
-                    _detailRelationEntityClient.Add(GetSelectedDetail(), isRoot, textBoxName.Text, maskedTextBoxAmount.Text));
+                DetailRelationEntity detailRelationEntity = GetSelectedDetail();
+                ButtonSuspend(button);
+                await Task.Run(() => new MessageBoxHelper().ShowWarningMessage(_detailRelationEntityClient.Add(detailRelationEntity, isRoot, textBoxName.Text, maskedTextBoxAmount.Text)));
                 UpdateTree();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 new MessageBoxHelper().ShowErrorMessage(ex.Message);
             }
+            finally
+            {
+                ButtonResume(button);
+            }
         }
 
-        private void buttonEdit_Click(object sender, EventArgs e)
+        private async void ButtonEdit_Click(object sender, EventArgs e)
         {
             try
             {
-                new MessageBoxHelper().ShowWarningMessage(
-                    _detailRelationEntityClient.Edit(GetSelectedDetail(), textBoxName.Text, maskedTextBoxAmount.Text));
+                ButtonSuspend(buttonEdit);
+                DetailRelationEntity detailRelationEntity = GetSelectedDetail();
+                await Task.Run(() => new MessageBoxHelper().ShowWarningMessage(_detailRelationEntityClient.Edit(detailRelationEntity, textBoxName.Text, maskedTextBoxAmount.Text)));
                 UpdateTree();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 new MessageBoxHelper().ShowErrorMessage(ex.Message);
             }
+            finally
+            {
+                ButtonResume(buttonEdit);
+            }
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e)
+        private async void ButtonDelete_Click(object sender, EventArgs e)
         {
             try
             {
-                new MessageBoxHelper().ShowWarningMessage(
-                    _detailRelationEntityClient.Delete(GetSelectedDetail()));
+                ButtonSuspend(buttonDelete);
+                DetailRelationEntity detailRelationEntity = GetSelectedDetail();
+                await Task.Run(() => new MessageBoxHelper().ShowWarningMessage(_detailRelationEntityClient.Delete(detailRelationEntity)));
                 UpdateTree();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 new MessageBoxHelper().ShowErrorMessage(ex.Message);
             }
+            finally
+            {
+                ButtonResume(buttonDelete);
+            }
         }
 
-        private void buttonCreateReport_Click(object sender, EventArgs e)
+        private async void ButtonCreateReport_Click(object sender, EventArgs e)
         {
             try
             {
-                string filePath = "C:\\client.doc";
-
-                byte[] fileBytes = _printClient.GetReportOnDetailInMSWord(GetSelectedDetail(), out string warningMessage);
-
-                if( ! new MessageBoxHelper().ShowWarningMessage(warningMessage))
+                ButtonSuspend(buttonCreateReport);
+                DetailRelationEntity detailRelationEntity = GetSelectedDetail();
+                await Task.Run(() =>
                 {
-                    File.WriteAllBytes(filePath, fileBytes);
+                    string filePath = "C:\\client.doc";
+                    string warningMessage = null;
 
-                    new MSWordHelper().ShowMSWord(filePath);
-                }
+                    byte[] fileBytes = _printClient.GetReportOnDetailInMSWord(detailRelationEntity, out warningMessage);
+
+                    if ( ! new MessageBoxHelper().ShowWarningMessage(warningMessage))
+                    {
+                        File.WriteAllBytes(filePath, fileBytes);
+
+                        new MSWordHelper().ShowMSWord(filePath);
+                    }
+                });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 new MessageBoxHelper().ShowErrorMessage(ex.Message);
+            }
+            finally
+            {
+                ButtonResume(buttonCreateReport);
             }
         }
 
         private DetailRelationEntity GetSelectedDetail()
         {
-            if(null == treeViewDetails.SelectedNode)
+            if (null == treeViewDetails.SelectedNode)
                 return null;
             long id = (long)treeViewDetails.SelectedNode.Tag;
             return AllDetails.Where(x => id.Equals(x.Id)).Single();
         }
 
-        private void maskedTextBoxNumber_MouseClick(object sender, MouseEventArgs e) =>
+        private void MaskedTextBoxNumber_MouseClick(object sender, MouseEventArgs e) =>
             new MaskedTextBoxHelper().MoveCaretBeforeSpaces(maskedTextBoxAmount);
+
+        private async void ButtonAuthorization_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ButtonSuspend(buttonAuthorization);
+                await Task.Run(() => _authorizationClient.GetAuthorization());
+            }
+            catch (Exception ex)
+            {
+                new MessageBoxHelper().ShowErrorMessage(ex.Message);
+            }
+            finally
+            {
+                ButtonResume(buttonAuthorization);
+            }
+        }
     }
 }

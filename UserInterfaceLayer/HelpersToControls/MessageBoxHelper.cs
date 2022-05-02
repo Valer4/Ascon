@@ -9,7 +9,7 @@ namespace UserInterfaceLayer.HelpersToControls
 
         internal bool ShowProblemMessage(string message, string caption, MessageBoxIcon icon)
         {
-            if( ! string.IsNullOrEmpty(message))
+            if ( ! string.IsNullOrEmpty(message))
             {
                 MessageBox.Show(message, caption, MessageBoxButtons.OK, icon);
                 return true;

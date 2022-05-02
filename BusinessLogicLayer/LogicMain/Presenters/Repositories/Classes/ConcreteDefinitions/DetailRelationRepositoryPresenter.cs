@@ -5,14 +5,11 @@ using System.Reflection;
 
 namespace BusinessLogicLayer.LogicMain.Presenters.Repositories.Classes.ConcreteDefinitions
 {
-    public class DetailRelationRepositoryPresenter : AbstractRepositoryPresenter<DetailRelationEntity>, IDetailRelationRepositoryPresenter
+    public class DetailRelationRepositoryPresenter : AbstractRepositoryPresenter<DetailRelationEntity, long>, IDetailRelationRepositoryPresenter
     {
         private const string _detailNotSelected = "Деталь не выбрана.";
 
-        IDetailRelationRepositoryManager _detailRelationEntityManager;
-
-        public DetailRelationRepositoryPresenter(IDetailRelationRepositoryManager detailRelationEntityManager) =>
-            _detailRelationEntityManager = detailRelationEntityManager;
+        public DetailRelationRepositoryPresenter(IDetailRelationRepositoryManager detailRelationRepositoryManager) : base(detailRelationRepositoryManager) { }
 
         public string Add(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount)
         {
@@ -20,60 +17,60 @@ namespace BusinessLogicLayer.LogicMain.Presenters.Repositories.Classes.ConcreteD
 
             detail.Name = name;
 
-            if(isRoot)
+            if (isRoot)
                 detail.IsRoot = true;
             else
             {
-                if(null == selectedDetail) return _detailNotSelected;
+                if (null == selectedDetail) return _detailNotSelected;
 
                 detail.ParentId = selectedDetail.TypeId;
 
                 SetAmount(detail, amount);
             }
 
-            _detailRelationEntityManager.Add(detail);
+            AbstractRepositoryManager.Add(detail);
 
             return string.Empty;
         }
 
         public string Edit(DetailRelationEntity selectedDetail, string name, string amount)
         {
-            if(null == selectedDetail) return _detailNotSelected;
+            if (null == selectedDetail) return _detailNotSelected;
 
             DetailRelationEntity editableDetail = new DetailRelationEntity();
 
             PropertyInfo[] properties = typeof(DetailRelationEntity).GetProperties();
-            foreach(PropertyInfo property in properties)
-                if(property.CanWrite)
+            foreach (PropertyInfo property in properties)
+                if (property.CanWrite)
                     property.SetValue(editableDetail, property.GetValue(selectedDetail));
 
-            if(editableDetail.IsRoot)
+            if (editableDetail.IsRoot)
                 editableDetail.Name = name;
             else
             {
-                if( ! string.IsNullOrWhiteSpace(name))
+                if ( ! string.IsNullOrWhiteSpace(name))
                     editableDetail.Name = name;
 
                 SetAmount(editableDetail, amount);
             }
 
-            _detailRelationEntityManager.Edit(editableDetail);
+            AbstractRepositoryManager.Edit(editableDetail);
 
             return string.Empty;
         }
 
         public override string Delete(DetailRelationEntity selectedDetail)
         {
-            if(null == selectedDetail) return _detailNotSelected;
+            if (null == selectedDetail) return _detailNotSelected;
 
-            _detailRelationEntityManager.Delete(selectedDetail.Id);
+            AbstractRepositoryManager.Delete(selectedDetail.Id);
 
             return string.Empty;
         }
 
         private void SetAmount(DetailRelationEntity detail, string amount)
         {
-            if(short.TryParse(amount, out short value))
+            if (short.TryParse(amount, out short value))
                 detail.Amount = value;
         }
     }

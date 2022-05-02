@@ -1,52 +1,42 @@
 ﻿using BusinessLogicLayer;
-using BusinessLogicLayer.Services.Print;
-using BusinessLogicLayer.Services.Repositories.Interfaces.ConcreteDefinitions;
+using BusinessLogicLayer.DiContainer;
 using System;
 using System.Collections.Generic;
-using UserInterfaceLayer.Clients.Print;
-using UserInterfaceLayer.Clients.Repositories.Classes.ConcreteDefinitions;
-using UserInterfaceLayer.Forms.Views;
+using WcfService.Services.Print;
+using WcfService.Services.Repositories.Interfaces.ConcreteDefinitions;
 
 namespace UserInterfaceLayer
 {
     internal class Configurator
     {
-        internal static Container Container;
+        internal static IDiContainer DiContainer;
         internal static UserInfo UserInfo;
         internal static ConnectInfoClientService ConnectInfo;
         internal static Dictionary<Type, string> HostNames;
 
         internal Configurator(ConnectInfoClientService connectInfo)
         {
-            Container = new Container();
+            DiContainer = new DiContainer();
             ConnectInfo = connectInfo;
-            UserInfo = new UserInfo("LoginX", "PasswordX");
+
+            UserInfo = new UserInfo(
+                "UserNameX",
+                "PasswordX");
             HostNames = new Dictionary<Type, string>();
 
-            RegisterTypes();
             FillHostNamesDictionary(GetContractsServicesInterfacesTypes());
         }
 
-        private void RegisterTypes()
-        {
-            Container.RegisterType<DetailsEditor>(constructorParams: new object[]{
-                new DetailRelationRepositoryClient(),
-                new PrintClient()});
-        }
-
-        private IEnumerable<Type> GetContractsServicesInterfacesTypes()
-        {
-            return
-                new List<Type>()
-                {
-                    typeof(IDetailRelationRepositoryService),
-                    typeof(IPrintService)
-                };
-        }
+        private IEnumerable<Type> GetContractsServicesInterfacesTypes() =>
+            new List<Type>()
+            {
+                typeof(IDetailRelationRepositoryService),
+                typeof(IPrintService)
+            };
 
         internal void FillHostNamesDictionary(IEnumerable<Type> contractsServicesInterfacesTypes)
         {
-            foreach(Type contractServiceInterfaceType in contractsServicesInterfacesTypes)
+            foreach (Type contractServiceInterfaceType in contractsServicesInterfacesTypes)
                 HostNames.Add(contractServiceInterfaceType, contractServiceInterfaceType.Name);
         }
     }

@@ -11,15 +11,15 @@ namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
         public ChildDetailRelationRepository(MainContext context) => _db = context;
 
         #region Entity
-        public override void Add(ChildDetailRelationEntity item) => _db.ChildDetailRelations.Add(item);
+        public override void Add(ChildDetailRelationEntity entity) => _db.ChildDetailRelations.Add(entity);
 
         public override void Delete(long id)
         {
-            ChildDetailRelationEntity item = GetAll().Where(x => id == x.Id).SingleOrDefault();
-            if(null != item)
-                Delete(item);
+            ChildDetailRelationEntity entity = GetAll().Where(x => id == x.Id).SingleOrDefault();
+            if (null != entity)
+                Delete(entity);
         }
-        private void Delete(ChildDetailRelationEntity item) => _db.ChildDetailRelations.Remove(item);
+        private void Delete(ChildDetailRelationEntity entity) => _db.ChildDetailRelations.Remove(entity);
         #endregion
 
         #region Collection

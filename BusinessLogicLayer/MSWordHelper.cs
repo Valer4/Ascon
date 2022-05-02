@@ -43,19 +43,19 @@ namespace BusinessLogicLayer
             bool hereIsOneLine = countLines == 1;
 
             int l;
-            List<StringBuilder> linesParagraph = new List<StringBuilder>();
+            IList<StringBuilder> linesParagraph = new List<StringBuilder>();
 
             System.Drawing.Font fontBookmark = GetFontBookmark(word, doc, hereIsOneLine ? bookmarkName : $"{bookmarkName}1");
 
-            List<string> bookmarksNames = new List<string>();
-            for(l = 0; l < countLines; ++ l)
+            IList<string> bookmarksNames = new List<string>();
+            for (l = 0; l < countLines; ++l)
                 bookmarksNames.Add(hereIsOneLine ? bookmarkName : $"{bookmarkName}{l + 1}");
 
-            if(null == pixelsInLines)
+            if (null == pixelsInLines)
             {
                 pixelsInLines = new int[countLines];
 
-                for(l = 0; l < countLines; ++ l)
+                for (l = 0; l < countLines; ++l)
                     pixelsInLines[l] = GetPixelsInLineCell(
                                             word, doc, bookmarksNames[l], fontBookmark, null != startLens && startLens.Length > l ? startLens[l] : 0);
             }
@@ -63,9 +63,9 @@ namespace BusinessLogicLayer
             StringParser stringParser = new StringParser();
             bool needFitText = false;
 
-            if(fitText)
+            if (fitText)
             {
-                if(pickUpFontSize) throw new ArgumentException();
+                if (pickUpFontSize) throw new ArgumentException();
 
                 stringParser.GetSplit(out needFitText, paragraph, pixelsInLines, ref linesParagraph, ref fontBookmark,
                     minFontSize, cropText, breakWords, addSpaces, pixelsAddLines);
@@ -76,15 +76,15 @@ namespace BusinessLogicLayer
                     isTable, pickUpFontSize, minFontSize, cropText, breakWords, addSpaces, pixelsAddLines);
             }
 
-            if(isTable)
+            if (isTable)
             {
                 int diffLines = linesParagraph.Count - countLines;
-                if(diffLines > 0)
+                if (diffLines > 0)
                 {
                     doc.Bookmarks[bookmarksNames[0]].Select();
 
                     int linesParagraphCount = linesParagraph.Count;
-                    for(l = countLines; l < linesParagraphCount; ++ l)
+                    for (l = countLines; l < linesParagraphCount; ++l)
                     {
                         word.Selection.Tables[1].Rows.Add();
                         word.Selection.Tables[1].Rows.Last.Select();
@@ -101,7 +101,7 @@ namespace BusinessLogicLayer
             SetBookmarkExcel2003Compatibility(
                 word, doc, hereIsOneLine ? bookmarkName : $"{bookmarkName}1", linesParagraph[0].ToString(), needFitText, fontSize);
 
-            for(l = 1; l < countLines; ++ l)
+            for (l = 1; l < countLines; ++l)
                 SetBookmarkExcel2003Compatibility(
                     word, doc, $"{bookmarkName}{l + 1}", linesParagraph[l].ToString(), needFitText, fontSize);
         }
@@ -132,16 +132,16 @@ namespace BusinessLogicLayer
             string bookmarkTextBackup = string.Empty;
             bool AllowAutoFitBackup = false;
 
-            for(int i = 0; i < ITERATIONS; ++ i)
+            for (int i = 0; i < ITERATIONS; ++i)
             {
                 doc.Bookmarks[bookmarkName].Select();
                 selection = word.Selection;
 
-                if(i == 0)
+                if (i == 0)
                 {
                     bookmarkTextBackup = selection.Text;
 
-                    if(isTable)
+                    if (isTable)
                     {
                         AllowAutoFitBackup = word.Selection.Tables[1].AllowAutoFit;
                         word.Selection.Tables[1].AllowAutoFit = false;
@@ -159,11 +159,11 @@ namespace BusinessLogicLayer
                 start = rangeStart.Information[WdInformation.wdFirstCharacterLineNumber];
                 end = rangeEnd.Information[WdInformation.wdFirstCharacterLineNumber];
 
-                if(end - start + 1 > 1)
+                if (end - start + 1 > 1)
                 {
-                    if(i > 0 && ! more)
+                    if (i > 0 && ! more)
                     {
-                        if(step == 1)
+                        if (step == 1)
                         {
                             textSB.Remove(textSB.Length - 1, 1);
                             break;
@@ -172,21 +172,21 @@ namespace BusinessLogicLayer
                     }
                     more = true;
 
-                    if(decreaseStep && step > 1)
+                    if (decreaseStep && step > 1)
                         step /= 2;
                     textSB.Remove(Math.Max(textSB.Length - step, 0), step);
                 }
                 else
                 {
-                    if(i > 0 && more)
+                    if (i > 0 && more)
                     {
-                        if(step == 1)
+                        if (step == 1)
                             break;
                         decreaseStep = true;
                     }
                     more = false;
 
-                    if(decreaseStep && step > 1)
+                    if (decreaseStep && step > 1)
                         step /= 2;
                     textSB.Insert(textSB.Length, SYM, step);
                 }
@@ -199,39 +199,39 @@ namespace BusinessLogicLayer
 
             int offset = 0;
 
-            if(isTable)
+            if (isTable)
                 word.Selection.Tables[1].AllowAutoFit = AllowAutoFitBackup;
             else
             {
                 // Похоже проблема из-за '\r'.
 
-                string prefix = selection.FormattedText.Sentences.First.Text.TrimEnd( new char[] { '\r' });
+                string prefix = selection.FormattedText.Sentences.First.Text.TrimEnd(new char[] { '\r' });
                 int index = prefix.IndexOf(bookmarkTextBackup);
-                if(index != -1)
+                if (index != -1)
                     prefix = prefix.Remove(index, bookmarkTextBackup.Length);
 
                 offset = TextRenderer.MeasureText(prefix, fontBookmark).Width;
 
-                if( ! string.IsNullOrEmpty(prefix))
+                if ( ! string.IsNullOrEmpty(prefix))
                     offset += 7;
             }
 
             string text = textSB.ToString();
-            
-            if(0 == offset
+
+            if (0 == offset
             && ! string.IsNullOrEmpty(text))
                 offset = 1;
-            
+
             return TextRenderer.MeasureText(text, fontBookmark).Width - offset;
         }
 
         private bool BookmarkInTable(_Application word, _Document doc, string bookmarkName)
         {
-            if( ! doc.Bookmarks.Exists(bookmarkName)) throw new InvalidOperationException();
+            if ( ! doc.Bookmarks.Exists(bookmarkName)) throw new InvalidOperationException();
 
             doc.Bookmarks[bookmarkName].Select();
 
-            if(Convert.ToInt32(word.Selection.Tables.Count) > 0)
+            if (Convert.ToInt32(word.Selection.Tables.Count) > 0)
                 return true;
 
             return false;
@@ -239,7 +239,7 @@ namespace BusinessLogicLayer
 
         internal System.Drawing.Font GetFontBookmark(_Application word, _Document doc, string bookmarkName)
         {
-            if( ! doc.Bookmarks.Exists(bookmarkName)) throw new InvalidOperationException();
+            if ( ! doc.Bookmarks.Exists(bookmarkName)) throw new InvalidOperationException();
 
             doc.Bookmarks[bookmarkName].Select();
             Selection selection = word.Selection;
@@ -255,7 +255,7 @@ namespace BusinessLogicLayer
 
         internal void SetFontBookmark(_Application word, _Document doc, string bookmarkName, System.Drawing.Font fontBookmark)
         {
-            if( ! doc.Bookmarks.Exists(bookmarkName)) throw new InvalidOperationException();
+            if ( ! doc.Bookmarks.Exists(bookmarkName)) throw new InvalidOperationException();
 
             doc.Bookmarks[bookmarkName].Select();
             Selection selection = word.Selection;
@@ -297,25 +297,25 @@ namespace BusinessLogicLayer
                     bool debug = false,
                     int countLines = 1)
         {
-            if( ! debug)
+            if ( ! debug)
             {
-                if(doc.Bookmarks.Exists(bookmarkName))
+                if (doc.Bookmarks.Exists(bookmarkName))
                 {
                     doc.Bookmarks[bookmarkName].Select();
                     Selection selection = word.Selection;
 
-				    if( ! string.IsNullOrEmpty(text))
-				    {
-					    if(needFitText)
-					        if(BookmarkInTable(word, doc, bookmarkName)) selection.Range.Cells[1].FitText = true;
+                    if ( ! string.IsNullOrEmpty(text))
+                    {
+                        if (needFitText)
+                            if (BookmarkInTable(word, doc, bookmarkName)) selection.Range.Cells[1].FitText = true;
                             else throw new ArgumentException();
-					
-					    if(fontSize >= 1.0F) selection.Font.Size = fontSize;
 
-					    selection.TypeText(text);
-				    }
-				    else
-					    selection.Delete();
+                        if (fontSize >= 1.0F) selection.Font.Size = fontSize;
+
+                        selection.TypeText(text);
+                    }
+                    else
+                        selection.Delete();
                 }
             }
             else
@@ -327,9 +327,9 @@ namespace BusinessLogicLayer
                 string bookmarkName2 = bookmarkName;
                 int pixelsInLine;
 
-                for(int l = 0; l < countLines; ++ l)
+                for (int l = 0; l < countLines; ++l)
                 {
-                    if( ! hereIsOneLine)
+                    if ( ! hereIsOneLine)
                         bookmarkName2 = $"{bookmarkName}{l + 1}";
 
                     pixelsInLine = GetPixelsInLineCell(word, doc, bookmarkName2, fontBookmark);
@@ -345,7 +345,7 @@ namespace BusinessLogicLayer
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData).Replace(@"\", "/"),
                 DateTime.Now);
 
-            if( ! Directory.Exists(dir))
+            if ( ! Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
 
             return $"{dir}/word{Guid.NewGuid()}.doc";
@@ -357,7 +357,7 @@ namespace BusinessLogicLayer
         internal void ReleaseMSWord(_Application word, _Document doc, string filePath = null)
         {
             word.DisplayAlerts = WdAlertLevel.wdAlertsNone;
-            if( ! string.IsNullOrEmpty(filePath))
+            if ( ! string.IsNullOrEmpty(filePath))
                 SaveAs(doc, filePath);
             doc.Close(SaveChanges: false);
             word.Visible = false;
@@ -368,8 +368,8 @@ namespace BusinessLogicLayer
         private void SaveAs(_Document doc, string filePath, WdSaveFormat format = WdSaveFormat.wdFormatDocumentDefault)
         {
             int applicationVersion = Convert.ToInt32(doc.Application.Version.Split(new char[] { '.' }, 2)[0]);
-            
-            if(applicationVersion < 14)
+
+            if (applicationVersion < 14)
                 doc.SaveAs(filePath, format);
             else
                 doc.SaveAs2(filePath, format);
@@ -380,9 +380,9 @@ namespace BusinessLogicLayer
             _Application word = new Application();
             _Document doc = GetDoc(typeReport, ref word);
 
-            var bookmarks = doc.Bookmarks;
+            Bookmarks bookmarks = doc.Bookmarks;
 
-            foreach(Bookmark bookmark in bookmarks)
+            foreach (Bookmark bookmark in bookmarks)
             {
                 bookmark.Select();
                 word.Selection.TypeText(CommonStrings.SpaceString);
@@ -406,7 +406,7 @@ namespace BusinessLogicLayer
 
                 return doc;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(
                     $@"Не удалось загрузить шаблон для экспорта {startupPath}\{TemplatesDirectory}\{typeReport}{'\n'}{ex.Message}");
@@ -421,7 +421,7 @@ namespace BusinessLogicLayer
                 word.Documents.Add(filePath);
                 word.Visible = true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(
                     $@"Не удалось загрузить шаблон для экспорта {filePath}{'\n'}{ex.Message}");
@@ -430,7 +430,7 @@ namespace BusinessLogicLayer
 
         internal string GetBookmarkText(_Application word, _Document doc, string bookmarkName)
         {
-            if( ! doc.Bookmarks.Exists(bookmarkName)) throw new InvalidOperationException();
+            if ( ! doc.Bookmarks.Exists(bookmarkName)) throw new InvalidOperationException();
 
             doc.Bookmarks[bookmarkName].Select();
 

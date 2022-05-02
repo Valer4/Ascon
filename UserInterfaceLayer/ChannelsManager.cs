@@ -8,7 +8,7 @@ namespace UserInterfaceLayer
     {
         internal T GetChannel<T>()
         {
-            if( ! Configurator.HostNames.TryGetValue(typeof(T), out string hostName))
+            if ( ! Configurator.HostNames.TryGetValue(typeof(T), out string hostName))
                 throw new ArgumentException("Имя хоста не найдено.");
 
             NetTcpBinding binding = new NetTcpBinding(SecurityMode.Message);
@@ -22,7 +22,7 @@ namespace UserInterfaceLayer
 
             ChannelFactory<T> channel = new ChannelFactory<T>(binding, address);
             channel.Credentials.ServiceCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.None;
-            channel.Credentials.UserName.UserName = Configurator.UserInfo.Login;
+            channel.Credentials.UserName.UserName = Configurator.UserInfo.UserName;
             channel.Credentials.UserName.Password = Configurator.UserInfo.Password;
 
             return channel.CreateChannel();

@@ -39,6 +39,7 @@ namespace UserInterfaceLayer.Forms.Views
             this.labelNumber = new System.Windows.Forms.Label();
             this.buttonCreateReport = new System.Windows.Forms.Button();
             this.maskedTextBoxAmount = new System.Windows.Forms.MaskedTextBox();
+            this.buttonAuthorization = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // treeViewDetails
@@ -49,7 +50,7 @@ namespace UserInterfaceLayer.Forms.Views
             this.treeViewDetails.HideSelection = false;
             this.treeViewDetails.Location = new System.Drawing.Point(12, 12);
             this.treeViewDetails.Name = "treeViewDetails";
-            this.treeViewDetails.Size = new System.Drawing.Size(400, 246);
+            this.treeViewDetails.Size = new System.Drawing.Size(400, 275);
             this.treeViewDetails.TabIndex = 0;
             // 
             // buttonAddRoot
@@ -61,7 +62,7 @@ namespace UserInterfaceLayer.Forms.Views
             this.buttonAddRoot.TabIndex = 3;
             this.buttonAddRoot.Text = "Добавить двигатель";
             this.buttonAddRoot.UseVisualStyleBackColor = true;
-            this.buttonAddRoot.Click += new System.EventHandler(this.buttonAddRoot_Click);
+            this.buttonAddRoot.Click += new System.EventHandler(this.ButtonAddRoot_Click);
             // 
             // buttonAddChild
             // 
@@ -72,7 +73,7 @@ namespace UserInterfaceLayer.Forms.Views
             this.buttonAddChild.TabIndex = 4;
             this.buttonAddChild.Text = "Добавить компонент";
             this.buttonAddChild.UseVisualStyleBackColor = true;
-            this.buttonAddChild.Click += new System.EventHandler(this.buttonAddChild_Click);
+            this.buttonAddChild.Click += new System.EventHandler(this.ButtonAddChild_Click);
             // 
             // buttonEdit
             // 
@@ -83,7 +84,7 @@ namespace UserInterfaceLayer.Forms.Views
             this.buttonEdit.TabIndex = 5;
             this.buttonEdit.Text = "Изменить";
             this.buttonEdit.UseVisualStyleBackColor = true;
-            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
+            this.buttonEdit.Click += new System.EventHandler(this.ButtonEdit_Click);
             // 
             // buttonDelete
             // 
@@ -94,7 +95,7 @@ namespace UserInterfaceLayer.Forms.Views
             this.buttonDelete.TabIndex = 6;
             this.buttonDelete.Text = "Удалить";
             this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            this.buttonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
             // textBoxName
             // 
@@ -134,24 +135,36 @@ namespace UserInterfaceLayer.Forms.Views
             this.buttonCreateReport.TabIndex = 7;
             this.buttonCreateReport.Text = "Вывести отчёт";
             this.buttonCreateReport.UseVisualStyleBackColor = true;
-            this.buttonCreateReport.Click += new System.EventHandler(this.buttonCreateReport_Click);
+            this.buttonCreateReport.Click += new System.EventHandler(this.ButtonCreateReport_Click);
             // 
-            // maskedTextBoxNumber
+            // maskedTextBoxAmount
             // 
             this.maskedTextBoxAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.maskedTextBoxAmount.Location = new System.Drawing.Point(418, 90);
             this.maskedTextBoxAmount.Mask = "0000";
-            this.maskedTextBoxAmount.Name = "maskedTextBoxNumber";
+            this.maskedTextBoxAmount.Name = "maskedTextBoxAmount";
             this.maskedTextBoxAmount.ResetOnSpace = false;
             this.maskedTextBoxAmount.Size = new System.Drawing.Size(150, 20);
             this.maskedTextBoxAmount.TabIndex = 2;
-            this.maskedTextBoxAmount.MouseClick += new System.Windows.Forms.MouseEventHandler(this.maskedTextBoxNumber_MouseClick);
+            this.maskedTextBoxAmount.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MaskedTextBoxNumber_MouseClick);
             // 
-            // DetailEditor
+            // buttonAuthorization
+            // 
+            this.buttonAuthorization.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAuthorization.Location = new System.Drawing.Point(418, 264);
+            this.buttonAuthorization.Name = "buttonAuthorization";
+            this.buttonAuthorization.Size = new System.Drawing.Size(150, 23);
+            this.buttonAuthorization.TabIndex = 9;
+            this.buttonAuthorization.Text = "Авторизоваться";
+            this.buttonAuthorization.UseVisualStyleBackColor = true;
+            this.buttonAuthorization.Click += new System.EventHandler(this.ButtonAuthorization_Click);
+            // 
+            // DetailsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 270);
+            this.ClientSize = new System.Drawing.Size(580, 299);
+            this.Controls.Add(this.buttonAuthorization);
             this.Controls.Add(this.maskedTextBoxAmount);
             this.Controls.Add(this.buttonCreateReport);
             this.Controls.Add(this.labelNumber);
@@ -162,7 +175,7 @@ namespace UserInterfaceLayer.Forms.Views
             this.Controls.Add(this.buttonAddChild);
             this.Controls.Add(this.buttonAddRoot);
             this.Controls.Add(this.treeViewDetails);
-            this.Name = "DetailEditor";
+            this.Name = "DetailsEditor";
             this.Text = "Редактор деталей";
             this.Load += new System.EventHandler(this.DetailEditor_Load);
             this.ResumeLayout(false);
@@ -182,6 +195,7 @@ namespace UserInterfaceLayer.Forms.Views
         private System.Windows.Forms.Label labelNumber;
         private System.Windows.Forms.Button buttonCreateReport;
         private System.Windows.Forms.MaskedTextBox maskedTextBoxAmount;
+        private System.Windows.Forms.Button buttonAuthorization;
     }
 }
 

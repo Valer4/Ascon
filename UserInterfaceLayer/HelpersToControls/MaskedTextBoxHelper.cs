@@ -12,8 +12,8 @@ namespace UserInterfaceLayer.HelpersToControls
             string text = maskedTextBox.Text;
             int i = 0,
                 len = text.Length;
-            for(; i < len; ++ i)
-                if(text[i] ==  ' ')
+            for (; i < len; ++i)
+                if (text[i] == ' ')
                     return i;
             return i;
         }

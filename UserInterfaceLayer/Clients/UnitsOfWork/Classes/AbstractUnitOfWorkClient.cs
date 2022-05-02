@@ -1,5 +1,5 @@
-﻿using BusinessLogicLayer.Services.UnitsOfWork.Interfaces;
-using UserInterfaceLayer.Clients.UnitsOfWork.Interfaces;
+﻿using UserInterfaceLayer.Clients.UnitsOfWork.Interfaces;
+using WcfService.Services.UnitsOfWork.Interfaces;
 
 namespace UserInterfaceLayer.Clients.UnitsOfWork.Classes
 {

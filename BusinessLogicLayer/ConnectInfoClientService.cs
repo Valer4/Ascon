@@ -3,11 +3,11 @@
     public class ConnectInfoClientService
     {
         public string Url;
-        public short Port;
+        public ushort Port;
 
         public string HostAddress => $"{Url}:{Port}";
 
-        public ConnectInfoClientService(string url, short port)
+        public ConnectInfoClientService(string url, ushort port)
         {
             Url = url;
             Port = port;

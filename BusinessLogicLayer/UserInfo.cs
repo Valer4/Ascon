@@ -2,12 +2,12 @@
 {
     public class UserInfo
     {
-        public string Login;
+        public string UserName;
         public string Password;
 
-        public UserInfo(string login, string password)
+        public UserInfo(string userName, string password)
         {
-            Login = login;
+            UserName = userName;
             Password = password;
         }
     }

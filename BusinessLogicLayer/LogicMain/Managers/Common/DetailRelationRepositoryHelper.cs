@@ -17,10 +17,10 @@ namespace BusinessLogicLayer.LogicMain.Managers.Common
         internal IEnumerable<DetailRelationEntity> GetAncestors
             (long? parentId, IQueryable<DetailRelationEntity> allDetailRelations, ICollection<DetailRelationEntity> ancestors)
         {
-            if(parentId != null)
+            if (null != parentId)
             {
                 IQueryable<DetailRelationEntity> parents = GetParents(parentId, allDetailRelations);
-                foreach(DetailRelationEntity parent in parents)
+                foreach (DetailRelationEntity parent in parents)
                 {
                     ancestors.Add(parent);
                     GetAncestors(parent.ParentId, allDetailRelations, ancestors);
@@ -35,7 +35,7 @@ namespace BusinessLogicLayer.LogicMain.Managers.Common
             (long typeId, IQueryable<DetailRelationEntity> allDetailRelations, ICollection<DetailRelationEntity> descendants)
         {
             IQueryable<DetailRelationEntity> childs = GetChilds(typeId, allDetailRelations);
-            foreach(DetailRelationEntity child in childs)
+            foreach (DetailRelationEntity child in childs)
             {
                 descendants.Add(child);
                 GetDescendants(child.TypeId, allDetailRelations, descendants);

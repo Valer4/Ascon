@@ -20,7 +20,7 @@ namespace BusinessLogicLayer.LogicMain.Managers.Repositories.Classes
             {
                 Repository.Save();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(message, ex);
             }

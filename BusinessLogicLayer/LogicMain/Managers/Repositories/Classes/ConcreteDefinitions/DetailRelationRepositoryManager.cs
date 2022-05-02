@@ -1,11 +1,10 @@
 ﻿using BusinessLogicLayer.Data.DataAccessInterfaces.Repositories.ConcreteDefinitions;
 using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
 using BusinessLogicLayer.LogicMain.Managers.Common;
-using BusinessLogicLayer.LogicMain.Managers.Repositories.Classes;
 using BusinessLogicLayer.LogicMain.Managers.Repositories.Interfaces.ConcreteDefinitions;
 using System;
 
-namespace BusinessLogicLayer.LogicMain.Managers.EntityManagers.Classes.ConcreteDefinitions
+namespace BusinessLogicLayer.LogicMain.Managers.Repositories.Classes.ConcreteDefinitions
 {
     public partial class DetailRelationRepositoryManager : AbstractRepositoryManager<DetailRelationEntity, long, IDetailRelationRepository>,
         IDetailRelationRepositoryManager
@@ -18,7 +17,7 @@ namespace BusinessLogicLayer.LogicMain.Managers.EntityManagers.Classes.ConcreteD
         {
             get
             {
-                if (_helper == null)
+                if (null == _helper)
                     _helper = new DetailRelationRepositoryHelper();
                 return _helper;
             }
@@ -27,28 +26,28 @@ namespace BusinessLogicLayer.LogicMain.Managers.EntityManagers.Classes.ConcreteD
         #region Entity
         private void CheckData(DetailRelationEntity selectedDetail, bool isAdd = false)
         {
-            if(string.IsNullOrWhiteSpace(selectedDetail.Name))
+            if (string.IsNullOrWhiteSpace(selectedDetail.Name))
                 throw new Exception("Несоответствие данных.");
 
-            if(selectedDetail.IsRoot)
+            if (selectedDetail.IsRoot)
             {
-                if(selectedDetail.RelationId != null) throw new Exception("Несоответствие данных.");
-                if(selectedDetail.ParentId != null) throw new Exception("Несоответствие данных.");
-                if(selectedDetail.Amount != null) throw new Exception("Несоответствие данных.");
+                if (null != selectedDetail.RelationId) throw new Exception("Несоответствие данных.");
+                if (null != selectedDetail.ParentId) throw new Exception("Несоответствие данных.");
+                if (null != selectedDetail.Amount) throw new Exception("Несоответствие данных.");
             }
             else
             {
-                if(isAdd)
+                if (isAdd)
                 {
-                    if(selectedDetail.RelationId != null) throw new Exception("Несоответствие данных.");
+                    if (null != selectedDetail.RelationId) throw new Exception("Несоответствие данных.");
                 }
                 else
-                    if(selectedDetail.RelationId == null) throw new Exception("Несоответствие данных.");
+                    if (null == selectedDetail.RelationId) throw new Exception("Несоответствие данных.");
 
-                if(selectedDetail.ParentId == null) throw new Exception("Несоответствие данных.");
-                if(selectedDetail.Amount == null) throw new Exception("Количество деталей не указано.");
+                if (null == selectedDetail.ParentId) throw new Exception("Несоответствие данных.");
+                if (null == selectedDetail.Amount) throw new Exception("Количество деталей не указано.");
 
-                if(selectedDetail.Amount < 1
+                if (selectedDetail.Amount < 1
                 || selectedDetail.Amount > 9999) throw new Exception("Количество деталей указано не верно.");
             }
         }

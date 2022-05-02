@@ -12,15 +12,15 @@ namespace UserInterfaceLayer.HelpersToControls.TreeViewHelper
         {
             BuildRootNodesTreeView<TItem, TId, TParentId, TTypeId>(treeView, collection);
 
-            foreach(TreeNode node in treeView.Nodes)
+            foreach (TreeNode node in treeView.Nodes)
                 BuildChildNodesTreeViewRecursive<TItem, TId, TParentId, TTypeId>(node, collection);
         }
 
         private void BuildRootNodesTreeView<TItem, TId, TParentId, TTypeId>(TreeView treeView, IQueryable<TItem> collection)
             where TItem : ITreeLogicalNode<TId, TParentId, TTypeId>
         {
-            foreach(TItem detail in collection)
-                if(detail.IsRoot)
+            foreach (TItem detail in collection)
+                if (detail.IsRoot)
                     AddNode<TItem, TId, TParentId, TTypeId>(treeView.Nodes, detail);
         }
 
@@ -32,7 +32,7 @@ namespace UserInterfaceLayer.HelpersToControls.TreeViewHelper
             IQueryable<TItem> childsOfDetail = collection.Where(x => typeId.Equals(x.ParentId));
 
             TreeNode addedNode;
-            foreach(TItem childOfDetail in childsOfDetail)
+            foreach (TItem childOfDetail in childsOfDetail)
             {
                 addedNode = AddNode<TItem, TId, TParentId, TTypeId>(treeNode.Nodes, childOfDetail);
 

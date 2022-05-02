@@ -13,7 +13,7 @@ namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
         {
             get
             {
-                if (_detailTypeRepository == null)
+                if (null == _detailTypeRepository)
                     _detailTypeRepository = new DetailTypeRepository(_db);
                 return _detailTypeRepository;
             }
@@ -24,7 +24,7 @@ namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
         {
             get
             {
-                if (_childDetailRelationRepository == null)
+                if (null == _childDetailRelationRepository)
                     _childDetailRelationRepository = new ChildDetailRelationRepository(_db);
                 return _childDetailRelationRepository;
             }
@@ -34,23 +34,23 @@ namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
 
         public override IQueryable<DetailRelationEntity> GetAll()
         {
-            var listA = DetailTypeRepository.GetAll();
-            var listB = ChildDetailRelationRepository.GetAll();
+            IQueryable<DetailTypeEntity> listA = DetailTypeRepository.GetAll();
+            IQueryable<ChildDetailRelationEntity> listB = ChildDetailRelationRepository.GetAll();
 
-            IEnumerable<DetailRelationEntity> query = 
-		        from itemA in listA.Outer()
-		            join itemB in listB.Outer()
-			            on itemA.Id equals itemB.TypeId
-		                    select new DetailRelationEntity()
-                            {
-                                Id = itemA.IsRoot ? itemA.Id * -1 - 1 : itemB.Id,
-                                IsRoot = itemA.IsRoot,
-                                RelationId = itemB?.Id,
-                                ParentId = itemB?.ParentId,
-                                TypeId = itemA.Id,
-                                Name = itemA.Name,
-                                Amount = itemB?.Amount
-                            };
+            IEnumerable<DetailRelationEntity> query =
+                from itemA in listA.Outer()
+                join itemB in listB.Outer()
+                    on itemA.Id equals itemB.TypeId
+                select new DetailRelationEntity()
+                {
+                    Id = itemA.IsRoot ? itemA.Id * -1 - 1 : itemB.Id,
+                    IsRoot = itemA.IsRoot,
+                    RelationId = itemB?.Id,
+                    ParentId = itemB?.ParentId,
+                    TypeId = itemA.Id,
+                    Name = itemA.Name,
+                    Amount = itemB?.Amount
+                };
 
             return query.AsQueryable();
         }

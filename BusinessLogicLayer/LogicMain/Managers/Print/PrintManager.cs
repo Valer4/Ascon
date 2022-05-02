@@ -29,11 +29,11 @@ namespace BusinessLogicLayer.LogicMain.Managers.Print
 
             DetailRelationEntity detailRelation;
             int lastId = descendants.Count - 1;
-            for(int i = lastId; i >= 0; -- i)
+            for (int i = lastId; i >= 0; --i)
             {
                 detailRelation = descendants.ElementAt(i);
 
-                if(helper.GetChilds(detailRelation.TypeId, allDetailRelations).Any())
+                if (helper.GetChilds(detailRelation.TypeId, allDetailRelations).Any())
                     descendants.Remove(detailRelation);
             }
 
@@ -53,12 +53,12 @@ namespace BusinessLogicLayer.LogicMain.Managers.Print
             paragraph.Range.Text = $"«{selectedDetail.Name}»";
             paragraph.Range.InsertParagraphAfter();
 
-            if(countRows > 0)
+            if (countRows > 0)
             {
                 range = doc.Bookmarks.get_Item(ref oEndOfDoc).Range;
                 Table table = doc.Tables.Add(range, countRows, 2, ref missing, ref missing);
                 table.Range.ParagraphFormat.SpaceAfter = 6;
-                for(int r = 0; r < countRows; ++ r)
+                for (int r = 0; r < countRows; ++r)
                 {
                     table.Cell(r + 1, 1).Range.Text = descendants.ElementAt(r).Name;
                     table.Cell(r + 1, 2).Range.Text = $"{descendants.ElementAt(r).Amount} шт";
@@ -66,7 +66,7 @@ namespace BusinessLogicLayer.LogicMain.Managers.Print
                 table.Borders[WdBorderType.wdBorderVertical].LineStyle =
                 table.Borders[WdBorderType.wdBorderHorizontal].LineStyle =
                 table.Borders[WdBorderType.wdBorderRight].LineStyle =
-                table.Borders[WdBorderType.wdBorderBottom].LineStyle = 
+                table.Borders[WdBorderType.wdBorderBottom].LineStyle =
                 table.Borders[WdBorderType.wdBorderLeft].LineStyle =
                 table.Borders[WdBorderType.wdBorderTop].LineStyle = WdLineStyle.wdLineStyleSingle;
             }
@@ -81,8 +81,8 @@ namespace BusinessLogicLayer.LogicMain.Managers.Print
         private void SaveAs(_Document doc, string filePath, WdSaveFormat format = WdSaveFormat.wdFormatDocument)
         {
             int applicationVersion = Convert.ToInt32(doc.Application.Version.Split(new char[] { '.' }, 2)[0]);
-            
-            if(applicationVersion < 14)
+
+            if (applicationVersion < 14)
                 doc.SaveAs(filePath, format);
             else
                 doc.SaveAs2(filePath, format);

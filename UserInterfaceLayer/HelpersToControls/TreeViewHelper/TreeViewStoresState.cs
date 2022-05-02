@@ -34,13 +34,13 @@ namespace UserInterfaceLayer.HelpersToControls.TreeViewHelper
         private void GetFullPathRecursive(TreeNode node, ref StringBuilder fullPath)
         {
             fullPath.Append($"_{node.Tag}_");
-            if(null != node.Parent)
+            if (null != node.Parent)
                 GetFullPathRecursive(node.Parent, ref fullPath);
         }
 
         internal void SaveState(TreeView treeView)
         {
-            if(null == treeView)
+            if (null == treeView)
                 throw new ArgumentNullException("Дерево не создано.");
 
             _nodeStates = new List<TreeViewNodeState>();
@@ -50,7 +50,7 @@ namespace UserInterfaceLayer.HelpersToControls.TreeViewHelper
         // В девэкспресс есть итератор, он быстрее рекурсий, если дерево не ленивое.
         internal void SaveStateRecursive(TreeNodeCollection nodes)
         {
-            foreach(TreeNode node in nodes)
+            foreach (TreeNode node in nodes)
             {
                 _nodeStates.Add(
                     new TreeViewNodeState(
@@ -64,7 +64,7 @@ namespace UserInterfaceLayer.HelpersToControls.TreeViewHelper
 
         internal void RestoreState(TreeView treeView)
         {
-            if(null == _nodeStates)
+            if (null == _nodeStates)
                 throw new InvalidOperationException("Состояние дерева не сохранено.");
 
             treeView.SelectedNode = null;
@@ -74,17 +74,17 @@ namespace UserInterfaceLayer.HelpersToControls.TreeViewHelper
 
         internal void RestoreStateRecursive(TreeNodeCollection nodes)
         {
-            foreach(TreeNode node in nodes)
+            foreach (TreeNode node in nodes)
             {
                 string fullPath = GetFullPath(node);
                 TreeViewNodeState nodeState = _nodeStates.Where(x => fullPath == x.FullPath).SingleOrDefault();
 
-                if(null != nodeState)
+                if (null != nodeState)
                 {
-                    if(nodeState.IsExpanded)
+                    if (nodeState.IsExpanded)
                         node.Expand();
 
-                    if(nodeState.IsSelected)
+                    if (nodeState.IsSelected)
                         node.TreeView.SelectedNode = node;
                 }
 

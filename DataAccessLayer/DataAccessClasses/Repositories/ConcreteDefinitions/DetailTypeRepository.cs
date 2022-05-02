@@ -9,15 +9,15 @@ namespace DataAccessLayer.DataAccessClasses.Repositories.ConcreteDefinitions
         public DetailTypeRepository(MainContext context) => _db = context;
 
         #region Entity
-        public override void Add(DetailTypeEntity item) => _db.DetailTypes.Add(item);
+        public override void Add(DetailTypeEntity entity) => _db.DetailTypes.Add(entity);
 
         public override void Delete(long id)
         {
-            DetailTypeEntity item = GetAll().Where(x => id == x.Id).SingleOrDefault();
-            if(null != item)
-                Delete(item);
+            DetailTypeEntity entity = GetAll().Where(x => id == x.Id).SingleOrDefault();
+            if (null != entity)
+                Delete(entity);
         }
-        private void Delete(DetailTypeEntity item) => _db.DetailTypes.Remove(item);
+        private void Delete(DetailTypeEntity entity) => _db.DetailTypes.Remove(entity);
         #endregion
 
         #region Collection
