@@ -312,3 +312,8 @@
 /WcfService/obj/Debug/Server.csproj.CoreCompileInputs.cache
 /WcfService/obj/Debug/Server.csproj.CopyComplete
 /WcfService/obj/Debug/Server.csproj.AssemblyReference.cache
+/BusinessLogicLayer/.vs/slnx.sqlite
+/BusinessLogicLayer/.vs/ProjectSettings.json
+/BusinessLogicLayer/.vs/BusinessLogicLayer/v17/.suo
+/BusinessLogicLayer/obj/Release/BusinessLogicLayer.csproj.AssemblyReference.cache
+/BusinessLogicLayer/obj/Release/.NETFramework,Version=v4.6.1.AssemblyAttributes.cs
