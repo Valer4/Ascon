@@ -23,10 +23,10 @@ namespace BusinessLogicLayer
 				p,
 				l;
 
-			ParagraphParams paragraphParamsCropTextOff = new ParagraphParams(paragraphParams,cropText: false);
-			IList<string> results = new List<string>();
-			IList<IList<StringBuilder>> linesList = new List<IList<StringBuilder>>();
-			IList<Font> fonts = new List<Font>();
+			var paragraphParamsCropTextOff = new ParagraphParams(paragraphParams,cropText: false);
+			var results = new List<string>();
+			var linesList = new List<IList<StringBuilder>>();
+			var fonts = new List<Font>();
 
 			for (p = 0; p <= 50; p += 5)
 			{
@@ -61,7 +61,7 @@ namespace BusinessLogicLayer
 			if (paragraphParams.CropText && countLines < linesParagraph.Count)
 			{
 				int trueLastLineID = countLines - 1;
-				StringBuilder lastLine = new StringBuilder(linesParagraph[trueLastLineID].ToString());
+				var lastLine = new StringBuilder(linesParagraph[trueLastLineID].ToString());
 				CropText(ref lastLine, fontBookmark, pixelsInLines2[trueLastLineID], paragraphParams.PadRemainingLineWidthWithSpaces);
 				linesParagraph[trueLastLineID].Clear();
 				linesParagraph[trueLastLineID].Append(lastLine);
@@ -98,7 +98,7 @@ namespace BusinessLogicLayer
 			if (paragraphParams.PixelsAddLines <= 0)
 				paragraphParams = new ParagraphParams(paragraphParams, pixelsInLines[pixelsInLines.Length - 1]);
 
-			List<List<StringBuilder>> linesList = new List<List<StringBuilder>>();
+			var linesList = new List<List<StringBuilder>>();
 			int countDecreaseFont = -1;
 
 			int paragraphCount = paragraphParams.Text.Count(),
@@ -107,7 +107,7 @@ namespace BusinessLogicLayer
 			const float stepFontSize = 0.5F;
 
 			int countLines;
-			List<int> pixels = new List<int>();
+			var pixels = new List<int>();
 			pixels.AddRange(pixelsInLines);
 
 			int startID,
@@ -115,7 +115,7 @@ namespace BusinessLogicLayer
 				endIDInLine;
 
 			Font font;
-			StringBuilder tempSB = new StringBuilder();
+			var tempSB = new StringBuilder();
 
 			float fontSize = fontBookmark.Size;
 			bool stop = false;

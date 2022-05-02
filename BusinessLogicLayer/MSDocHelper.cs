@@ -43,7 +43,7 @@ namespace BusinessLogicLayer
 
 			System.Drawing.Font fontBookmark = GetFontBookmark(word, doc, hereIsOneLine ? bookmarkName : $"{ bookmarkName }1");
 
-			IList<string> bookmarksNames = new List<string>();
+			var bookmarksNames = new List<string>();
 			for (l = 0; l < countLines; ++l)
 				bookmarksNames.Add(hereIsOneLine ? bookmarkName : $"{ bookmarkName }{ l + 1 }");
 
@@ -56,7 +56,7 @@ namespace BusinessLogicLayer
 											word, doc, bookmarksNames[l], fontBookmark, null != startLens && startLens.Length > l ? startLens[l] : 0);
 			}
 
-			StringParser stringParser = new StringParser();
+			var stringParser = new StringParser();
 			bool needFitText = false;
 
 			if (fitText)
@@ -116,7 +116,7 @@ namespace BusinessLogicLayer
 			const string SYM = "5";
 			bool more = false;
 			bool decreaseStep = false;
-			StringBuilder textSB = new StringBuilder().Insert(0, SYM, startLen > 0 ? startLen : 77);
+			var textSB = new StringBuilder().Insert(0, SYM, startLen > 0 ? startLen : 77);
 			Range rangeStart,
 					rangeEnd;
 			int start,
