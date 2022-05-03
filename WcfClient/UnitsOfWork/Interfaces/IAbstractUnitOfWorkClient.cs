@@ -1,4 +1,4 @@
-﻿namespace UserInterfaceLayer.Clients.UnitsOfWork.Interfaces
+﻿namespace WcfClient.UnitsOfWork.Interfaces
 {
     internal interface IAbstractUnitOfWorkClient<TModel>
     {

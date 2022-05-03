@@ -2,9 +2,9 @@
 using WcfService;
 using WcfService.Services.Print;
 
-namespace UserInterfaceLayer.Clients.Print
+namespace WcfClient.Print
 {
-    internal class PrintClient : IPrintClient
+	internal class PrintClient : IPrintClient
     {
         private readonly WcfClientConfigurator _wcfClientConfigurator;
 

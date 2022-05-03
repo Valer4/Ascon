@@ -1,4 +1,4 @@
-﻿namespace UserInterfaceLayer.Clients.Authorization
+﻿namespace WcfClient.Authorization
 {
     internal interface IAuthorizationClient
     {

@@ -3,9 +3,9 @@ using System.ServiceModel;
 using System.ServiceModel.Security;
 using WcfService;
 
-namespace UserInterfaceLayer
+namespace WcfClient
 {
-    public class ChannelsManager
+	public class ChannelsManager
     {
         private WcfClientConfigurator _wcfClientConfigurator;
 

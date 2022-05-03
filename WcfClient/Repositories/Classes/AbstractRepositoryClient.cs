@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using UserInterfaceLayer.Clients.Repositories.Interfaces;
+using WcfClient.Repositories.Interfaces;
 using WcfService;
 using WcfService.Services.Repositories.Interfaces;
 
-namespace UserInterfaceLayer.Clients.Repositories.Classes
+namespace WcfClient.Repositories.Classes
 {
 	internal abstract class AbstractRepositoryClient<TEntity, TId, TInterfaceEntityService> :
         IAbstractRepositoryClient<TEntity, TId>

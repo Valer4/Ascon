@@ -1,10 +1,10 @@
-﻿using UserInterfaceLayer.Clients.UnitsOfWork.Interfaces;
+﻿using WcfClient.UnitsOfWork.Interfaces;
 using WcfService;
 using WcfService.Services.UnitsOfWork.Interfaces;
 
-namespace UserInterfaceLayer.Clients.UnitsOfWork.Classes
+namespace WcfClient.UnitsOfWork.Classes
 {
-    internal abstract class AbstractUnitOfWorkClient<TModel, TInterfaceUnitOfWorkService> : IAbstractUnitOfWorkClient<TModel>
+	internal abstract class AbstractUnitOfWorkClient<TModel, TInterfaceUnitOfWorkService> : IAbstractUnitOfWorkClient<TModel>
         where TInterfaceUnitOfWorkService : IAbstractUnitOfWorkService<TModel>
     {
         private readonly WcfClientConfigurator _wcfClientConfigurator;

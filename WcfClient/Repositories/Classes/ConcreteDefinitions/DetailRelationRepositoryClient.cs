@@ -1,9 +1,9 @@
 ﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
-using UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions;
+using WcfClient.Repositories.Interfaces.ConcreteDefinitions;
 using WcfService;
 using WcfService.Services.Repositories.Interfaces.ConcreteDefinitions;
 
-namespace UserInterfaceLayer.Clients.Repositories.Classes.ConcreteDefinitions
+namespace WcfClient.Repositories.Classes.ConcreteDefinitions
 {
 	internal class DetailRelationRepositoryClient :
         AbstractRepositoryClient<DetailRelationEntity, long, IDetailRelationRepositoryService>,

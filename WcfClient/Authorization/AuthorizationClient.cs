@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UserInterfaceLayer.Clients.Authorization
+namespace WcfClient.Authorization
 {
 	internal class AuthorizationClient : IAuthorizationClient
     {

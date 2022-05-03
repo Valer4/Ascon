@@ -1,8 +1,8 @@
 ﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
 
-namespace UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions
+namespace WcfClient.Repositories.Interfaces.ConcreteDefinitions
 {
-    internal interface IDetailRelationRepositoryClient : IAbstractRepositoryClient<DetailRelationEntity, long>
+	internal interface IDetailRelationRepositoryClient : IAbstractRepositoryClient<DetailRelationEntity, long>
     {
         string Add(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount);
 

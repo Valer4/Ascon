@@ -1,8 +1,8 @@
 ﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
 
-namespace UserInterfaceLayer.Clients.Print
+namespace WcfClient.Print
 {
-    internal interface IPrintClient
+	internal interface IPrintClient
     {
         byte[] GetReportOnDetailInMSWord(DetailRelationEntity selectedDetail, out string message);
     }

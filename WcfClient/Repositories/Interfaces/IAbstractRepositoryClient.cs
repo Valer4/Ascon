@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 
-namespace UserInterfaceLayer.Clients.Repositories.Interfaces
+namespace WcfClient.Repositories.Interfaces
 {
-    internal interface IAbstractRepositoryClient<TEntity, TId>
+	internal interface IAbstractRepositoryClient<TEntity, TId>
     {
 #region Entity.
 
