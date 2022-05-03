@@ -7,7 +7,8 @@ namespace DataAccessLayerCore.DataAccessClasses.Repositories.ConcreteDefinitions
     {
         public DetailTypeRepository(MainContext? context) => _db = context;
 
-        #region Entity
+#region Entity
+
         public override void Add(DetailTypeEntity entity) => _db?.DetailTypes?.Add(entity);
 
         public override void Delete(long id)
@@ -17,10 +18,13 @@ namespace DataAccessLayerCore.DataAccessClasses.Repositories.ConcreteDefinitions
                 Delete(entity);
         }
         private void Delete(DetailTypeEntity entity) => _db?.DetailTypes?.Remove(entity);
-        #endregion
 
-        #region Collection
+#endregion
+
+#region Collection
+
         public override IQueryable<DetailTypeEntity>? GetAll() => _db?.DetailTypes;
-        #endregion
+
+#endregion
     }
 }

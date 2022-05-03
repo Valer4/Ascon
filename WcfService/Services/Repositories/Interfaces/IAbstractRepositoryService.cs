@@ -6,7 +6,8 @@ namespace WcfService.Services.Repositories.Interfaces
     [ServiceContract(SessionMode = SessionMode.Required)]
     public interface IAbstractRepositoryService<TEntity, TId>
     {
-        #region Entity.
+#region Entity.
+
         [OperationContract]
         TEntity Get(TId id);
 
@@ -14,9 +15,11 @@ namespace WcfService.Services.Repositories.Interfaces
         void DeleteById(TId id);
         [OperationContract]
         string Delete(TEntity entity);
-        #endregion
 
-        #region Collection.
+#endregion
+
+#region Collection.
+
         [OperationContract]
         IQueryable<TEntity> GetAll();
 
@@ -28,6 +31,7 @@ namespace WcfService.Services.Repositories.Interfaces
 
         [OperationContract]
         void DeleteCollection(IQueryable<TEntity> collection);
-        #endregion
+
+#endregion
     }
 }

@@ -7,12 +7,12 @@ using WcfService.Services.Repositories.Interfaces.ConcreteDefinitions;
 
 namespace WcfService
 {
-    public class Configurator
+    public class WcfServiceConfigurator
     {
         public static IDiContainer DiContainer;
         public static ConnectInfoClientService ConnectInfo;
 
-        public Configurator(ConnectInfoClientService connectInfo)
+        public WcfServiceConfigurator(ConnectInfoClientService connectInfo)
         {
             DiContainer = new DiContainer();
             ConnectInfo = connectInfo;

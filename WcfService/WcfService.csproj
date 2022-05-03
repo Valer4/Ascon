@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Configurator.cs" />
+    <Compile Include="WcfServiceConfigurator.cs" />
     <Compile Include="HostsManager.cs" />
     <Compile Include="InstancesCreatorWithParams\WcfInstanceProvider.cs" />
     <Compile Include="InstancesCreatorWithParams\WcfServiceBehavior.cs" />
@@ -54,6 +54,7 @@
     <Compile Include="Services\Repositories\Interfaces\IAbstractRepositoryService.cs" />
     <Compile Include="Services\UnitsOfWork\Classes\AbstractUnitOfWorkService.cs" />
     <Compile Include="Services\UnitsOfWork\Interfaces\IAbstractUnitOfWorkService.cs" />
+    <Compile Include="WcfClientConfigurator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

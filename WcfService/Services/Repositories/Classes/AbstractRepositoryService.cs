@@ -14,7 +14,8 @@ namespace WcfService.Services.Repositories.Classes
 
         public AbstractRepositoryService(TInterfaceRepositoryPresenter repositoryPresenter) => _repositoryPresenter = repositoryPresenter;
 
-        #region Entity.
+#region Entity.
+
         [PrincipalPermission(SecurityAction.Demand, Role = AppRoles.Admin)]
         public TEntity Get(TId id) => _repositoryPresenter.AbstractRepositoryManager.Get(id);
 
@@ -22,9 +23,11 @@ namespace WcfService.Services.Repositories.Classes
         public void DeleteById(TId id) => _repositoryPresenter.AbstractRepositoryManager.Delete(id);
         [PrincipalPermission(SecurityAction.Demand, Role = AppRoles.Admin)]
         public string Delete(TEntity entity) => _repositoryPresenter.Delete(entity);
-        #endregion
 
-        #region Collection.
+#endregion
+
+#region Collection.
+
         [PrincipalPermission(SecurityAction.Demand, Role = AppRoles.Admin)]
         public IQueryable<TEntity> GetAll() => _repositoryPresenter.AbstractRepositoryManager.GetAll();
 
@@ -36,6 +39,7 @@ namespace WcfService.Services.Repositories.Classes
 
         [PrincipalPermission(SecurityAction.Demand, Role = AppRoles.Admin)]
         public void DeleteCollection(IQueryable<TEntity> collection) => _repositoryPresenter.AbstractRepositoryManager.DeleteCollection(collection);
-        #endregion
+
+#endregion
     }
 }

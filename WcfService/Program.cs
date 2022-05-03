@@ -21,31 +21,31 @@ namespace WcfService
         {
             try
             {
-                new Configurator(new ConnectInfoClientService("localhost", 10000));
+                new WcfServiceConfigurator(new ConnectInfoClientService("localhost", 10000));
 
-                Configurator.DiContainer.RegisterType<ConnectInfoDataAccess>(DiLifetimeType.Transient, constructorParams: new object[] {
+                WcfServiceConfigurator.DiContainer.RegisterType<ConnectInfoDataAccess>(DiLifetimeType.Transient, constructorParams: new object[] {
                     "localhost",
                     "Kuznetsov",
                     "msroot",
                     "msroot",
                     (short)1433 });
-                Configurator.DiContainer.RegisterType<IDetailRelationRepository, DetailRelationRepository>(DiLifetimeType.Transient, constructorParams:
-                    Configurator.DiContainer.Resolve<ConnectInfoDataAccess>().
+                WcfServiceConfigurator.DiContainer.RegisterType<IDetailRelationRepository, DetailRelationRepository>(DiLifetimeType.Transient, constructorParams:
+                    WcfServiceConfigurator.DiContainer.Resolve<ConnectInfoDataAccess>().
                         ConnectionString);
 
-                Configurator.DiContainer.RegisterType<IDetailRelationRepositoryManager, DetailRelationRepositoryManager>(typeof(IDetailRelationRepository),
-                    delegate() { return Configurator.DiContainer.Resolve<IDetailRelationRepository>(); });
-                Configurator.DiContainer.RegisterType<IDetailRelationRepositoryPresenter, DetailRelationRepositoryPresenter>(typeof(IDetailRelationRepositoryManager),
-                    delegate() { return Configurator.DiContainer.Resolve<IDetailRelationRepositoryManager>(); });
-                Configurator.DiContainer.RegisterType<IDetailRelationRepositoryService, DetailRelationRepositoryService>(typeof(IDetailRelationRepositoryPresenter),
-                    delegate() { return Configurator.DiContainer.Resolve<IDetailRelationRepositoryPresenter>(); });
+                WcfServiceConfigurator.DiContainer.RegisterType<IDetailRelationRepositoryManager, DetailRelationRepositoryManager>(typeof(IDetailRelationRepository),
+                    delegate() { return WcfServiceConfigurator.DiContainer.Resolve<IDetailRelationRepository>(); });
+                WcfServiceConfigurator.DiContainer.RegisterType<IDetailRelationRepositoryPresenter, DetailRelationRepositoryPresenter>(typeof(IDetailRelationRepositoryManager),
+                    delegate() { return WcfServiceConfigurator.DiContainer.Resolve<IDetailRelationRepositoryManager>(); });
+                WcfServiceConfigurator.DiContainer.RegisterType<IDetailRelationRepositoryService, DetailRelationRepositoryService>(typeof(IDetailRelationRepositoryPresenter),
+                    delegate() { return WcfServiceConfigurator.DiContainer.Resolve<IDetailRelationRepositoryPresenter>(); });
 
-                Configurator.DiContainer.RegisterType<IPrintManager, PrintManager>(typeof(IDetailRelationRepository),
-                    delegate() { return Configurator.DiContainer.Resolve<IDetailRelationRepository>(); });
-                Configurator.DiContainer.RegisterType<IPrintPresenter, PrintPresenter>(typeof(IPrintManager),
-                    delegate() { return Configurator.DiContainer.Resolve<IPrintManager>(); });
-                Configurator.DiContainer.RegisterType<IPrintService, PrintService>(typeof(IPrintPresenter),
-                    delegate() { return Configurator.DiContainer.Resolve<IPrintPresenter>(); });
+                WcfServiceConfigurator.DiContainer.RegisterType<IPrintManager, PrintManager>(typeof(IDetailRelationRepository),
+                    delegate() { return WcfServiceConfigurator.DiContainer.Resolve<IDetailRelationRepository>(); });
+                WcfServiceConfigurator.DiContainer.RegisterType<IPrintPresenter, PrintPresenter>(typeof(IPrintManager),
+                    delegate() { return WcfServiceConfigurator.DiContainer.Resolve<IPrintManager>(); });
+                WcfServiceConfigurator.DiContainer.RegisterType<IPrintService, PrintService>(typeof(IPrintPresenter),
+                    delegate() { return WcfServiceConfigurator.DiContainer.Resolve<IPrintPresenter>(); });
 
                 Console.ReadKey();
             }

@@ -9,7 +9,8 @@ namespace DataAccessLayerCore.DataAccessClasses.Repositories.ConcreteDefinitions
     {
         public ChildDetailRelationRepository(MainContext? context) => _db = context;
 
-        #region Entity
+#region Entity
+
         public override void Add(ChildDetailRelationEntity entity) => _db?.ChildDetailRelations?.Add(entity);
 
         public override void Delete(long id)
@@ -19,10 +20,13 @@ namespace DataAccessLayerCore.DataAccessClasses.Repositories.ConcreteDefinitions
                 Delete(entity);
         }
         private void Delete(ChildDetailRelationEntity entity) => _db?.ChildDetailRelations?.Remove(entity);
-        #endregion
 
-        #region Collection
+#endregion
+
+#region Collection
+
         public override IQueryable<ChildDetailRelationEntity>? GetAll() => _db?.ChildDetailRelations;
-        #endregion
+
+#endregion
     }
 }

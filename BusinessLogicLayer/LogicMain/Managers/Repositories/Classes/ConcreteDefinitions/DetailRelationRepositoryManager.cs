@@ -6,7 +6,7 @@ using System;
 
 namespace BusinessLogicLayer.LogicMain.Managers.Repositories.Classes.ConcreteDefinitions
 {
-    public partial class DetailRelationRepositoryManager : AbstractRepositoryManager<DetailRelationEntity, long, IDetailRelationRepository>,
+	public partial class DetailRelationRepositoryManager : AbstractRepositoryManager<DetailRelationEntity, long, IDetailRelationRepository>,
         IDetailRelationRepositoryManager
     {
         public DetailRelationRepositoryManager(IDetailRelationRepository detailRelationRepository) :
@@ -23,7 +23,8 @@ namespace BusinessLogicLayer.LogicMain.Managers.Repositories.Classes.ConcreteDef
             }
         }
 
-        #region Entity
+#region Entity
+
         private void CheckData(DetailRelationEntity selectedDetail, bool isAdd = false)
         {
             if (string.IsNullOrWhiteSpace(selectedDetail.Name))
@@ -70,6 +71,7 @@ namespace BusinessLogicLayer.LogicMain.Managers.Repositories.Classes.ConcreteDef
             DeleteDetailRelation(id);
             Save("Произошла ошибка при обращении к базе данных.");
         }
-        #endregion
+
+#endregion
     }
 }

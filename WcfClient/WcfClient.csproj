@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3628FDCC-14E3-4FEA-89C7-6D1314B66EDE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WcfClient</RootNamespace>
+    <AssemblyName>WcfClient</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Authorization\AuthorizationClient.cs" />
+    <Compile Include="Authorization\IAuthorizationClient.cs" />
+    <Compile Include="ChannelsManager.cs" />
+    <Compile Include="Print\IPrintClient.cs" />
+    <Compile Include="Print\PrintClient.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Classes\AbstractRepositoryClient.cs" />
+    <Compile Include="Repositories\Classes\ConcreteDefinitions\DetailRelationRepositoryClient.cs" />
+    <Compile Include="Repositories\Interfaces\ConcreteDefinitions\IDetailRelationRepositoryClient.cs" />
+    <Compile Include="Repositories\Interfaces\IAbstractRepositoryClient.cs" />
+    <Compile Include="UnitsOfWork\Classes\AbstractUnitOfWorkClient.cs" />
+    <Compile Include="UnitsOfWork\Interfaces\IAbstractUnitOfWorkClient.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj">
+      <Project>{fc4bdf75-52a4-4e6c-abfb-b34947795dc9}</Project>
+      <Name>BusinessLogicLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WcfService\WcfService.csproj">
+      <Project>{8bb65b50-70aa-4587-9ef4-af03e3a6c644}</Project>
+      <Name>WcfService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.ServiceModel" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

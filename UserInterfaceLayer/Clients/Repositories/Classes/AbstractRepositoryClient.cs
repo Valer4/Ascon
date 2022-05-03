@@ -11,7 +11,7 @@ using WcfService.Services.Repositories.Interfaces;
 
 namespace UserInterfaceLayer.Clients.Repositories.Classes
 {
-    internal abstract class AbstractRepositoryClient<TEntity, TId, TInterfaceEntityService> :
+	internal abstract class AbstractRepositoryClient<TEntity, TId, TInterfaceEntityService> :
         IAbstractRepositoryClient<TEntity, TId>
             where TInterfaceEntityService : IAbstractRepositoryService<TEntity, TId>
     {
@@ -25,7 +25,8 @@ namespace UserInterfaceLayer.Clients.Repositories.Classes
             _controllerAddress = controllerAddress;
         }
 
-        #region Entity.
+#region Entity.
+
         public TEntity Get(TId id) => new ChannelsManager().GetChannel<TInterfaceEntityService>().Get(id);
 
         public void Delete(TId id) => new ChannelsManager().GetChannel<TInterfaceEntityService>().DeleteById(id);
@@ -51,12 +52,14 @@ namespace UserInterfaceLayer.Clients.Repositories.Classes
             return warningMessage;
         }
 #endif
-        #endregion
 
-        #region Collection.
-//#if WCF
+#endregion
+
+#region Collection.
+
+#if WCF
         public IQueryable<TEntity> GetAll() => new ChannelsManager().GetChannel<TInterfaceEntityService>().GetAll();
-/*#elif REST
+#elif REST
         public IQueryable<TEntity> GetAll()
         {
             string methodName = "all"; // new StackTrace().GetFrame(0).GetMethod().Name;
@@ -73,13 +76,14 @@ namespace UserInterfaceLayer.Clients.Repositories.Classes
             List<TEntity> result = _streamHelper.JsonToObj<List<TEntity>>(byteArray, Encoding.UTF8);
             return result.AsQueryable();
         }
-#endif*/
+#endif
         public void AddCollection(IQueryable<TEntity> collection) =>
             new ChannelsManager().GetChannel<TInterfaceEntityService>().AddCollection(collection);
         public void EditCollection(IQueryable<TEntity> collection) =>
             new ChannelsManager().GetChannel<TInterfaceEntityService>().EditCollection(collection);
         public void DeleteCollection(IQueryable<TEntity> collection) =>
             new ChannelsManager().GetChannel<TInterfaceEntityService>().DeleteCollection(collection);
-        #endregion
+
+#endregion
     }
 }

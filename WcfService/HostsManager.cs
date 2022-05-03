@@ -19,11 +19,11 @@ namespace BusinessLogicLayer
             NetTcpBinding binding = new NetTcpBinding(SecurityMode.Message);
             binding.Security.Message.ClientCredentialType = MessageCredentialType.UserName;
 
-            string hostAddress = Configurator.ConnectInfo.HostAddress;
+            string hostAddress = WcfServiceConfigurator.ConnectInfo.HostAddress;
             string uriString = $"net.tcp://{hostAddress}/{hostName}";
             Uri uri = new Uri(uriString);
 
-            ServiceHost host = new WcfServiceHost(Configurator.DiContainer, contractClass);
+            ServiceHost host = new WcfServiceHost(WcfServiceConfigurator.DiContainer, contractClass);
 
             host.Credentials.ServiceCertificate.SetCertificate
                 (StoreLocation.LocalMachine, StoreName.My, X509FindType.FindBySerialNumber, "01");

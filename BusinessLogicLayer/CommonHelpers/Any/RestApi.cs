@@ -6,14 +6,14 @@ using System.Security.Cryptography.Pkcs;
 
 namespace CommonHelpers.Any
 {
-    public class RestApi : IRestApi
+	public class RestApi : IRestApi
     {
-        private IStreamHelper _streamHelper;
+        public IStreamHelper StreamHelper { get; }
         private INoticeError _noticeError;
         private ICryptoProvider _cryptoProvider;
         public RestApi(IStreamHelper streamHelper, INoticeError noticeError, ICryptoProvider cryptoProvider)
         {
-            _streamHelper = streamHelper;
+            StreamHelper = streamHelper;
             _noticeError = noticeError;
             _cryptoProvider = cryptoProvider;
         }
@@ -40,7 +40,7 @@ namespace CommonHelpers.Any
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse()) // Получили.
                 switch (response.StatusCode)
                 {
-                    case HttpStatusCode.OK: array = _streamHelper.StreamToByteArray(response.GetResponseStream()); break;
+                    case HttpStatusCode.OK: array = StreamHelper.StreamToByteArray(response.GetResponseStream()); break;
                     default:
                         if ( ! string.IsNullOrWhiteSpace(msgBadStatusCode))
                             _noticeError.Throw(string.Format(msgBadStatusCode, response.StatusCode));

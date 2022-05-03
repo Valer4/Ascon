@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace BusinessLogicLayer.LogicMain.Managers.Repositories.Classes
 {
-    public abstract class AbstractRepositoryManager<TEntity, TId, TInterfaceRepository> :
+	public abstract class AbstractRepositoryManager<TEntity, TId, TInterfaceRepository> :
         IAbstractRepositoryManager<TEntity, TId>
             where TInterfaceRepository : IAbstractRepository<TEntity, TId>
     {
@@ -26,18 +26,22 @@ namespace BusinessLogicLayer.LogicMain.Managers.Repositories.Classes
             }
         }
 
-        #region Entity
+#region Entity
+
         public virtual TEntity Get(TId id) => Repository.Get(id);
         public virtual void Add(TEntity entity) => Repository.Add(entity);
         public virtual void Edit(TEntity entity) => Repository.Edit(entity);
         public virtual void Delete(TId id) => Repository.Delete(id);
-        #endregion
 
-        #region Collection
+#endregion
+
+#region Collection
+
         public virtual IQueryable<TEntity> GetAll() => Repository.GetAll();
         public virtual void AddCollection(IQueryable<TEntity> collection) => Repository.AddCollection(collection);
         public virtual void EditCollection(IQueryable<TEntity> collection) => Repository.EditCollection(collection);
         public virtual void DeleteCollection(IQueryable<TEntity> collection) => Repository.DeleteCollection(collection);
-        #endregion
+
+#endregion
     }
 }

@@ -5,9 +5,10 @@ using System.Linq;
 
 namespace BusinessLogicLayer.LogicMain.Managers.Repositories.Classes.ConcreteDefinitions
 {
-    public partial class DetailRelationRepositoryManager
+	public partial class DetailRelationRepositoryManager
     {
-        #region Добавление.        
+#region Добавление.
+
         public void AddDetailRelation(DetailRelationEntity detailRelation)
         {
             IQueryable<DetailRelationEntity> allDetailRelations = Repository.GetAll();
@@ -71,9 +72,11 @@ namespace BusinessLogicLayer.LogicMain.Managers.Repositories.Classes.ConcreteDef
             Repository.ChildDetailRelationRepository.Add(childDetailRelation);
             return childDetailRelation;
         }
-        #endregion
 
-        #region Редактирование.
+#endregion
+
+#region Редактирование.
+
         public void EditDetailRelation(DetailRelationEntity detailRelation)
         {
             IQueryable<DetailTypeEntity> allDetailTypes = Repository.DetailTypeRepository.GetAll();
@@ -100,9 +103,11 @@ namespace BusinessLogicLayer.LogicMain.Managers.Repositories.Classes.ConcreteDef
                     childDetailRelation.Amount = (short)detailRelation.Amount;
             }
         }
-        #endregion
 
-        #region Удаление.
+#endregion
+
+#region Удаление.
+
         public void DeleteDetailRelation(long id)
         {
             IQueryable<DetailRelationEntity> allDetailRelations = Repository.GetAll();
@@ -128,6 +133,7 @@ namespace BusinessLogicLayer.LogicMain.Managers.Repositories.Classes.ConcreteDef
                     DeleteRecursive(child, allDetailRelations);
             }
         }
-        #endregion
+
+#endregion
     }
 }

@@ -4,9 +4,10 @@ using System.Windows.Forms;
 
 namespace UserInterfaceLayer.HelpersToControls.TreeViewHelper
 {
-    internal class TreeViewBuilder
+	internal class TreeViewBuilder
     {
-        #region Построение TreeView.
+#region Построение TreeView.
+
         internal void BuildTreeView<TItem, TId, TParentId, TTypeId>(TreeView treeView, IQueryable<TItem> collection)
             where TItem : ITreeLogicalNode<TId, TParentId, TTypeId>
         {
@@ -49,6 +50,7 @@ namespace UserInterfaceLayer.HelpersToControls.TreeViewHelper
             addedNode.Tag = detail.Id;
             return addedNode;
         }
-        #endregion
+
+#endregion
     }
 }
