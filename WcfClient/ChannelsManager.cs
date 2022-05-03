@@ -7,7 +7,7 @@ namespace WcfClient
 {
 	public class ChannelsManager
     {
-        private WcfClientConfigurator _wcfClientConfigurator;
+        private readonly WcfClientConfigurator _wcfClientConfigurator;
 
         public ChannelsManager(WcfClientConfigurator wcfClientConfigurator)
         {
@@ -16,7 +16,7 @@ namespace WcfClient
 
         public T GetChannel<T>()
         {
-            if ( !_wcfClientConfigurator.HostNames.TryGetValue(typeof(T), out string hostName))
+            if ( ! _wcfClientConfigurator.HostNames.TryGetValue(typeof(T), out string hostName))
                 throw new ArgumentException("Имя хоста не найдено.");
 
             NetTcpBinding binding = new NetTcpBinding(SecurityMode.Message);
