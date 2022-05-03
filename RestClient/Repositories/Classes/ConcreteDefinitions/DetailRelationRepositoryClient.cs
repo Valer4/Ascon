@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RestClient.Repositories.Classes.ConcreteDefinitions
 {
-	internal class DetailRelationRepositoryClient :
+    public class DetailRelationRepositoryClient :
         AbstractRepositoryClient<DetailRelationEntity, long>,
         IDetailRelationRepositoryClient
     {

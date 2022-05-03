@@ -1,61 +1,42 @@
 ﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
-using CommonHelpers.Any.Interfaces;
-#if REST
-using System.Text;
-#endif
 using UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions;
 using WcfService.Services.Repositories.Interfaces.ConcreteDefinitions;
+using IRestDetail = RestClient.Repositories.Interfaces.ConcreteDefinitions;
+using IWcfDetail = WcfClient.Repositories.Interfaces.ConcreteDefinitions;
 
 namespace UserInterfaceLayer.Clients.Repositories.Classes.ConcreteDefinitions
 {
-    internal class DetailRelationRepositoryClient :
+	internal class DetailRelationRepositoryClient :
         AbstractRepositoryClient<DetailRelationEntity, long, IDetailRelationRepositoryService>,
         IDetailRelationRepositoryClient
     {
-        public DetailRelationRepositoryClient(IRestApi restApi, IStreamHelper streamHelper, string controllerAddress) : base(restApi, streamHelper, controllerAddress) {}
+        protected readonly IWcfDetail.IDetailRelationRepositoryClient _wcfDetail;
+        protected readonly IRestDetail.IDetailRelationRepositoryClient _restDetail;
 
-#if WCF
-        public string Add(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount) =>
-            new ChannelsManager().GetChannel<IDetailRelationRepositoryService>().Add(selectedDetail, isRoot, name, amount);
-#elif REST
+        internal DetailRelationRepositoryClient(
+            IWcfDetail.IDetailRelationRepositoryClient wcfDetail,
+            IRestDetail.IDetailRelationRepositoryClient restDetail
+        )
+            : base(wcfDetail, restDetail)
+        {
+            _wcfDetail = wcfDetail;
+            _restDetail = restDetail;
+        }
+
         public string Add(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount)
         {
-            string methodName = "add"; // new StackTrace().GetFrame(0).GetMethod().Name;
+            if (ChannelType.Wcf == Program.ChannelType)
+                return _wcfDetail.Add(selectedDetail, isRoot, name, amount);
 
-            byte[] byteArray = _restApi.GetHttpData(
-                url: $"https://{Program.ConnectInfo.HostAddress}/{_controllerAddress}/{methodName}",
-                method: "POST",
-                contentType: "application/json; charset=utf-8",
-                sentData: _streamHelper.ObjToJson(new { selectedDetail, isRoot, name, amount }, Encoding.UTF8),
-                accessToken: Program.AccessToken,
-                useCertificate: false,
-                msgBadStatusCode: "Ошибка. HttpStatusCode = {0}.");
-
-            string warningMessage = _streamHelper.JsonToObj<string>(byteArray, Encoding.UTF8);
-            return warningMessage;
+            return _restDetail.Add(Program.AccessToken, selectedDetail, isRoot, name, amount);
         }
-#endif
 
-#if WCF
-        public string Edit(DetailRelationEntity selectedDetail, string name, string amount) =>
-            new ChannelsManager().GetChannel<IDetailRelationRepositoryService>().Edit(selectedDetail, name, amount);
-#elif REST
         public string Edit(DetailRelationEntity selectedDetail, string name, string amount)
         {
-            string methodName = "edit"; // new StackTrace().GetFrame(0).GetMethod().Name;
+            if (ChannelType.Wcf == Program.ChannelType)
+                return _wcfDetail.Edit(selectedDetail, name, amount);
 
-            byte[] byteArray = _restApi.GetHttpData(
-                url: $"https://{Program.ConnectInfo.HostAddress}/{_controllerAddress}/{methodName}",
-                method: "POST",
-                contentType: "application/json; charset=utf-8",
-                sentData: _streamHelper.ObjToJson(new { selectedDetail, name, amount }, Encoding.UTF8),
-                accessToken: Program.AccessToken,
-                useCertificate: false,
-                msgBadStatusCode: "Ошибка. HttpStatusCode = {0}.");
-
-            string warningMessage = _streamHelper.JsonToObj<string>(byteArray, Encoding.UTF8);
-            return warningMessage;
+            return _restDetail.Edit(Program.AccessToken, selectedDetail, name, amount);
         }
-#endif
     }
 }

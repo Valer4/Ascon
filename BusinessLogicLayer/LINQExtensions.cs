@@ -30,9 +30,7 @@ namespace BusinessLogicLayer
 
         public static JoinedEnumerable<TElement> Wrap<TElement>(IEnumerable<TElement> source, bool isOuter)
         {
-            var joinedSource
-                = source as JoinedEnumerable<TElement> ??
-                    new JoinedEnumerable<TElement>(source);
+            var joinedSource = source as JoinedEnumerable<TElement> ?? new JoinedEnumerable<TElement>(source);
             joinedSource.IsOuter = isOuter;
             return joinedSource;
         }

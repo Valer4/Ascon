@@ -4,7 +4,7 @@ using WcfService.Services.Print;
 
 namespace WcfClient.Print
 {
-	internal class PrintClient : IPrintClient
+    public class PrintClient : IPrintClient
     {
         private readonly WcfClientConfigurator _wcfClientConfigurator;
 

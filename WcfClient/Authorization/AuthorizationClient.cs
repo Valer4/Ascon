@@ -1,9 +1,17 @@
 ﻿using System;
+using WcfService;
 
 namespace WcfClient.Authorization
 {
-	internal class AuthorizationClient : IAuthorizationClient
+    public class AuthorizationClient : IAuthorizationClient
     {
-        public void GetAuthorization() => throw new NotImplementedException();
+        private readonly WcfClientConfigurator _wcfClientConfigurator;
+
+        public AuthorizationClient(WcfClientConfigurator wcfClientConfigurator)
+        {
+            _wcfClientConfigurator = wcfClientConfigurator;
+        }
+
+        public string GetAuthorization() => throw new NotImplementedException();
     }
 }

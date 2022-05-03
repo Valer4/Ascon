@@ -2,7 +2,7 @@
 
 namespace RestClient.Repositories.Interfaces.ConcreteDefinitions
 {
-	internal interface IDetailRelationRepositoryClient : IAbstractRepositoryClient<DetailRelationEntity, long>
+	public interface IDetailRelationRepositoryClient : IAbstractRepositoryClient<DetailRelationEntity, long>
     {
         string Add(
             string accessToken,

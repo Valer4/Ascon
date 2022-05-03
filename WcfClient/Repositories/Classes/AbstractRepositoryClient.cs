@@ -5,7 +5,7 @@ using WcfService.Services.Repositories.Interfaces;
 
 namespace WcfClient.Repositories.Classes
 {
-	internal abstract class AbstractRepositoryClient<TEntity, TId, TInterfaceEntityService> :
+    public abstract class AbstractRepositoryClient<TEntity, TId, TInterfaceEntityService> :
         IAbstractRepositoryClient<TEntity, TId>
             where TInterfaceEntityService : IAbstractRepositoryService<TEntity, TId>
     {

@@ -11,12 +11,22 @@ using UserInterfaceLayer.Clients.Print;
 using UserInterfaceLayer.Clients.Repositories.Classes.ConcreteDefinitions;
 using UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions;
 using UserInterfaceLayer.Forms.Views;
+using WcfService;
+using IRestDetail = RestClient.Repositories.Interfaces.ConcreteDefinitions;
+using IWcfDetail = WcfClient.Repositories.Interfaces.ConcreteDefinitions;
+using RestAuthorization = RestClient.Authorization;
+using RestDetail = RestClient.Repositories.Classes.ConcreteDefinitions;
+using RestPrint = RestClient.Print;
+using WcfAuthorization = WcfClient.Authorization;
+using WcfDetail = WcfClient.Repositories.Classes.ConcreteDefinitions;
+using WcfPrint = WcfClient.Print;
 
 namespace UserInterfaceLayer
 {
-    internal static class Program
+	internal static class Program
     {
-        internal static ConnectInfoClientService ConnectInfo;
+        internal static IDiContainer DiContainer = new DiContainer();
+        internal static ChannelType ChannelType = ChannelType.Wcf;
         internal static string AccessToken;
 
         /// <summary>
@@ -30,57 +40,88 @@ namespace UserInterfaceLayer
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                new Configurator(new ConnectInfoClientService("localhost", 10000));
+                DiContainer.RegisterType<INoticeError, NoticeError>(DiLifetimeType.Transient);
+                DiContainer.RegisterType<IStreamHelper, StreamHelper>(DiLifetimeType.Transient);
 
-                ConnectInfo = new ConnectInfoClientService("localhost", 44331);
+                DiContainer.RegisterType<CfgCryptoProvider>(DiLifetimeType.Transient, constructorParams: new object[] {
+                    DiContainer.Resolve<INoticeError>(),
 
-                {
-                    Configurator.DiContainer.RegisterType<INoticeError, NoticeError>(DiLifetimeType.Transient);
-                    Configurator.DiContainer.RegisterType<IStreamHelper, StreamHelper>(DiLifetimeType.Transient);
+                    /*keyContainerName*/ string.Empty,
+                    /*containerPassword*/ string.Empty,
 
-                    Configurator.DiContainer.RegisterType<CfgCryptoProvider>(DiLifetimeType.Transient, constructorParams: new object[] {
-                        Configurator.DiContainer.Resolve<INoticeError>(),
+                    /*providerName*/ string.Empty,
+                    /*providerType*/ 0,
 
-                        /*keyContainerName*/ string.Empty,
-                        /*containerPassword*/ string.Empty,
+                    /*catchMsg_CreateCryptoProvider*/ string.Empty,
+                    /*catchMsg_KeyPassword*/ string.Empty,
+                    /*errorMsg_GetCertificateFromContainer*/ string.Empty});
 
-                        /*providerName*/ string.Empty,
-                        /*providerType*/ 0,
+                DiContainer.RegisterType<ICryptoProvider, CryptoProvider>(DiLifetimeType.Transient, constructorParams:
+                    DiContainer.Resolve<CfgCryptoProvider>());
 
-                        /*catchMsg_CreateCryptoProvider*/ string.Empty,
-                        /*catchMsg_KeyPassword*/ string.Empty,
-                        /*errorMsg_GetCertificateFromContainer*/ string.Empty});
+                DiContainer.RegisterType<IRestApi, RestApi>(DiLifetimeType.Transient, constructorParams: new object[]{
+                    DiContainer.Resolve<IStreamHelper>(),
+                    DiContainer.Resolve<INoticeError>(),
+                    DiContainer.Resolve<ICryptoProvider>()});
 
-                    Configurator.DiContainer.RegisterType<ICryptoProvider, CryptoProvider>(DiLifetimeType.Transient, constructorParams:
-                        Configurator.DiContainer.Resolve<CfgCryptoProvider>());
+                DiContainer.RegisterType<WcfClientConfigurator>(DiLifetimeType.Transient, constructorParams: new object[] {
+                    new ConnectInfoClientService("localhost", 10000)});
 
-                    Configurator.DiContainer.RegisterType<IRestApi, RestApi>(DiLifetimeType.Transient, constructorParams: new object[]{
-                        Configurator.DiContainer.Resolve<IStreamHelper>(),
-                        Configurator.DiContainer.Resolve<INoticeError>(),
-                        Configurator.DiContainer.Resolve<ICryptoProvider>()});
+                DiContainer.RegisterType<RestClientConfigurator>(DiLifetimeType.Transient, constructorParams: new object[] {
+                    DiContainer.Resolve<IRestApi>(),
+                    new ConnectInfoClientService("localhost", 44331)});
 
-                    Configurator.DiContainer.RegisterType<IDetailRelationRepositoryClient, DetailRelationRepositoryClient>(DiLifetimeType.Transient, constructorParams: new object[]{
-                        Configurator.DiContainer.Resolve<IRestApi>(),
-                        Configurator.DiContainer.Resolve<IStreamHelper>(),
+                DiContainer.RegisterType<IWcfDetail.IDetailRelationRepositoryClient, WcfDetail.DetailRelationRepositoryClient>(
+                    DiLifetimeType.Transient,
+                    constructorParams: new object[] {
+                        DiContainer.Resolve<WcfClientConfigurator>()});
+                DiContainer.RegisterType<IRestDetail.IDetailRelationRepositoryClient, RestDetail.DetailRelationRepositoryClient>(
+                    DiLifetimeType.Transient,
+                    constructorParams: new object[] {
+                        DiContainer.Resolve<RestClientConfigurator>(),
                         @"api/detail"});
+                DiContainer.RegisterType<IDetailRelationRepositoryClient, DetailRelationRepositoryClient>(
+                    DiLifetimeType.Transient,
+                    constructorParams: new object[]{
+                        DiContainer.Resolve<IWcfDetail.IDetailRelationRepositoryClient>(),
+                        DiContainer.Resolve<IRestDetail.IDetailRelationRepositoryClient>()});
 
-                    Configurator.DiContainer.RegisterType<IPrintClient, PrintClient>(DiLifetimeType.Transient, constructorParams: new object[]{
-                        Configurator.DiContainer.Resolve<IRestApi>(),
-                        Configurator.DiContainer.Resolve<IStreamHelper>(),
+                DiContainer.RegisterType<WcfPrint.IPrintClient, WcfPrint.PrintClient>(
+                    DiLifetimeType.Transient,
+                    constructorParams: new object[] {
+                        DiContainer.Resolve<WcfClientConfigurator>()});
+                DiContainer.RegisterType<RestPrint.IPrintClient, RestPrint.PrintClient>(
+                    DiLifetimeType.Transient,
+                    constructorParams: new object[] {
+                        DiContainer.Resolve<RestClientConfigurator>(),
                         @"api/print"});
+                DiContainer.RegisterType<IPrintClient, PrintClient>(
+                    DiLifetimeType.Transient,
+                    constructorParams: new object[]{
+                        DiContainer.Resolve<WcfPrint.IPrintClient>(),
+                        DiContainer.Resolve<RestPrint.IPrintClient>()});
 
-                    Configurator.DiContainer.RegisterType<IAuthorizationClient, AuthorizationClient>(DiLifetimeType.Transient, constructorParams: new object[]{
-                        Configurator.DiContainer.Resolve<IRestApi>(),
-                        Configurator.DiContainer.Resolve<IStreamHelper>(),
+                DiContainer.RegisterType<WcfAuthorization.IAuthorizationClient, WcfAuthorization.AuthorizationClient>(
+                    DiLifetimeType.Transient,
+                    constructorParams: new object[] {
+                        DiContainer.Resolve<WcfClientConfigurator>()});
+                DiContainer.RegisterType<RestAuthorization.IAuthorizationClient, RestAuthorization.AuthorizationClient>(
+                    DiLifetimeType.Transient,
+                    constructorParams: new object[] {
+                        DiContainer.Resolve<RestClientConfigurator>(),
                         @"api/authorization"});
+                DiContainer.RegisterType<IAuthorizationClient, AuthorizationClient>(
+                    DiLifetimeType.Transient,
+                    constructorParams: new object[]{
+                        DiContainer.Resolve<WcfAuthorization.IAuthorizationClient>(),
+                        DiContainer.Resolve<RestAuthorization.IAuthorizationClient>()});
 
-                    Configurator.DiContainer.RegisterType<DetailsEditor>(DiLifetimeType.Transient, constructorParams: new object[]{
-                        Configurator.DiContainer.Resolve<IDetailRelationRepositoryClient>(),
-                        Configurator.DiContainer.Resolve<IPrintClient>(),
-                        Configurator.DiContainer.Resolve<IAuthorizationClient>()});
-                }
+                DiContainer.RegisterType<DetailsEditor>(DiLifetimeType.Transient, constructorParams: new object[]{
+                    DiContainer.Resolve<IDetailRelationRepositoryClient>(),
+                    DiContainer.Resolve<IPrintClient>(),
+                    DiContainer.Resolve<IAuthorizationClient>()});
 
-                Application.Run(Configurator.DiContainer.Resolve<DetailsEditor>());
+                Application.Run(DiContainer.Resolve<DetailsEditor>());
             }
             catch (Exception ex)
             {

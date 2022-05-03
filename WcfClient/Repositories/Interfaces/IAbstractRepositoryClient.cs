@@ -2,7 +2,7 @@
 
 namespace WcfClient.Repositories.Interfaces
 {
-	internal interface IAbstractRepositoryClient<TEntity, TId>
+	public interface IAbstractRepositoryClient<TEntity, TId>
     {
 #region Entity.
 

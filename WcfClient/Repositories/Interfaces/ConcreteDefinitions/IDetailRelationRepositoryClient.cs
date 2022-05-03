@@ -2,7 +2,7 @@
 
 namespace WcfClient.Repositories.Interfaces.ConcreteDefinitions
 {
-	internal interface IDetailRelationRepositoryClient : IAbstractRepositoryClient<DetailRelationEntity, long>
+	public interface IDetailRelationRepositoryClient : IAbstractRepositoryClient<DetailRelationEntity, long>
     {
         string Add(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount);
 

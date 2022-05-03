@@ -9,7 +9,7 @@ namespace BusinessLogicLayer.DiContainer
 {
     public class DiContainer : IDiContainer
     {
-        private IUnityContainer Implementation { get; } = new UnityContainer();
+        private IUnityContainer Implementation { get; } = new UnityContainer().AddExtension(new Diagnostic());
 
         public Dictionary<Type, Func<object>> ResolveDelegateDictionary = new Dictionary<Type, Func<object>>();
         public Dictionary<Type, Type> ResolveParamTypeDictionary = new Dictionary<Type, Type>();

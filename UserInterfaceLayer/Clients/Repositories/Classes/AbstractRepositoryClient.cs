@@ -1,13 +1,8 @@
-﻿using CommonHelpers.Any.Interfaces;
-#if REST
-using System.Collections.Generic;
-#endif
-using System.Linq;
-#if REST
-using System.Text;
-#endif
+﻿using System.Linq;
 using UserInterfaceLayer.Clients.Repositories.Interfaces;
 using WcfService.Services.Repositories.Interfaces;
+using IRest = RestClient.Repositories.Interfaces;
+using IWcf = WcfClient.Repositories.Interfaces;
 
 namespace UserInterfaceLayer.Clients.Repositories.Classes
 {
@@ -15,74 +10,76 @@ namespace UserInterfaceLayer.Clients.Repositories.Classes
         IAbstractRepositoryClient<TEntity, TId>
             where TInterfaceEntityService : IAbstractRepositoryService<TEntity, TId>
     {
-        protected IRestApi _restApi;
-        protected IStreamHelper _streamHelper;
-        protected string _controllerAddress;
-        public AbstractRepositoryClient(IRestApi restApi, IStreamHelper streamHelper, string controllerAddress)
+        protected readonly IWcf.IAbstractRepositoryClient<TEntity, TId> _wcfDetailAbstract;
+        protected readonly IRest.IAbstractRepositoryClient<TEntity, TId> _restDetailAbstract;
+
+        internal AbstractRepositoryClient(
+            IWcf.IAbstractRepositoryClient<TEntity, TId> wcfDetailAbstract,
+            IRest.IAbstractRepositoryClient<TEntity, TId> restDetailAbstract
+        )
         {
-            _restApi = restApi;
-            _streamHelper = streamHelper;
-            _controllerAddress = controllerAddress;
+            _wcfDetailAbstract = wcfDetailAbstract;
+            _restDetailAbstract = restDetailAbstract;
         }
 
 #region Entity.
 
-        public TEntity Get(TId id) => new ChannelsManager().GetChannel<TInterfaceEntityService>().Get(id);
+        public TEntity Get(TId id)
+        {
+            if (ChannelType.Wcf == Program.ChannelType)
+                return _wcfDetailAbstract.Get(id);
 
-        public void Delete(TId id) => new ChannelsManager().GetChannel<TInterfaceEntityService>().DeleteById(id);
+            return _restDetailAbstract.Get(Program.AccessToken, id);
+        }
+        public void Delete(TId id)
+        {
+            if (ChannelType.Wcf == Program.ChannelType)
+                _wcfDetailAbstract.Delete(id);
 
-#if WCF
-        public string Delete(TEntity entity) =>
-            new ChannelsManager().GetChannel<TInterfaceEntityService>().Delete(entity);
-#elif REST
+            _restDetailAbstract.Delete(Program.AccessToken, id);
+        }
+
         public string Delete(TEntity entity)
         {
-            string methodName = "delete"; // new StackTrace().GetFrame(0).GetMethod().Name;
+            if (ChannelType.Wcf == Program.ChannelType)
+                return _wcfDetailAbstract.Delete(entity);
 
-            byte[] byteArray = _restApi.GetHttpData(
-                url: $"https://{Program.ConnectInfo.HostAddress}/{_controllerAddress}/{methodName}",
-                method: "POST",
-                contentType: "application/json; charset=utf-8",
-                sentData: _streamHelper.ObjToJson(entity, Encoding.UTF8),
-                accessToken: Program.AccessToken,
-                useCertificate: false,
-                msgBadStatusCode: "Ошибка. HttpStatusCode = {0}.");
-
-            string warningMessage = _streamHelper.JsonToObj<string>(byteArray, Encoding.UTF8);
-            return warningMessage;
+            return _restDetailAbstract.Delete(Program.AccessToken, entity);
         }
-#endif
 
 #endregion
 
 #region Collection.
 
-#if WCF
-        public IQueryable<TEntity> GetAll() => new ChannelsManager().GetChannel<TInterfaceEntityService>().GetAll();
-#elif REST
         public IQueryable<TEntity> GetAll()
         {
-            string methodName = "all"; // new StackTrace().GetFrame(0).GetMethod().Name;
+            if (ChannelType.Wcf == Program.ChannelType)
+                return _wcfDetailAbstract.GetAll();
 
-            byte[] byteArray = _restApi.GetHttpData(
-                url: $"https://{Program.ConnectInfo.HostAddress}/{_controllerAddress}/{methodName}",
-                method: "GET",
-                contentType: "application/json; charset=utf-8",
-                sentData: new byte[0],
-                accessToken: Program.AccessToken,
-                useCertificate: false,
-                msgBadStatusCode: "Ошибка. HttpStatusCode = {0}.");
-
-            List<TEntity> result = _streamHelper.JsonToObj<List<TEntity>>(byteArray, Encoding.UTF8);
-            return result.AsQueryable();
+            return _restDetailAbstract.GetAll(Program.AccessToken);
         }
-#endif
-        public void AddCollection(IQueryable<TEntity> collection) =>
-            new ChannelsManager().GetChannel<TInterfaceEntityService>().AddCollection(collection);
-        public void EditCollection(IQueryable<TEntity> collection) =>
-            new ChannelsManager().GetChannel<TInterfaceEntityService>().EditCollection(collection);
-        public void DeleteCollection(IQueryable<TEntity> collection) =>
-            new ChannelsManager().GetChannel<TInterfaceEntityService>().DeleteCollection(collection);
+
+        public void AddCollection(IQueryable<TEntity> collection)
+        {
+            if (ChannelType.Wcf == Program.ChannelType)
+                _wcfDetailAbstract.AddCollection(collection);
+
+            _restDetailAbstract.AddCollection(Program.AccessToken, collection);
+        }
+        public void EditCollection(IQueryable<TEntity> collection)
+        {
+            if (ChannelType.Wcf == Program.ChannelType)
+                _wcfDetailAbstract.EditCollection(collection);
+
+            _restDetailAbstract.EditCollection(Program.AccessToken, collection);
+        }
+        public void DeleteCollection(IQueryable<TEntity> collection)
+        {
+            if (ChannelType.Wcf == Program.ChannelType)
+                _wcfDetailAbstract.DeleteCollection(collection);
+
+            _restDetailAbstract.DeleteCollection(Program.AccessToken, collection);
+        }
 
 #endregion
     }

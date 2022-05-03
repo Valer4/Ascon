@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RestClient.Print
 {
-	internal class PrintClient : IPrintClient
+    public class PrintClient : IPrintClient
     {
         private readonly RestClientConfigurator _restClientConfigurator;
         private readonly string _controllerAddress;

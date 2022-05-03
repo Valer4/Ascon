@@ -51,7 +51,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ChannelsManager.cs" />
+    <Compile Include="ChannelType.cs" />
     <Compile Include="Clients\Authorization\AuthorizationClient.cs" />
     <Compile Include="Clients\Authorization\IAuthorizationClient.cs" />
     <Compile Include="Clients\Print\IPrintClient.cs" />
@@ -60,9 +60,6 @@
     <Compile Include="Clients\Repositories\Classes\ConcreteDefinitions\DetailRelationRepositoryClient.cs" />
     <Compile Include="Clients\Repositories\Interfaces\ConcreteDefinitions\IDetailRelationRepositoryClient.cs" />
     <Compile Include="Clients\Repositories\Interfaces\IAbstractRepositoryClient.cs" />
-    <Compile Include="Clients\UnitsOfWork\Classes\AbstractUnitOfWorkClient.cs" />
-    <Compile Include="Clients\UnitsOfWork\Interfaces\IAbstractUnitOfWorkClient.cs" />
-    <Compile Include="Configurator.cs" />
     <Compile Include="Forms\FormHelper.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +124,14 @@
       <Project>{fc4bdf75-52a4-4e6c-abfb-b34947795dc9}</Project>
       <Name>BusinessLogicLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RestClient\RestClient.csproj">
+      <Project>{11721a63-1460-4a07-a4d0-7fefd6395332}</Project>
+      <Name>RestClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WcfClient\WcfClient.csproj">
+      <Project>{3628fdcc-14e3-4fea-89c7-6d1314b66ede}</Project>
+      <Name>WcfClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WCFService\WcfService.csproj">
       <Project>{8bb65b50-70aa-4587-9ef4-af03e3a6c644}</Project>
       <Name>WcfService</Name>
@@ -144,5 +149,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

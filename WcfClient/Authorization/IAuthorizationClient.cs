@@ -1,7 +1,7 @@
 ﻿namespace WcfClient.Authorization
 {
-    internal interface IAuthorizationClient
+    public interface IAuthorizationClient
     {
-        void GetAuthorization();
+        string GetAuthorization();
     }
 }

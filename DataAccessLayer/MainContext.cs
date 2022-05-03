@@ -6,7 +6,7 @@ namespace DataAccessLayer
 {
     public class MainContext : DbContext
     {
-        public MainContext(string nameOrConnectionString) : base(nameOrConnectionString) {}
+        public MainContext(string nameOrConnectionString) : base(nameOrConnectionString) {Database.Create();}
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

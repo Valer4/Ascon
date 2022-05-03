@@ -5,7 +5,7 @@ using WcfService.Services.Repositories.Interfaces.ConcreteDefinitions;
 
 namespace WcfClient.Repositories.Classes.ConcreteDefinitions
 {
-	internal class DetailRelationRepositoryClient :
+    public class DetailRelationRepositoryClient :
         AbstractRepositoryClient<DetailRelationEntity, long, IDetailRelationRepositoryService>,
         IDetailRelationRepositoryClient
     {

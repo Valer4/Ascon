@@ -2,7 +2,7 @@
 
 namespace RestClient.Print
 {
-	internal interface IPrintClient
+    public interface IPrintClient
     {
         byte[] GetReportOnDetailInMSWord(
             string accessToken,

@@ -27,9 +27,7 @@ namespace UserInterfaceLayer.Forms.Views
 
             InitializeComponent();
 
-#if WCF
-            buttonAuthorization.Visible = false;
-#endif
+            buttonAuthorization.Visible = ChannelType.Rest == Program.ChannelType;
         }
 
         private IQueryable<DetailRelationEntity> _allDetails;
@@ -47,17 +45,12 @@ namespace UserInterfaceLayer.Forms.Views
         internal DetailsEditor() => InitializeComponent();
         private void DetailEditor_Load(object sender, EventArgs e) => UpdateTree();
 
-#if WCF
-        private void UpdateTree()
-#elif REST
         private async void UpdateTree()
-#endif
         {
             try
             {
-#if REST
-                await Task.Run(() => _authorizationClient.GetAuthorization());
-#endif
+                if (ChannelType.Rest == Program.ChannelType)
+                    await Task.Run(() => _authorizationClient.GetAuthorization());
 
                 AllDetails = _detailRelationEntityClient.GetAll();
             }

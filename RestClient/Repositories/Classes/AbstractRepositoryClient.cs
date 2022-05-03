@@ -7,7 +7,7 @@ using System.Text;
 
 namespace RestClient.Repositories.Classes
 {
-	internal abstract class AbstractRepositoryClient<TEntity, TId> : IAbstractRepositoryClient<TEntity, TId>
+    public abstract class AbstractRepositoryClient<TEntity, TId> : IAbstractRepositoryClient<TEntity, TId>
     {
         protected readonly RestClientConfigurator _restClientConfigurator;
         protected readonly string _controllerAddress;
