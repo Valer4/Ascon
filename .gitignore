@@ -317,3 +317,6 @@
 /BusinessLogicLayer/.vs/BusinessLogicLayer/v17/.suo
 /BusinessLogicLayer/obj/Release/BusinessLogicLayer.csproj.AssemblyReference.cache
 /BusinessLogicLayer/obj/Release/.NETFramework,Version=v4.6.1.AssemblyAttributes.cs
+/.vs/Ascon/v17/HierarchyCache.v1.txt
+/DataAccessLayerCore/obj/Debug/net6.0/refint/DataAccessLayerCore.dll
+/RestService/obj/Debug/net6.0/refint/RestService.dll
