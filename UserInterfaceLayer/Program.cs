@@ -26,8 +26,8 @@ namespace UserInterfaceLayer
 {
 	internal static class Program
     {
+        internal static ChannelType ChannelType = ChannelType.Rest;
         internal static IDiContainer DiContainer = new DiContainer();
-        internal static ChannelType ChannelType = ChannelType.Wcf;
         internal static string AccessToken;
 
         /// <summary>
