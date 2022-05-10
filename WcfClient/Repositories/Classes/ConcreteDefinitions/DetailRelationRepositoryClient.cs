@@ -9,15 +9,15 @@ namespace WcfClient.Repositories.Classes.ConcreteDefinitions
         AbstractRepositoryClient<DetailRelationEntity, long, IDetailRelationRepositoryService>,
         IDetailRelationRepositoryClient
     {
-        public DetailRelationRepositoryClient(WcfClientConfigurator wcfClientConfigurator)
-            : base(wcfClientConfigurator)
+        public DetailRelationRepositoryClient(ChannelsManager channelsManager)
+            : base(channelsManager)
         {
 		}
 
         public string Add(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount) =>
-            new ChannelsManager(_wcfClientConfigurator).GetChannel<IDetailRelationRepositoryService>().Add(selectedDetail, isRoot, name, amount);
+            _channelsManager.GetChannel<IDetailRelationRepositoryService>().Add(selectedDetail, isRoot, name, amount);
 
         public string Edit(DetailRelationEntity selectedDetail, string name, string amount) =>
-            new ChannelsManager(_wcfClientConfigurator).GetChannel<IDetailRelationRepositoryService>().Edit(selectedDetail, name, amount);
+            _channelsManager.GetChannel<IDetailRelationRepositoryService>().Edit(selectedDetail, name, amount);
     }
 }

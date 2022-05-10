@@ -11,6 +11,7 @@ using UserInterfaceLayer.Clients.Print;
 using UserInterfaceLayer.Clients.Repositories.Classes.ConcreteDefinitions;
 using UserInterfaceLayer.Clients.Repositories.Interfaces.ConcreteDefinitions;
 using UserInterfaceLayer.Forms.Views;
+using WcfClient;
 using WcfService;
 using IRestDetail = RestClient.Repositories.Interfaces.ConcreteDefinitions;
 using IWcfDetail = WcfClient.Repositories.Interfaces.ConcreteDefinitions;
@@ -71,10 +72,13 @@ namespace UserInterfaceLayer
                     DiContainer.Resolve<IRestApi>(),
                     new ConnectInfoClientService("localhost", 44331)});
 
+                DiContainer.RegisterType<ChannelsManager>(DiLifetimeType.Transient, constructorParams: new object[] {
+                    DiContainer.Resolve<WcfClientConfigurator>()});
+
                 DiContainer.RegisterType<IWcfDetail.IDetailRelationRepositoryClient, WcfDetail.DetailRelationRepositoryClient>(
                     DiLifetimeType.Transient,
                     constructorParams: new object[] {
-                        DiContainer.Resolve<WcfClientConfigurator>()});
+                        DiContainer.Resolve<ChannelsManager>()});
                 DiContainer.RegisterType<IRestDetail.IDetailRelationRepositoryClient, RestDetail.DetailRelationRepositoryClient>(
                     DiLifetimeType.Transient,
                     constructorParams: new object[] {
@@ -89,7 +93,7 @@ namespace UserInterfaceLayer
                 DiContainer.RegisterType<WcfPrint.IPrintClient, WcfPrint.PrintClient>(
                     DiLifetimeType.Transient,
                     constructorParams: new object[] {
-                        DiContainer.Resolve<WcfClientConfigurator>()});
+                        DiContainer.Resolve<ChannelsManager>()});
                 DiContainer.RegisterType<RestPrint.IPrintClient, RestPrint.PrintClient>(
                     DiLifetimeType.Transient,
                     constructorParams: new object[] {
@@ -104,7 +108,7 @@ namespace UserInterfaceLayer
                 DiContainer.RegisterType<WcfAuthorization.IAuthorizationClient, WcfAuthorization.AuthorizationClient>(
                     DiLifetimeType.Transient,
                     constructorParams: new object[] {
-                        DiContainer.Resolve<WcfClientConfigurator>()});
+                        DiContainer.Resolve<ChannelsManager>()});
                 DiContainer.RegisterType<RestAuthorization.IAuthorizationClient, RestAuthorization.AuthorizationClient>(
                     DiLifetimeType.Transient,
                     constructorParams: new object[] {

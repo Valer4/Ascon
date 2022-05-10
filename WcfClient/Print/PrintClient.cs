@@ -6,14 +6,14 @@ namespace WcfClient.Print
 {
     public class PrintClient : IPrintClient
     {
-        private readonly WcfClientConfigurator _wcfClientConfigurator;
+        private readonly ChannelsManager _channelsManager;
 
-        public PrintClient(WcfClientConfigurator wcfClientConfigurator)
+        public PrintClient(ChannelsManager channelsManager)
         {
-            _wcfClientConfigurator = wcfClientConfigurator;
+            _channelsManager = channelsManager;
         }
 
         public byte[] GetReportOnDetailInMSWord(DetailRelationEntity selectedDetail, out string warningMessage) =>
-            new ChannelsManager(_wcfClientConfigurator).GetChannel<IPrintService>().GetReportOnDetailInMSWord(selectedDetail, out warningMessage);
+            _channelsManager.GetChannel<IPrintService>().GetReportOnDetailInMSWord(selectedDetail, out warningMessage);
     }
 }

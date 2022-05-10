@@ -9,33 +9,29 @@ namespace WcfClient.Repositories.Classes
         IAbstractRepositoryClient<TEntity, TId>
             where TInterfaceEntityService : IAbstractRepositoryService<TEntity, TId>
     {
-        protected readonly WcfClientConfigurator _wcfClientConfigurator;
+        private protected readonly ChannelsManager _channelsManager;
 
-        public AbstractRepositoryClient(WcfClientConfigurator wcfClientConfigurator)
+        public AbstractRepositoryClient(ChannelsManager channelsManager)
         {
-            _wcfClientConfigurator = wcfClientConfigurator;
+            _channelsManager = channelsManager;
         }
 
 #region Entity.
 
-        public TEntity Get(TId id) => new ChannelsManager(_wcfClientConfigurator).GetChannel<TInterfaceEntityService>().Get(id);
-        public void Delete(TId id) => new ChannelsManager(_wcfClientConfigurator).GetChannel<TInterfaceEntityService>().DeleteById(id);
+        public TEntity Get(TId id) => _channelsManager.GetChannel<TInterfaceEntityService>().Get(id);
+        public void Delete(TId id) => _channelsManager.GetChannel<TInterfaceEntityService>().DeleteById(id);
 
-        public string Delete(TEntity entity) =>
-            new ChannelsManager(_wcfClientConfigurator).GetChannel<TInterfaceEntityService>().Delete(entity);
+        public string Delete(TEntity entity) => _channelsManager.GetChannel<TInterfaceEntityService>().Delete(entity);
 
 #endregion
 
 #region Collection.
 
-        public IQueryable<TEntity> GetAll() => new ChannelsManager(_wcfClientConfigurator).GetChannel<TInterfaceEntityService>().GetAll();
+        public IQueryable<TEntity> GetAll() => _channelsManager.GetChannel<TInterfaceEntityService>().GetAll();
 
-        public void AddCollection(IQueryable<TEntity> collection) =>
-            new ChannelsManager(_wcfClientConfigurator).GetChannel<TInterfaceEntityService>().AddCollection(collection);
-        public void EditCollection(IQueryable<TEntity> collection) =>
-            new ChannelsManager(_wcfClientConfigurator).GetChannel<TInterfaceEntityService>().EditCollection(collection);
-        public void DeleteCollection(IQueryable<TEntity> collection) =>
-            new ChannelsManager(_wcfClientConfigurator).GetChannel<TInterfaceEntityService>().DeleteCollection(collection);
+        public void AddCollection(IQueryable<TEntity> collection) => _channelsManager.GetChannel<TInterfaceEntityService>().AddCollection(collection);
+        public void EditCollection(IQueryable<TEntity> collection) => _channelsManager.GetChannel<TInterfaceEntityService>().EditCollection(collection);
+        public void DeleteCollection(IQueryable<TEntity> collection) => _channelsManager.GetChannel<TInterfaceEntityService>().DeleteCollection(collection);
 
 #endregion
     }

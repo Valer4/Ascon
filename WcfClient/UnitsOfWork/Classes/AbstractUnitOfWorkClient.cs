@@ -7,12 +7,13 @@ namespace WcfClient.UnitsOfWork.Classes
 	internal abstract class AbstractUnitOfWorkClient<TModel, TInterfaceUnitOfWorkService> : IAbstractUnitOfWorkClient<TModel>
         where TInterfaceUnitOfWorkService : IAbstractUnitOfWorkService<TModel>
     {
-        private readonly WcfClientConfigurator _wcfClientConfigurator;
-        public AbstractUnitOfWorkClient(WcfClientConfigurator wcfClientConfigurator)
+        private readonly ChannelsManager _channelsManager;
+
+        public AbstractUnitOfWorkClient(ChannelsManager channelsManager)
         {
-            _wcfClientConfigurator = wcfClientConfigurator;
+            _channelsManager = channelsManager;
         }
 
-        public TModel Get() => new ChannelsManager(_wcfClientConfigurator).GetChannel<TInterfaceUnitOfWorkService>().Get();
+        public TModel Get() => _channelsManager.GetChannel<TInterfaceUnitOfWorkService>().Get();
     }
 }

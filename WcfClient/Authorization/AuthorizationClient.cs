@@ -5,11 +5,11 @@ namespace WcfClient.Authorization
 {
     public class AuthorizationClient : IAuthorizationClient
     {
-        private readonly WcfClientConfigurator _wcfClientConfigurator;
+        private readonly ChannelsManager _channelsManager;
 
-        public AuthorizationClient(WcfClientConfigurator wcfClientConfigurator)
+        public AuthorizationClient(ChannelsManager channelsManager)
         {
-            _wcfClientConfigurator = wcfClientConfigurator;
+            _channelsManager = channelsManager;
         }
 
         public string GetAuthorization() => throw new NotImplementedException();
