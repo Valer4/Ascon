@@ -369,3 +369,10 @@
 /WcfClient/obj/Debug/WcfClient.csproj.CopyComplete
 /WcfClient/obj/Debug/WcfClient.csproj.AssemblyReference.cache
 /WcfClient/obj/Debug/.NETFramework,Version=v4.8.AssemblyAttributes.cs
+/UserInterfaceLayer/bin/Debug/WcfClient.pdb
+/UserInterfaceLayer/bin/Debug/WcfClient.dll
+/UserInterfaceLayer/bin/Debug/RestClient.pdb
+/UserInterfaceLayer/bin/Debug/RestClient.dll
+/BusinessLogicLayer/obj/Debug/DesignTimeResolveAssemblyReferences.cache
+/RestClient/obj/Debug/.NETFramework,Version=v4.6.1.AssemblyAttributes.cs
+/WcfClient/obj/Debug/.NETFramework,Version=v4.6.1.AssemblyAttributes.cs

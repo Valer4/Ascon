@@ -73,7 +73,9 @@ namespace BusinessLogicLayer.LogicMain.Managers.Print
 
             string filePath = "C:\\service.doc";
 
-            new MSDocHelper().ReleaseMSWord(word);
+            var msDocHelper = new MsDocHelper();
+            msDocHelper.CloseDocument(word, doc, filePath);
+            msDocHelper.ReleaseMSWord(word);
 
             return File.ReadAllBytes(filePath);
         }

@@ -10,7 +10,7 @@ using Application = Microsoft.Office.Interop.Word.Application;
 
 namespace BusinessLogicLayer
 {
-	public class MSDocHelper
+	public class MsDocHelper
 	{
 		internal class ParagraphSettings
 		{
@@ -366,7 +366,7 @@ namespace BusinessLogicLayer
 			Marshal.ReleaseComObject(word);
 		}
 
-		private void CloseDocument(_Application word, _Document doc, string filePath = null)
+		public void CloseDocument(_Application word, _Document doc, string filePath = null)
 		{
 			WdAlertLevel backup = word.DisplayAlerts;
 			word.DisplayAlerts = WdAlertLevel.wdAlertsNone;
