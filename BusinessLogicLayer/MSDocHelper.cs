@@ -329,7 +329,7 @@ namespace BusinessLogicLayer
 				for (int l = 0; l < countLines; ++l)
 				{
 					if ( ! hereIsOneLine)
-						bookmarkName2 = $"{ bookmarkName }{l + 1}";
+						bookmarkName2 = $"{ bookmarkName }{ l + 1 }";
 
 					pixelsInLine = GetPixelsInLineCell(word, doc, bookmarkName2, fontBookmark);
 
