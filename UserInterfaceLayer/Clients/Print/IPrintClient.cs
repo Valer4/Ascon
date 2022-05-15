@@ -2,8 +2,8 @@
 
 namespace UserInterfaceLayer.Clients.Print
 {
-    internal interface IPrintClient
-    {
-        byte[] GetReportOnDetailInMSWord(DetailRelationEntity selectedDetail, out string message);
-    }
+	internal interface IPrintClient
+	{
+		byte[] GetReportOnDetailInMSWord(DetailRelationEntity selectedDetail, out string message);
+	}
 }

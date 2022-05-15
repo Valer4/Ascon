@@ -2,8 +2,8 @@
 
 namespace BusinessLogicLayer.LogicMain.Presenters.Print
 {
-    public interface IPrintPresenter
-    {
-        byte[] GetReportOnDetailInMSWord(DetailRelationEntity selectedDetail, out string warningMessage);
-    }
+	public interface IPrintPresenter
+	{
+		byte[] GetReportOnDetailInMSWord(DetailRelationEntity selectedDetail, out string warningMessage);
+	}
 }

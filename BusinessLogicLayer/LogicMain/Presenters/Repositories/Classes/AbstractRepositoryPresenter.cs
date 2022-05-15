@@ -4,11 +4,11 @@ using System;
 
 namespace BusinessLogicLayer.LogicMain.Presenters.Repositories.Classes
 {
-    public abstract class AbstractRepositoryPresenter<TEntity, TId> : IAbstractRepositoryPresenter<TEntity, TId>
-    {
-        public IAbstractRepositoryManager<TEntity, TId> AbstractRepositoryManager { get; }
-        public AbstractRepositoryPresenter(IAbstractRepositoryManager<TEntity, TId> abstractRepositoryManager) => AbstractRepositoryManager = abstractRepositoryManager;
+	public abstract class AbstractRepositoryPresenter<TEntity, TId> : IAbstractRepositoryPresenter<TEntity, TId>
+	{
+		public IAbstractRepositoryManager<TEntity, TId> AbstractRepositoryManager { get; }
+		public AbstractRepositoryPresenter(IAbstractRepositoryManager<TEntity, TId> abstractRepositoryManager) => AbstractRepositoryManager = abstractRepositoryManager;
 
-        public virtual string Delete(TEntity entity) => throw new NotImplementedException();
-    }
+		public virtual string Delete(TEntity entity) => throw new NotImplementedException();
+	}
 }

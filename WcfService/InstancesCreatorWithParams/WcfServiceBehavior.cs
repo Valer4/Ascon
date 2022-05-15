@@ -8,34 +8,34 @@ using System.ServiceModel.Dispatcher;
 
 namespace WcfService.InstancesCreatorWithParams
 {
-    internal class WcfServiceBehavior : IServiceBehavior
-    {
-        private readonly IDiContainer _diContainer;
+	internal class WcfServiceBehavior : IServiceBehavior
+	{
+		private readonly IDiContainer _diContainer;
 
-        internal WcfServiceBehavior(IDiContainer diContainer) => _diContainer = diContainer;
+		internal WcfServiceBehavior(IDiContainer diContainer) => _diContainer = diContainer;
 
-        public void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase) {}
+		public void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase) {}
 
-        public void AddBindingParameters(
-            ServiceDescription serviceDescription,
-            ServiceHostBase serviceHostBase,
-            Collection<ServiceEndpoint> endpoints,
-            BindingParameterCollection bindingParameters) {}
+		public void AddBindingParameters(
+			ServiceDescription serviceDescription,
+			ServiceHostBase serviceHostBase,
+			Collection<ServiceEndpoint> endpoints,
+			BindingParameterCollection bindingParameters) {}
 
-        public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
-        {
-            foreach (ChannelDispatcher channelDispatcher in serviceHostBase.ChannelDispatchers)
-                foreach (EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints)
-                    if (endpointDispatcher.ContractName != "IMetadataExchange")
-                    {
-                        string contractName = endpointDispatcher.ContractName;
+		public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
+		{
+			foreach (ChannelDispatcher channelDispatcher in serviceHostBase.ChannelDispatchers)
+				foreach (EndpointDispatcher endpointDispatcher in channelDispatcher.Endpoints)
+					if (endpointDispatcher.ContractName != "IMetadataExchange")
+					{
+						string contractName = endpointDispatcher.ContractName;
 
-                        ServiceEndpoint serviceEndpoint = serviceDescription.Endpoints.
-                            FirstOrDefault(e => e.Contract.Name == contractName);
+						ServiceEndpoint serviceEndpoint = serviceDescription.Endpoints.
+							FirstOrDefault(e => e.Contract.Name == contractName);
 
-                        endpointDispatcher.DispatchRuntime.InstanceProvider =
-                            new WcfInstanceProvider(_diContainer, serviceEndpoint.Contract.ContractType);
-                    }
-        }
-    }
+						endpointDispatcher.DispatchRuntime.InstanceProvider =
+							new WcfInstanceProvider(_diContainer, serviceEndpoint.Contract.ContractType);
+					}
+		}
+	}
 }

@@ -23,7 +23,7 @@ namespace BusinessLogicLayer
 				p,
 				l;
 
-			var paragraphParamsCropTextOff = new ParagraphParams(paragraphParams,cropText: false);
+			var paragraphParamsCropTextOff = new ParagraphParams(paragraphParams, cropText: false);
 			var results = new List<string>();
 			var linesList = new List<IList<StringBuilder>>();
 			var fonts = new List<Font>();

@@ -2,7 +2,7 @@
 
 namespace BusinessLogicLayer.LogicMain.Managers.Repositories.Interfaces.ConcreteDefinitions
 {
-    public interface IDetailRelationRepositoryManager : IAbstractRepositoryManager<DetailRelationEntity, long>
-    {
-    }
+	public interface IDetailRelationRepositoryManager : IAbstractRepositoryManager<DetailRelationEntity, long>
+	{
+	}
 }

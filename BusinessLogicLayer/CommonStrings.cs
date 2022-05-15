@@ -1,10 +1,10 @@
 ﻿namespace BusinessLogicLayer
 {
-    public static class CommonStrings
-    {
-        public const string MissingData = "Данные отсутствуют";
+	public static class CommonStrings
+	{
+		public const string MissingData = "Данные отсутствуют";
 
-        // Константа для использованя в отчетах, т. к. string.Empty оставляет закладки видимыми в ранних версиях MicrosoftWord.
-        public const string SpaceString = " ";
-    }
+		// Константа для использованя в отчетах, т. к. string.Empty оставляет закладки видимыми в ранних версиях MicrosoftWord.
+		public const string SpaceString = " ";
+	}
 }

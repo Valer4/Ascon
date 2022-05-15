@@ -7,39 +7,39 @@ using System.Security.Principal;
 
 namespace WcfService.Security.RoleBasedAccessControl
 {
-    internal class AuthorizationPolicy : IAuthorizationPolicy
-    {
-        private string _id = Guid.NewGuid().ToString();
-        public string Id
-        {
-            get { return _id; }
-        }
+	internal class AuthorizationPolicy : IAuthorizationPolicy
+	{
+		private string _id = Guid.NewGuid().ToString();
+		public string Id
+		{
+			get { return _id; }
+		}
 
-        public ClaimSet Issuer
-        {
-            get { return ClaimSet.System; }
-        }
+		public ClaimSet Issuer
+		{
+			get { return ClaimSet.System; }
+		}
 
-        public bool Evaluate(EvaluationContext context, ref object state)
-        {
-            IIdentity client = GetClientIdentity(context);
+		public bool Evaluate(EvaluationContext context, ref object state)
+		{
+			IIdentity client = GetClientIdentity(context);
 
-            context.Properties["Principal"] = new Principal(client);
+			context.Properties["Principal"] = new Principal(client);
 
-            return true;
-        }
+			return true;
+		}
 
-        private IIdentity GetClientIdentity(EvaluationContext context)
-        {
-            object obj;
-            if ( ! context.Properties.TryGetValue("Identities", out obj))
-                throw new Exception("No Identity found");
+		private IIdentity GetClientIdentity(EvaluationContext context)
+		{
+			object obj;
+			if ( ! context.Properties.TryGetValue("Identities", out obj))
+				throw new Exception("No Identity found");
 
-            IList<IIdentity> identities = obj as IList<IIdentity>;
-            if (null == identities || ! identities.Any())
-                throw new Exception("No Identity found");
+			var identities = obj as IList<IIdentity>;
+			if (null == identities || ! identities.Any())
+				throw new Exception("No Identity found");
 
-            return identities[0];
-        }
-    }
+			return identities[0];
+		}
+	}
 }

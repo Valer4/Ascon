@@ -3,7 +3,7 @@
 namespace WcfClient.Print
 {
 	public interface IPrintClient
-    {
-        byte[] GetReportOnDetailInMSWord(DetailRelationEntity selectedDetail, out string message);
-    }
+	{
+		byte[] GetReportOnDetailInMSWord(DetailRelationEntity selectedDetail, out string message);
+	}
 }

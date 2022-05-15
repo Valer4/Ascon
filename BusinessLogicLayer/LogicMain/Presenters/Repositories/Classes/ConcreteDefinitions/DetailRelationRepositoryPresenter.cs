@@ -5,73 +5,73 @@ using System.Reflection;
 
 namespace BusinessLogicLayer.LogicMain.Presenters.Repositories.Classes.ConcreteDefinitions
 {
-    public class DetailRelationRepositoryPresenter : AbstractRepositoryPresenter<DetailRelationEntity, long>, IDetailRelationRepositoryPresenter
-    {
-        private const string _detailNotSelected = "Деталь не выбрана.";
+	public class DetailRelationRepositoryPresenter : AbstractRepositoryPresenter<DetailRelationEntity, long>, IDetailRelationRepositoryPresenter
+	{
+		private const string _detailNotSelected = "Деталь не выбрана.";
 
-        public DetailRelationRepositoryPresenter(IDetailRelationRepositoryManager detailRelationRepositoryManager) : base(detailRelationRepositoryManager) { }
+		public DetailRelationRepositoryPresenter(IDetailRelationRepositoryManager detailRelationRepositoryManager) : base(detailRelationRepositoryManager) { }
 
-        public string Add(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount)
-        {
-            var detail = new DetailRelationEntity();
+		public string Add(DetailRelationEntity selectedDetail, bool isRoot, string name, string amount)
+		{
+			var detail = new DetailRelationEntity();
 
-            detail.Name = name;
+			detail.Name = name;
 
-            if (isRoot)
-                detail.IsRoot = true;
-            else
-            {
-                if (null == selectedDetail) return _detailNotSelected;
+			if (isRoot)
+				detail.IsRoot = true;
+			else
+			{
+				if (null == selectedDetail) return _detailNotSelected;
 
-                detail.ParentId = selectedDetail.TypeId;
+				detail.ParentId = selectedDetail.TypeId;
 
-                SetAmount(detail, amount);
-            }
+				SetAmount(detail, amount);
+			}
 
-            AbstractRepositoryManager.Add(detail);
+			AbstractRepositoryManager.Add(detail);
 
-            return string.Empty;
-        }
+			return string.Empty;
+		}
 
-        public string Edit(DetailRelationEntity selectedDetail, string name, string amount)
-        {
-            if (null == selectedDetail) return _detailNotSelected;
+		public string Edit(DetailRelationEntity selectedDetail, string name, string amount)
+		{
+			if (null == selectedDetail) return _detailNotSelected;
 
-            var editableDetail = new DetailRelationEntity();
+			var editableDetail = new DetailRelationEntity();
 
-            PropertyInfo[] properties = typeof(DetailRelationEntity).GetProperties();
-            foreach (PropertyInfo property in properties)
-                if (property.CanWrite)
-                    property.SetValue(editableDetail, property.GetValue(selectedDetail));
+			PropertyInfo[] properties = typeof(DetailRelationEntity).GetProperties();
+			foreach (PropertyInfo property in properties)
+				if (property.CanWrite)
+					property.SetValue(editableDetail, property.GetValue(selectedDetail));
 
-            if (editableDetail.IsRoot)
-                editableDetail.Name = name;
-            else
-            {
-                if ( ! string.IsNullOrWhiteSpace(name))
-                    editableDetail.Name = name;
+			if (editableDetail.IsRoot)
+				editableDetail.Name = name;
+			else
+			{
+				if ( ! string.IsNullOrWhiteSpace(name))
+					editableDetail.Name = name;
 
-                SetAmount(editableDetail, amount);
-            }
+				SetAmount(editableDetail, amount);
+			}
 
-            AbstractRepositoryManager.Edit(editableDetail);
+			AbstractRepositoryManager.Edit(editableDetail);
 
-            return string.Empty;
-        }
+			return string.Empty;
+		}
 
-        public override string Delete(DetailRelationEntity selectedDetail)
-        {
-            if (null == selectedDetail) return _detailNotSelected;
+		public override string Delete(DetailRelationEntity selectedDetail)
+		{
+			if (null == selectedDetail) return _detailNotSelected;
 
-            AbstractRepositoryManager.Delete(selectedDetail.Id);
+			AbstractRepositoryManager.Delete(selectedDetail.Id);
 
-            return string.Empty;
-        }
+			return string.Empty;
+		}
 
-        private void SetAmount(DetailRelationEntity detail, string amount)
-        {
-            if (short.TryParse(amount, out short value))
-                detail.Amount = value;
-        }
-    }
+		private void SetAmount(DetailRelationEntity detail, string amount)
+		{
+			if (short.TryParse(amount, out short value))
+				detail.Amount = value;
+		}
+	}
 }

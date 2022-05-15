@@ -212,11 +212,11 @@ namespace BusinessLogicLayer
 			}
 
 			string text = textSB.ToString();
-			
+
 			if (0 == offset
 			&& ! string.IsNullOrEmpty(text))
 				offset = 1;
-			
+
 			return TextRenderer.MeasureText(text, fontBookmark).Width - offset;
 		}
 
@@ -308,7 +308,7 @@ namespace BusinessLogicLayer
 
 							selection.Range.Cells[1].FitText = true;
 						}
-					
+
 						if (fontSize >= 1.0F) selection.Font.Size = fontSize;
 
 						selection.TypeText(text);
@@ -382,7 +382,7 @@ namespace BusinessLogicLayer
 		private void SaveAs(_Document doc, string filePath, WdSaveFormat format = WdSaveFormat.wdFormatDocumentDefault)
 		{
 			int applicationVersion = Convert.ToInt32(doc.Application.Version.Split(new char[] { '.' }, 2)[0]);
-			
+
 			if (applicationVersion < 14)
 				doc.SaveAs(filePath, format);
 			else
@@ -413,7 +413,7 @@ namespace BusinessLogicLayer
 			try
 			{
 				filePath = $@"{(
-					!useOnlyTemplatesDirectory ?
+					! useOnlyTemplatesDirectory ?
 						// AppDomain.CurrentDomain.BaseDirectory : // Папка с .exe.
 						(Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath) + @"\") :
 						string.Empty)

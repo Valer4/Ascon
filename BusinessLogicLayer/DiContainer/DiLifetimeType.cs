@@ -1,7 +1,7 @@
 ﻿namespace BusinessLogicLayer.DiContainer
 {
-    public enum DiLifetimeType
-    {
-        Transient
-    }
+	public enum DiLifetimeType
+	{
+		Transient
+	}
 }
