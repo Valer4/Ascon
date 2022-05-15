@@ -2,7 +2,7 @@
 
 namespace BusinessLogicLayer.Data.DataAccessInterfaces.Repositories.ConcreteDefinitions
 {
-    public interface IChildDetailRelationRepository : IAbstractRepository<ChildDetailRelationEntity, long>
-    {
-    }
+	public interface IChildDetailRelationRepository : IAbstractRepository<ChildDetailRelationEntity, long>
+	{
+	}
 }

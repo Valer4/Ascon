@@ -2,8 +2,8 @@
 
 namespace CommonHelpers.CryptoProvider.Interfaces
 {
-    public interface ICryptoProvider
-    {
-        X509Certificate2 GetCertificate();
-    }
+	public interface ICryptoProvider
+	{
+		X509Certificate2 GetCertificate();
+	}
 }

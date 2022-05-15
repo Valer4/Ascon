@@ -376,3 +376,6 @@
 /BusinessLogicLayer/obj/Debug/DesignTimeResolveAssemblyReferences.cache
 /RestClient/obj/Debug/.NETFramework,Version=v4.6.1.AssemblyAttributes.cs
 /WcfClient/obj/Debug/.NETFramework,Version=v4.6.1.AssemblyAttributes.cs
+/RestClient/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/WcfClient/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/BusinessLogicLayer/BusinessLogicLayer.csproj.user
