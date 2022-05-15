@@ -36,7 +36,7 @@ namespace BusinessLogicLayer
 		}
 	}
 
-	public static class LINQExtensions
+	public static class LinqExtensions
 	{
 		public static IEnumerable<TResult> Join<TOuter, TInner, TKey, TResult>
 			(this JoinedEnumerable<TOuter> outer, IEnumerable<TInner> inner, Func<TOuter, TKey> outerKeySelector, Func<TInner, TKey> innerKeySelector, Func<TOuter, TInner, TResult> resultSelector, IEqualityComparer<TKey> comparer = null)

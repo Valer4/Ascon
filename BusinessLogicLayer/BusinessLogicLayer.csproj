@@ -59,7 +59,7 @@
     <Compile Include="Delegates.cs" />
     <Compile Include="DiContainer\DiLifetimeType.cs" />
     <Compile Include="DiContainer\IDiContainer.cs" />
-    <Compile Include="LINQExtensions.cs" />
+    <Compile Include="LinqExtensions.cs" />
     <Compile Include="LogicMain\Presenters\Repositories\Classes\AbstractRepositoryPresenter.cs" />
     <Compile Include="LogicMain\Presenters\Repositories\Classes\ConcreteDefinitions\DetailRelationRepositoryPresenter.cs" />
     <Compile Include="LogicMain\Presenters\Print\IPrintPresenter.cs" />
