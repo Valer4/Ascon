@@ -20,7 +20,7 @@ namespace BusinessLogicLayer
 			binding.Security.Message.ClientCredentialType = MessageCredentialType.UserName;
 
 			string hostAddress = WcfServiceConfigurator.ConnectInfo.HostAddress;
-			string uriString = $"net.tcp://{hostAddress}/{hostName}";
+			string uriString = $"net.tcp://{ hostAddress }/{ hostName }";
 			Uri uri = new Uri(uriString);
 
 			ServiceHost host = new WcfServiceHost(WcfServiceConfigurator.DiContainer, contractClass);

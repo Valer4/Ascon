@@ -33,7 +33,7 @@ namespace UserInterfaceLayer.HelpersToControls.TreeViewHelper
 
 		private void GetFullPathRecursive(TreeNode node, ref StringBuilder fullPath)
 		{
-			fullPath.Append($"_{node.Tag}_");
+			fullPath.Append($"_{ node.Tag }_");
 			if (null != node.Parent)
 				GetFullPathRecursive(node.Parent, ref fullPath);
 		}

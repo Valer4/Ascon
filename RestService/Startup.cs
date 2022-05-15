@@ -104,7 +104,7 @@ namespace RestService
 					}
 				});
 				// Set the comments path for the Swagger JSON and UI.
-				string xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+				string xmlFile = $"{ Assembly.GetExecutingAssembly().GetName().Name }.xml";
 				string xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 				c.IncludeXmlComments(xmlPath);
 			});

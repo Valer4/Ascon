@@ -347,7 +347,7 @@ namespace BusinessLogicLayer
 			if ( ! Directory.Exists(dir))
 				Directory.CreateDirectory(dir);
 
-			return $"{ dir }/word{Guid.NewGuid()}.doc";
+			return $"{ dir }/word{ Guid.NewGuid() }.doc";
 		}
 
 		/// <summary>
@@ -412,12 +412,12 @@ namespace BusinessLogicLayer
 
 			try
 			{
-				filePath = $@"{(
+				filePath = $@"{ (
 					! useOnlyTemplatesDirectory ?
 						// AppDomain.CurrentDomain.BaseDirectory : // Папка с .exe.
 						(Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath) + @"\") :
 						string.Empty)
-							}{templatesDirectory}\{typeReport}";
+							}{ templatesDirectory }\{ typeReport }";
 
 				return word.Documents.Add(filePath);
 			}
@@ -438,7 +438,7 @@ namespace BusinessLogicLayer
 			catch (Exception ex)
 			{
 				throw new Exception(
-					$@"Не удалось загрузить шаблон для экспорта { filePath }{'\n'}{ ex.Message }");
+					$@"Не удалось загрузить шаблон для экспорта { filePath }{ '\n' }{ ex.Message }");
 			}
 		}
 

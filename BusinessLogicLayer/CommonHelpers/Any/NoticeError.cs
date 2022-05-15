@@ -10,6 +10,6 @@ namespace CommonHelpers.Any
 		public void Throw() => throw new Exception(prefixErrorMsg);
 
 		public void Throw(string textSuffix) =>
-			throw new Exception($"{prefixErrorMsg}{( ! string.IsNullOrEmpty(textSuffix) ? " " + textSuffix : string.Empty)}");
+			throw new Exception($"{ prefixErrorMsg }{( ! string.IsNullOrEmpty(textSuffix) ? " " + textSuffix : string.Empty) }");
 	}
 }

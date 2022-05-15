@@ -50,7 +50,7 @@ namespace BusinessLogicLayer.LogicMain.Managers.Print
 			range = doc.Bookmarks.get_Item(ref oEndOfDoc).Range;
 			Paragraph paragraph = doc.Content.Paragraphs.Add(ref missing);
 			paragraph.Format.SpaceAfter = 12;
-			paragraph.Range.Text = $"«{selectedDetail.Name}»";
+			paragraph.Range.Text = $"«{ selectedDetail.Name }»";
 			paragraph.Range.InsertParagraphAfter();
 
 			if (countRows > 0)
@@ -61,7 +61,7 @@ namespace BusinessLogicLayer.LogicMain.Managers.Print
 				for (int r = 0; r < countRows; ++r)
 				{
 					table.Cell(r + 1, 1).Range.Text = descendants.ElementAt(r).Name;
-					table.Cell(r + 1, 2).Range.Text = $"{descendants.ElementAt(r).Amount} шт";
+					table.Cell(r + 1, 2).Range.Text = $"{ descendants.ElementAt(r).Amount } шт";
 				}
 				table.Borders[WdBorderType.wdBorderVertical].LineStyle =
 				table.Borders[WdBorderType.wdBorderHorizontal].LineStyle =
