@@ -1,5 +1,4 @@
 ﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
-using WcfService;
 using WcfService.Services.Print;
 
 namespace WcfClient.Print

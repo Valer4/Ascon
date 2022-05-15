@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using WcfClient.Repositories.Interfaces;
-using WcfService;
 using WcfService.Services.Repositories.Interfaces;
 
 namespace WcfClient.Repositories.Classes

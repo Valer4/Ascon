@@ -1,6 +1,5 @@
 ﻿using BusinessLogicLayer.Data.Entities.Classes.ConcreteDefinitions;
 using WcfClient.Repositories.Interfaces.ConcreteDefinitions;
-using WcfService;
 using WcfService.Services.Repositories.Interfaces.ConcreteDefinitions;
 
 namespace WcfClient.Repositories.Classes.ConcreteDefinitions
